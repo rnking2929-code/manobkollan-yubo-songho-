@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reports - মানবকল্যাণ যুব সংঘ</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#0f172a;
+  color:#fff;
+}
+
+.header{
+  padding:22px 15px;
+  text-align:center;
+  background:#111827;
+  border-bottom:1px solid #334155;
+}
+
+.header h1{
+  margin:0 0 6px;
+  font-size:24px;
+}
+
+.header p{
+  margin:0;
+  color:#94a3b8;
+}
+
+.container{
+  max-width:950px;
+  margin:auto;
+  padding:20px 15px;
+}
+
+.topbar{
+  display:flex;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.topbar a,
+.topbar button{
+  flex:1;
+  padding:12px;
+  border-radius:9px;
+  border:0;
+  text-align:center;
+  text-decoration:none;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.back{
+  background:#334155;
+  color:#fff;
+}
+
+.logout{
+  background:#dc2626;
+  color:#fff;
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.summary-card{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:14px;
+  padding:20px 12px;
+  text-align:center;
+}
+
+.summary-card h3{
+  margin:0 0 10px;
+  font-size:15px;
+  color:#94a3b8;
+}
+
+.money{
+  font-size:25px;
+  font-weight:bold;
+}
+
+.income .money{
+  color:#4ade80;
+}
+
+.expense .money{
+  color:#f87171;
+}
+
+.balance .money{
+  color:#60a5fa;
+}
+
+.card{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:14px;
+  padding:18px;
+  margin-bottom:18px;
+}
+
+.card h2{
+  margin-top:0;
+}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.stat{
+  background:#1e293b;
+  border:1px solid #334155;
+  border-radius:11px;
+  padding:15px;
+}
+
+.stat-title{
+  color:#94a3b8;
+  font-size:14px;
+}
+
+.stat-value{
+  margin-top:7px;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.refresh{
+  width:100%;
+  padding:12px;
+  margin-bottom:12px;
+  border:0;
+  border-radius:9px;
+  background:#2563eb;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.transaction{
+  background:#1e293b;
+  border:1px solid #334155;
+  border-radius:11px;
+  padding:14px;
+  margin-top:10px;
+}
+
+.transaction-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.income-text{
+  color:#4ade80;
+  font-weight:bold;
+}
+
+.expense-text{
+  color:#f87171;
+  font-weight:bold;
+}
+
+.transaction-info{
+  margin-top:7px;
+  color:#cbd5e1;
+  line-height:1.6;
+}
+
+.empty,
+.loading{
+  text-align:center;
+  padding:25px;
+  color:#94a3b8;
+}
+
+.message{
+  text-align:center;
+  color:#fbbf24;
+  margin:10px 0;
+}
+
+@media(max-width:650px){
+
+  .summary{
+    grid-template-columns:1fr;
+  }
+
+  .stat-grid{
+    grid-template-columns:1fr;
+  }
+
+  .transaction-top{
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+  <h1>📊 Financial Reports</h1>
+
+  <p>মানবকল্যাণ যুব সংঘ</p>
+
+</div>
+
+
+<div class="container">
+
+
+  <div class="topbar">
+
+    <a
+      href="admin.html"
+      class="back">
+      ⬅️ Admin
+    </a>
+
+    <button
+      class="logout"
+      onclick="logout()">
+      🚪 Logout
+    </button>
+
+  </div>
+
+
+  <!-- SUMMARY -->
+
+  <div class="summary">
+
+    <div class="summary-card income">
+
+      <h3>💚 মোট আয়</h3>
+
+      <div
+        id="totalIncome"
+        class="money">
+        ৳ 0
+      </div>
+
+    </div>
+
+
+    <div class="summary-card expense">
+
+      <h3>❤️ মোট ব্যয়</h3>
+
+      <div
+        id="totalExpense"
+        class="money">
+        ৳ 0
+      </div>
+
+    </div>
+
+
+    <div class="summary-card balance">
+
+      <h3>💙 বর্তমান ব্যালেন্স</h3>
+
+      <div
+        id="balance"
+        class="money">
+        ৳ 0
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- REPORT DETAILS -->
+
+  <div class="card">
+
+    <h2>📈 হিসাবের সারাংশ</h2>
+
+    <div
+      id="message"
+      class="message">
+    </div>
+
+
+    <div class="stat-grid">
+
+      <div class="stat">
+
+        <div class="stat-title">
+          মোট লেনদেন
+        </div>
+
+        <div
+          id="transactionCount"
+          class="stat-value">
+          ০
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-title">
+          মোট আয় লেনদেন
+        </div>
+
+        <div
+          id="incomeCount"
+          class="stat-value">
+          ০
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-title">
+          মোট ব্যয় লেনদেন
+        </div>
+
+        <div
+          id="expenseCount"
+          class="stat-value">
+          ০
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-title">
+          সর্বশেষ আপডেট
+        </div>
+
+        <div
+          id="lastUpdate"
+          class="stat-value">
+          —
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RECENT TRANSACTIONS -->
+
+  <div class="card">
+
+    <h2>📋 সাম্প্রতিক লেনদেন</h2>
+
+    <button
+      class="refresh"
+      onclick="loadReport()">
+      🔄 রিপোর্ট Refresh
+    </button>
+
+
+    <div id="transactionList">
+
+      <div class="loading">
+        ⏳ রিপোর্ট তৈরি হচ্ছে...
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+<script>
+
+const sb = supabase.createClient(
+  window.SUPABASE_URL,
+  window.SUPABASE_ANON_KEY
+);
+
+
+function esc(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function money(value){
+
+  return Number(value || 0)
+    .toLocaleString("bn-BD",{
+      minimumFractionDigits:0,
+      maximumFractionDigits:2
+    });
+
+}
+
+
+async function checkLogin(){
+
+  const {data} =
+    await sb.auth.getSession();
+
+  if(!data.session){
+
+    window.location.href =
+      "admin.html";
+
+    return false;
+  }
+
+  return true;
+}
+
+
+async function loadReport(){
+
+  const loggedIn =
+    await checkLogin();
+
+  if(!loggedIn) return;
+
+
+  const list =
+    document.getElementById(
+      "transactionList"
+    );
+
+
+  list.innerHTML =
+    '<div class="loading">⏳ রিপোর্ট তৈরি হচ্ছে...</div>';
+
+
+  const {data,error} =
+    await sb
+      .from("transactions")
+      .select("*")
+      .order(
+        "created_at",
+        {ascending:false}
+      );
+
+
+  if(error){
+
+    console.error(error);
+
+    list.innerHTML =
+      '<div class="empty">❌ রিপোর্ট তৈরি করা যায়নি।</div>';
+
+    return;
+  }
+
+
+  const transactions =
+    data || [];
+
+
+  let totalIncome = 0;
+
+  let totalExpense = 0;
+
+  let incomeCount = 0;
+
+  let expenseCount = 0;
+
+
+  transactions.forEach(function(item){
+
+    const amount =
+      Number(item.amount || 0);
+
+
+    if(item.type === "income"){
+
+      totalIncome += amount;
+
+      incomeCount++;
+
+    }
+
+
+    if(item.type === "expense"){
+
+      totalExpense += amount;
+
+      expenseCount++;
+
+    }
+
+  });
+
+
+  const balance =
+    totalIncome - totalExpense;
+
+
+  document.getElementById(
+    "totalIncome"
+  ).textContent =
+    "৳ " + money(totalIncome);
+
+
+  document.getElementById(
+    "totalExpense"
+  ).textContent =
+    "৳ " + money(totalExpense);
+
+
+  document.getElementById(
+    "balance"
+  ).textContent =
+    "৳ " + money(balance);
+
+
+  document.getElementById(
+    "transactionCount"
+  ).textContent =
+    money(transactions.length);
+
+
+  document.getElementById(
+    "incomeCount"
+  ).textContent =
+    money(incomeCount);
+
+
+  document.getElementById(
+    "expenseCount"
+  ).textContent =
+    money(expenseCount);
+
+
+  if(transactions.length){
+
+    const latest =
+      transactions[0].created_at;
+
+    document.getElementById(
+      "lastUpdate"
+    ).textContent =
+      new Date(latest)
+        .toLocaleDateString("bn-BD");
+
+  }else{
+
+    document.getElementById(
+      "lastUpdate"
+    ).textContent =
+      "কোনো হিসাব নেই";
+
+  }
+
+
+  if(transactions.length === 0){
+
+    list.innerHTML =
+      '<div class="empty">📭 কোনো লেনদেন নেই।</div>';
+
+    return;
+  }
+
+
+  /*
+    রিপোর্ট পেজে সর্বশেষ ৫০টি
+    লেনদেন দেখানো হবে।
+  */
+
+  const recent =
+    transactions.slice(0,50);
+
+
+  list.innerHTML =
+    recent.map(function(item){
+
+      const isIncome =
+        item.type === "income";
+
+
+      const amount =
+        Number(item.amount || 0);
+
+
+      const date =
+        item.created_at
+        ?
+        new Date(
+          item.created_at
+        ).toLocaleString("bn-BD")
+        :
+        "";
+
+
+      return `
+
+        <div class="transaction">
+
+          <div class="transaction-top">
+
+            <div
+              class="${
+                isIncome
+                ?
+                "income-text"
+                :
+                "expense-text"
+              }">
+
+              ${
+                isIncome
+                ?
+                "💚 আয়"
+                :
+                "❤️ ব্যয়"
+              }
+
+            </div>
+
+
+            <strong>
+
+              ${
+                isIncome
+                ?
+                "+"
+                :
+                "-"
+              }
+
+              ৳ ${money(amount)}
+
+            </strong>
+
+          </div>
+
+
+          <div class="transaction-info">
+
+            <strong>
+              ${esc(
+                item.category ||
+                "ক্যাটাগরি নেই"
+              )}
+            </strong>
+
+            <br>
+
+            📝 ${
+              esc(
+                item.description ||
+                "কোনো বিবরণ নেই"
+              )
+            }
+
+            <br>
+
+            📅 ${esc(date)}
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+async function logout(){
+
+  await sb.auth.signOut();
+
+  window.location.href =
+    "admin.html";
+
+}
+
+
+loadReport();
+
+</script>
+
+</body>
+</html>
