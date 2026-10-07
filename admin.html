@@ -97,10 +97,6 @@ button{
   margin:0
 }
 
-/* =========================
-   VOLUNTEERS
-========================= */
-
 .volunteer-card{
   border:1px solid #39424b;
   border-radius:14px;
@@ -139,6 +135,18 @@ button{
 .refresh{
   background:#374151;
   margin-top:10px
+}
+
+.call-button{
+  display:block;
+  text-align:center;
+  text-decoration:none;
+  background:#16a34a;
+  color:#fff;
+  padding:12px;
+  border-radius:10px;
+  margin-top:12px;
+  font-weight:700
 }
 
 .count-box{
@@ -213,7 +221,7 @@ placeholder="পাসওয়ার্ড">
 
 
 <!-- =========================
-     PAYMENT REQUEST
+     BKASH PAYMENT
 ========================= -->
 
 <div class="card">
@@ -231,6 +239,43 @@ placeholder="পাসওয়ার্ড">
 </p>
 
 </div>
+
+</div>
+
+
+<!-- =========================
+     BLOOD DONORS
+========================= -->
+
+<div class="card">
+
+<h2>🩸 রক্তদাতা তালিকা</h2>
+
+<p class="muted">
+নিবন্ধিত রক্তদাতাদের তথ্য এখানে দেখা যাবে।
+মোবাইল নম্বর শুধুমাত্র অ্যাডমিন দেখতে পারবেন।
+</p>
+
+<div id="donorCount" class="count-box">
+লোড হচ্ছে...
+</div>
+
+<div id="adminDonors">
+
+<p class="muted">
+রক্তদাতা তালিকা লোড হচ্ছে...
+</p>
+
+</div>
+
+<button
+type="button"
+class="refresh"
+onclick="loadAdminDonors()">
+
+🔄 রক্তদাতা তালিকা রিফ্রেশ
+
+</button>
 
 </div>
 
@@ -761,7 +806,195 @@ async function rejectPayment(id){
 
 
 /* =========================
-   VOLUNTEERS LOAD
+   BLOOD DONORS
+========================= */
+
+async function loadAdminDonors(){
+
+  $('adminDonors').innerHTML = `
+
+    <p class="muted">
+      ⏳ রক্তদাতা তালিকা লোড হচ্ছে...
+    </p>
+
+  `;
+
+  $('donorCount').textContent =
+    '⏳ হিসাব করা হচ্ছে...';
+
+
+  const {
+    data,
+    error
+  } = await sb
+    .from('blood_donors')
+    .select('*')
+    .order(
+      'created_at',
+      {ascending:false}
+    );
+
+
+  if(error){
+
+    console.error(error);
+
+    $('donorCount').textContent =
+      '⚠️ তালিকা পাওয়া যায়নি';
+
+    $('adminDonors').innerHTML = `
+
+      <p class="muted">
+        ❌ রক্তদাতা তালিকা লোড করা যায়নি।
+      </p>
+
+      <p class="muted">
+        ${esc(error.message)}
+      </p>
+
+    `;
+
+    return;
+
+  }
+
+
+  if(!data || data.length === 0){
+
+    $('donorCount').textContent =
+      'মোট রক্তদাতা: ০ জন';
+
+    $('adminDonors').innerHTML = `
+
+      <p class="muted">
+        বর্তমানে কোনো রক্তদাতা নিবন্ধিত নেই।
+      </p>
+
+    `;
+
+    return;
+
+  }
+
+
+  $('donorCount').textContent =
+    'মোট রক্তদাতা: ' +
+    data.length.toLocaleString('bn-BD') +
+    ' জন';
+
+
+  $('adminDonors').innerHTML =
+
+    data.map((x,index) => {
+
+      const phone =
+        String(x.phone || '')
+          .replace(/[^0-9+]/g,'');
+
+      return `
+
+        <div class="volunteer-card">
+
+          <div class="volunteer-top">
+
+            <div class="volunteer-name">
+
+              ${index + 1}.
+              ${esc(x.name || 'নাম নেই')}
+
+            </div>
+
+            <span class="volunteer-interest">
+
+              🩸 ${esc(
+                x.blood_group ||
+                'গ্রুপ নেই'
+              )}
+
+            </span>
+
+          </div>
+
+
+          <div class="volunteer-info">
+
+            🩸 <b>রক্তের গ্রুপ:</b>
+            ${esc(
+              x.blood_group ||
+              'উল্লেখ নেই'
+            )}
+
+            <br>
+
+            📍 <b>এলাকা:</b>
+            ${esc(
+              x.area ||
+              'উল্লেখ নেই'
+            )}
+
+            <br>
+
+            📱 <b>মোবাইল:</b>
+            ${esc(
+              x.phone ||
+              'নম্বর নেই'
+            )}
+
+            <br>
+
+            🟢 <b>স্ট্যাটাস:</b>
+            ${esc(
+              x.status ||
+              'available'
+            )}
+
+            <br>
+
+            📅 <b>নিবন্ধনের তারিখ:</b>
+            ${
+              x.created_at
+              ? new Date(x.created_at)
+                  .toLocaleDateString(
+                    'bn-BD',
+                    {
+                      year:'numeric',
+                      month:'long',
+                      day:'numeric'
+                    }
+                  )
+              : 'উল্লেখ নেই'
+            }
+
+          </div>
+
+
+          ${
+            phone
+            ? `
+
+              <a
+                href="tel:${esc(phone)}"
+                class="call-button">
+
+                📞 কল করুন
+
+              </a>
+
+            `
+            : ''
+          }
+
+        </div>
+
+      `;
+
+    }).join('');
+
+}
+
+
+/* =========================
+   VOLUNTEERS
 ========================= */
 
 async function loadVolunteers(){
@@ -884,7 +1117,8 @@ async function loadVolunteers(){
           <br>
 
           📅 <b>নিবন্ধনের তারিখ:</b>
-          ${x.created_at
+          ${
+            x.created_at
             ? new Date(x.created_at)
                 .toLocaleDateString(
                   'bn-BD',
@@ -928,6 +1162,8 @@ async function check(){
     load();
 
     loadPayments();
+
+    loadAdminDonors();
 
     loadVolunteers();
 
