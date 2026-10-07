@@ -1,133 +1,1086 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta name="google-site-verification" content="hOvyCnk0XjjpGgpaBiGAtvu61uLk_23GdUyDDQ4kv54" />
+
+<meta name="google-site-verification" content="hOvyCnk0XjjpGgpaBiGAtvu61uLk_23GdUyDDQ4kv54">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
 <title>মানবকল্যাণ যুব সংঘ</title>
+
 <meta name="theme-color" content="#171717">
+
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;background:#111;color:#eee;font-family:"Noto Sans Bengali","SolaimanLipi",Arial,sans-serif}
-body{padding-bottom:70px}
-a{text-decoration:none;color:inherit}
-.topbar{height:64px;background:#1b1b1b;border-bottom:1px solid #3a3a3a;display:flex;align-items:center;padding:0 16px;gap:15px;position:sticky;top:0;z-index:20}
-.menu{font-size:31px;color:#eee;line-height:1}
-.logo{width:40px;height:40px;border-radius:7px;background:#ddd;display:grid;place-items:center;color:#087443;font-weight:900;font-size:12px;text-align:center}
-.brand{font-size:24px;font-weight:800;color:#4bb7ff;white-space:nowrap}
-.search{margin-left:auto;background:#2a292d;border-radius:28px;color:#aaa;padding:10px 15px;min-width:145px;font-size:15px}
-.hero{margin:28px 14px 0;border-radius:14px;overflow:hidden;background:#1d1d1d;box-shadow:0 3px 18px #000}
-.cover{height:220px;background:linear-gradient(135deg,#063e2c,#087b52 50%,#123d2c);display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
-.cover h1{font-size:29px;margin:0;color:#dfece4}.cover p{font-size:15px;margin:8px 0;color:#b7d6c7}
-.profile{padding:0 25px 25px;position:relative}
-.avatar{width:126px;height:126px;border-radius:50%;border:8px solid #777;background:#eee;color:#087443;display:grid;place-items:center;text-align:center;font-weight:900;font-size:20px;position:relative;margin-top:-62px}
-.profile h2{font-size:29px;margin:10px 0 0}.profile p{margin:0;color:#ddd;font-size:17px}
-.content{padding:20px 14px}
-.post{background:#1b1b1b;border-radius:15px;padding:18px;margin-bottom:15px}
-.posthead{display:flex;gap:12px;align-items:center}.mini{width:42px;height:42px;border-radius:50%;background:#0a7a4b;display:grid;place-items:center;font-weight:900}
-.posthead b{font-size:16px}.date{display:block;color:#999;font-size:12px}
-.posttext{font-size:18px;margin:18px 0 15px}
-.actions{border-top:1px solid #444;padding-top:12px;display:flex;justify-content:space-around;color:#aaa}
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.card{background:#1b1b1b;padding:18px;border-radius:13px}.card .icon{font-size:30px}.card b{display:block;color:#fff;margin-top:5px}.card small{color:#aaa}
-.section-title{font-size:22px;margin:10px 3px 14px}
-.bottom{position:fixed;bottom:0;left:0;right:0;height:70px;background:#191919;border-top:1px solid #454545;display:grid;grid-template-columns:repeat(5,1fr);z-index:30}
-.bottom a{text-align:center;padding-top:7px;font-size:12px;color:#aaa}.bottom a.active{color:#54b8ff}.bottom span{display:block;font-size:25px;line-height:31px}
-.notice{background:#252525;border-left:4px solid #54b8ff;padding:14px;border-radius:9px;margin-bottom:10px}
-form input,form select,form textarea{width:100%;background:#242424;border:1px solid #444;color:#fff;border-radius:8px;padding:11px;margin:5px 0 12px;font:inherit}
-button{width:100%;background:#087b4c;border:0;color:white;padding:12px;border-radius:8px;font-weight:800;font:inherit}
-@media(min-width:700px){body{max-width:700px;margin:auto;background:#0d0d0d}.topbar,.bottom{max-width:700px;margin:auto}.hero{margin-top:28px}.content{padding-left:18px;padding-right:18px}}
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  background:#111;
+  color:#eee;
+  font-family:"Noto Sans Bengali","SolaimanLipi",Arial,sans-serif;
+}
+
+body{
+  padding-bottom:70px;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* TOP BAR */
+
+.topbar{
+  height:64px;
+  background:#1b1b1b;
+  border-bottom:1px solid #3a3a3a;
+  display:flex;
+  align-items:center;
+  padding:0 16px;
+  gap:15px;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.menu{
+  font-size:31px;
+  color:#eee;
+  line-height:1;
+}
+
+.logo{
+  width:40px;
+  height:40px;
+  border-radius:7px;
+  background:#ddd;
+  display:grid;
+  place-items:center;
+  color:#087443;
+  font-weight:900;
+  font-size:12px;
+  text-align:center;
+}
+
+.brand{
+  font-size:24px;
+  font-weight:800;
+  color:#4bb7ff;
+  white-space:nowrap;
+}
+
+.search{
+  margin-left:auto;
+  background:#2a292d;
+  border-radius:28px;
+  color:#aaa;
+  padding:10px 15px;
+  min-width:145px;
+  font-size:15px;
+}
+
+/* HERO */
+
+.hero{
+  margin:28px 14px 0;
+  border-radius:14px;
+  overflow:hidden;
+  background:#1d1d1d;
+  box-shadow:0 3px 18px #000;
+}
+
+.cover{
+  height:220px;
+  background:linear-gradient(135deg,#063e2c,#087b52 50%,#123d2c);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+}
+
+.cover h1{
+  font-size:29px;
+  margin:0;
+  color:#dfece4;
+}
+
+.cover p{
+  font-size:15px;
+  margin:8px 0;
+  color:#b7d6c7;
+}
+
+.profile{
+  padding:0 25px 25px;
+  position:relative;
+}
+
+.avatar{
+  width:126px;
+  height:126px;
+  border-radius:50%;
+  border:8px solid #777;
+  background:#eee;
+  color:#087443;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  font-weight:900;
+  font-size:20px;
+  position:relative;
+  margin-top:-62px;
+}
+
+.profile h2{
+  font-size:29px;
+  margin:10px 0 0;
+}
+
+.profile p{
+  margin:0;
+  color:#ddd;
+  font-size:17px;
+}
+
+/* CONTENT */
+
+.content{
+  padding:20px 14px;
+}
+
+.post{
+  background:#1b1b1b;
+  border-radius:15px;
+  padding:18px;
+  margin-bottom:15px;
+}
+
+.posthead{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.mini{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#0a7a4b;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+}
+
+.posthead b{
+  font-size:16px;
+}
+
+.date{
+  display:block;
+  color:#999;
+  font-size:12px;
+}
+
+.posttext{
+  font-size:18px;
+  margin:18px 0 15px;
+}
+
+.actions{
+  border-top:1px solid #444;
+  padding-top:12px;
+  display:flex;
+  justify-content:space-around;
+  color:#aaa;
+}
+
+/* CARDS */
+
+.cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.card{
+  background:#1b1b1b;
+  padding:18px;
+  border-radius:13px;
+}
+
+.card .icon{
+  font-size:30px;
+}
+
+.card b{
+  display:block;
+  color:#fff;
+  margin-top:5px;
+}
+
+.card small{
+  color:#aaa;
+}
+
+/* SECTION */
+
+.section-title{
+  font-size:22px;
+  margin:10px 3px 14px;
+}
+
+/* NOTICE */
+
+.notice{
+  background:#252525;
+  border-left:4px solid #54b8ff;
+  padding:14px;
+  border-radius:9px;
+  margin-bottom:10px;
+}
+
+/* FORM */
+
+form input,
+form select,
+form textarea,
+input{
+  width:100%;
+  background:#242424;
+  border:1px solid #444;
+  color:#fff;
+  border-radius:8px;
+  padding:11px;
+  margin:5px 0 12px;
+  font:inherit;
+}
+
+input::placeholder{
+  color:#999;
+}
+
+button{
+  width:100%;
+  background:#087b4c;
+  border:0;
+  color:white;
+  padding:12px;
+  border-radius:8px;
+  font-weight:800;
+  font:inherit;
+  cursor:pointer;
+}
+
+button:active{
+  opacity:.8;
+}
+
+.muted{
+  color:#aaa;
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* BKASH */
+
+.bkash-box{
+  background:#171717;
+  border:1px solid #333;
+  border-radius:13px;
+  padding:16px;
+  margin-top:12px;
+}
+
+.bkash-number{
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
+/* BOTTOM NAV */
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:70px;
+  background:#191919;
+  border-top:1px solid #454545;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  z-index:30;
+}
+
+.bottom a{
+  text-align:center;
+  padding-top:7px;
+  font-size:12px;
+  color:#aaa;
+}
+
+.bottom a.active{
+  color:#54b8ff;
+}
+
+.bottom span{
+  display:block;
+  font-size:25px;
+  line-height:31px;
+}
+
+/* FINANCE */
+
+.finance-box{
+  margin:20px auto;
+  max-width:900px;
+  padding:18px;
+  border-radius:18px;
+  background:#171d23;
+  border:1px solid #2b333b;
+  color:#fff;
+  text-align:center;
+}
+
+.finance-button{
+  display:inline-block;
+  padding:11px 18px;
+  border-radius:10px;
+  background:#2563eb;
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+}
+
+/* DESKTOP */
+
+@media(min-width:700px){
+
+  body{
+    max-width:700px;
+    margin:auto;
+    background:#0d0d0d;
+  }
+
+  .topbar,
+  .bottom{
+    max-width:700px;
+    margin:auto;
+  }
+
+  .hero{
+    margin-top:28px;
+  }
+
+  .content{
+    padding-left:18px;
+    padding-right:18px;
+  }
+
+}
+
 </style>
+
 </head>
+
 <body>
 
+<!-- TOP BAR -->
+
 <header class="topbar">
-<div class="menu">☰</div>
-<div class="logo">মযুস</div>
-<div class="brand">মানবকল্যাণ যুব সংঘ</div>
-<div class="search">Search... 🔍</div>
+
+  <div class="menu">☰</div>
+
+  <div class="logo">
+    মযুস
+  </div>
+
+  <div class="brand">
+    মানবকল্যাণ যুব সংঘ
+  </div>
+
+  <div class="search">
+    Search... 🔍
+  </div>
+
 </header>
 
+
+<!-- HERO -->
+
 <section class="hero" id="home">
-<div class="cover">
-<div><h1>মানবতার সেবায়, মানুষের পাশে</h1><p>ঐক্য • মানবতা • স্বেচ্ছাসেবা</p><p>হাপানিয়া, ধানীখোলা, ত্রিশাল, ময়মনসিংহ</p></div>
-</div>
-<div class="profile">
-<div class="avatar">মানব<br>কল্যাণ</div>
-<h2>মানবকল্যাণ যুব সংঘ</h2>
-<p>সবার পাশে, মানবতার পথে।</p>
-</div>
+
+  <div class="cover">
+
+    <div>
+
+      <h1>
+        মানবতার সেবায়, মানুষের পাশে
+      </h1>
+
+      <p>
+        ঐক্য • মানবতা • স্বেচ্ছাসেবা
+      </p>
+
+      <p>
+        হাপানিয়া, ধানীখোলা, ত্রিশাল, ময়মনসিংহ
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="profile">
+
+    <div class="avatar">
+      মানব<br>
+      কল্যাণ
+    </div>
+
+    <h2>
+      মানবকল্যাণ যুব সংঘ
+    </h2>
+
+    <p>
+      সবার পাশে, মানবতার পথে।
+    </p>
+
+  </div>
+
 </section>
 
+
+<!-- MAIN -->
+
 <main class="content">
-<h2 class="section-title">📢 সর্বশেষ কার্যক্রম</h2>
+
+
+<!-- সর্বশেষ কার্যক্রম -->
+
+<h2 class="section-title">
+  📢 সর্বশেষ কার্যক্রম
+</h2>
+
 <article class="post">
-<div class="posthead"><div class="mini">ম</div><div><b>মানবকল্যাণ যুব সংঘ</b><span class="date">আজ • সংগঠনের অফিসিয়াল পোস্ট</span></div></div>
-<div class="posttext">আসসালামু আলাইকুম।<br><br>মানুষের কল্যাণে আমাদের প্রতিটি উদ্যোগে আপনিও পাশে থাকুন। 🤝</div>
-<div class="actions"><span>👍 Like</span><span>💬 Comment</span><span>🔗 Share</span></div>
+
+  <div class="posthead">
+
+    <div class="mini">
+      ম
+    </div>
+
+    <div>
+
+      <b>
+        মানবকল্যাণ যুব সংঘ
+      </b>
+
+      <span class="date">
+        আজ • সংগঠনের অফিসিয়াল পোস্ট
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="posttext">
+
+    আসসালামু আলাইকুম।
+
+    <br><br>
+
+    মানুষের কল্যাণে আমাদের প্রতিটি উদ্যোগে আপনিও পাশে থাকুন। 🤝
+
+  </div>
+
+
+  <div class="actions">
+
+    <span>👍 Like</span>
+
+    <span>💬 Comment</span>
+
+    <span>🔗 Share</span>
+
+  </div>
+
 </article>
 
-<h2 class="section-title">🌿 এক নজরে</h2>
+
+<!-- এক নজরে -->
+
+<h2 class="section-title">
+  🌿 এক নজরে
+</h2>
+
 <div class="cards">
-<a class="card" href="#blood"><div class="icon">🩸</div><b>রক্তদান</b><small>রক্তদাতা তালিকায় যুক্ত হোন</small></a>
-<a class="card" href="#volunteer"><div class="icon">👥</div><b>স্বেচ্ছাসেবক</b><small>মানবতার কাজে যুক্ত হোন</small></a>
-<a class="card" href="#activities"><div class="icon">📅</div><b>কর্মপরিকল্পনা</b><small>১২ মাসের উদ্যোগ</small></a>
-<a class="card" href="#committee"><div class="icon">🏢</div><b>কমিটি</b><small>কার্যনির্বাহী সদস্যবৃন্দ</small></a>
-<a class="card" href="finance.html"><div class="icon">💰</div><b>আয়-ব্যয়</b><small>প্রকাশ্য আর্থিক হিসাব</small></a>
+
+  <a class="card" href="#blood">
+
+    <div class="icon">
+      🩸
+    </div>
+
+    <b>
+      রক্তদান
+    </b>
+
+    <small>
+      রক্তদাতা তালিকায় যুক্ত হোন
+    </small>
+
+  </a>
+
+
+  <a class="card" href="#volunteer">
+
+    <div class="icon">
+      👥
+    </div>
+
+    <b>
+      স্বেচ্ছাসেবক
+    </b>
+
+    <small>
+      মানবতার কাজে যুক্ত হোন
+    </small>
+
+  </a>
+
+
+  <a class="card" href="#activities">
+
+    <div class="icon">
+      📅
+    </div>
+
+    <b>
+      কর্মপরিকল্পনা
+    </b>
+
+    <small>
+      ১২ মাসের উদ্যোগ
+    </small>
+
+  </a>
+
+
+  <a class="card" href="#committee">
+
+    <div class="icon">
+      🏢
+    </div>
+
+    <b>
+      কমিটি
+    </b>
+
+    <small>
+      কার্যনির্বাহী সদস্যবৃন্দ
+    </small>
+
+  </a>
+
+
+  <a class="card" href="finance.html">
+
+    <div class="icon">
+      💰
+    </div>
+
+    <b>
+      আয়-ব্যয়
+    </b>
+
+    <small>
+      প্রকাশ্য আর্থিক হিসাব
+    </small>
+
+  </a>
+
 </div>
 
-<h2 class="section-title" id="activities">📅 ১২ মাসের কর্মপরিকল্পনা</h2>
-<div class="notice">জানুয়ারি — শীতবস্ত্র বিতরণ</div>
-<div class="notice">ফেব্রুয়ারি — বিনামূল্যে শিক্ষা উপকরণ বিতরণ</div>
-<div class="notice">মার্চ — বৃক্ষরোপণ ও পরিবেশ সচেতনতা</div>
-<div class="notice">এপ্রিল — দরিদ্র পরিবারের খাদ্য সহায়তা</div>
-<div class="notice">মে — স্বাস্থ্য সচেতনতামূলক ক্যাম্প</div>
-<div class="notice">জুন — রক্তদাতা তালিকা ও রক্তদান সচেতনতা</div>
-<div class="notice">জুলাই — বন্যা ও দুর্যোগ প্রস্তুতি</div>
-<div class="notice">আগস্ট — মাদকবিরোধী প্রচারণা</div>
-<div class="notice">সেপ্টেম্বর — শিক্ষার্থীদের ক্যারিয়ার গাইডলাইন</div>
-<div class="notice">অক্টোবর — পরিচ্ছন্নতা অভিযান</div>
-<div class="notice">নভেম্বর — শীতবস্ত্র সংগ্রহ কর্মসূচি</div>
-<div class="notice">ডিসেম্বর — বার্ষিক মানবকল্যাণ ও স্বেচ্ছাসেবক সম্মাননা অনুষ্ঠান</div>
 
-<h2 class="section-title" id="committee">👥 কার্যনির্বাহী কমিটি</h2>
-<div class="notice"><b>সভাপতি:</b> তাকির হোসেন</div>
-<div class="notice"><b>সহ-সভাপতি:</b> রাফিউল হাসান শান্ত</div>
-<div class="notice"><b>সাধারণ সম্পাদক:</b> রানা আহমেদ</div>
-<div class="notice"><b>যুগ্ম সাধারণ সম্পাদক:</b> সাব্বির হোসেন</div>
-<div class="notice"><b>সাংগঠনিক সম্পাদক:</b> শাকিল হোসেন</div>
-<div class="notice"><b>অর্থ সম্পাদক:</b> আলামিন হোসেন</div>
+<!-- ১২ মাসের কর্মপরিকল্পনা -->
 
-<h2 class="section-title" id="blood">🩸 রক্তদাতা</h2>
+<h2 class="section-title" id="activities">
+  📅 ১২ মাসের কর্মপরিকল্পনা
+</h2>
+
+<div class="notice">
+  জানুয়ারি — শীতবস্ত্র বিতরণ
+</div>
+
+<div class="notice">
+  ফেব্রুয়ারি — বিনামূল্যে শিক্ষা উপকরণ বিতরণ
+</div>
+
+<div class="notice">
+  মার্চ — বৃক্ষরোপণ ও পরিবেশ সচেতনতা
+</div>
+
+<div class="notice">
+  এপ্রিল — দরিদ্র পরিবারের খাদ্য সহায়তা
+</div>
+
+<div class="notice">
+  মে — স্বাস্থ্য সচেতনতামূলক ক্যাম্প
+</div>
+
+<div class="notice">
+  জুন — রক্তদাতা তালিকা ও রক্তদান সচেতনতা
+</div>
+
+<div class="notice">
+  জুলাই — বন্যা ও দুর্যোগ প্রস্তুতি
+</div>
+
+<div class="notice">
+  আগস্ট — মাদকবিরোধী প্রচারণা
+</div>
+
+<div class="notice">
+  সেপ্টেম্বর — শিক্ষার্থীদের ক্যারিয়ার গাইডলাইন
+</div>
+
+<div class="notice">
+  অক্টোবর — পরিচ্ছন্নতা অভিযান
+</div>
+
+<div class="notice">
+  নভেম্বর — শীতবস্ত্র সংগ্রহ কর্মসূচি
+</div>
+
+<div class="notice">
+  ডিসেম্বর — বার্ষিক মানবকল্যাণ ও স্বেচ্ছাসেবক সম্মাননা অনুষ্ঠান
+</div>
+
+
+<!-- কমিটি -->
+
+<h2 class="section-title" id="committee">
+  👥 কার্যনির্বাহী কমিটি
+</h2>
+
+<div class="notice">
+  <b>সভাপতি:</b> তাকির হোসেন
+</div>
+
+<div class="notice">
+  <b>সহ-সভাপতি:</b> রাফিউল হাসান শান্ত
+</div>
+
+<div class="notice">
+  <b>সাধারণ সম্পাদক:</b> রানা আহমেদ
+</div>
+
+<div class="notice">
+  <b>যুগ্ম সাধারণ সম্পাদক:</b> সাব্বির হোসেন
+</div>
+
+<div class="notice">
+  <b>সাংগঠনিক সম্পাদক:</b> শাকিল হোসেন
+</div>
+
+<div class="notice">
+  <b>অর্থ সম্পাদক:</b> আলামিন হোসেন
+</div>
+
+
+<!-- BLOOD -->
+
+<h2 class="section-title" id="blood">
+  🩸 রক্তদাতা
+</h2>
+
+
+<!-- BKASH PAYMENT -->
+
+<section class="post" id="bkash">
+
+  <h2>
+    💳 সদস্য চাঁদা
+  </h2>
+
+  <p>
+    মানবকল্যাণ যুব সংঘের কার্যক্রম পরিচালনায়
+    মাসিক চাঁদা প্রদান করুন।
+  </p>
+
+
+  <div class="bkash-box">
+
+    <h3>
+      📱 bKash-এ টাকা পাঠান
+    </h3>
+
+
+    <p>
+      bKash নম্বর:
+      <strong class="bkash-number">
+        +8801318425093
+      </strong>
+    </p>
+
+
+    <p class="muted">
+
+      উক্ত bKash নম্বরে টাকা পাঠানোর পর
+      নিচের ফর্মে আপনার পেমেন্টের তথ্য জমা দিন।
+
+      <br>
+
+      প্রশাসক তথ্য যাচাই করে অনুমোদন করবেন।
+
+    </p>
+
+
+    <label>
+      আপনার নাম
+    </label>
+
+    <input
+      id="paymentName"
+      type="text"
+      placeholder="আপনার নাম"
+      autocomplete="name"
+    >
+
+
+    <label>
+      যে bKash নম্বর থেকে পাঠিয়েছেন
+    </label>
+
+    <input
+      id="paymentBkash"
+      type="tel"
+      placeholder="01XXXXXXXXX"
+      autocomplete="tel"
+    >
+
+
+    <label>
+      টাকার পরিমাণ
+    </label>
+
+    <input
+      id="paymentAmount"
+      type="number"
+      min="1"
+      placeholder="টাকার পরিমাণ"
+    >
+
+
+    <label>
+      bKash Transaction ID
+    </label>
+
+    <input
+      id="paymentTrx"
+      type="text"
+      placeholder="Transaction ID"
+      autocomplete="off"
+    >
+
+
+    <button
+      type="button"
+      onclick="submitPayment()"
+    >
+      🧾 পেমেন্ট জমা দিন
+    </button>
+
+
+    <p
+      id="paymentMsg"
+      class="muted"
+      aria-live="polite"
+    ></p>
+
+  </div>
+
+</section>
+
+
+<!-- GOOGLE BLOOD FORM -->
+
 <div class="post">
-<p>রক্তদানে এগিয়ে আসুন। আপনার এক ব্যাগ রক্ত কারও জন্য আশার আলো হতে পারে।</p>
-<iframe
-  src="https://docs.google.com/forms/d/e/1FAIpQLSdziGGKWKIMw2qWrfGOjvkpWxVUgRg06f_SGH6aOBRPt7rD7g/viewform?embedded=true"
-  width="100%"
-  height="900"
-  frameborder="0"
-  marginheight="0"
-  marginwidth="0">
-  Loading…
-</iframe>
+
+  <p>
+    রক্তদানে এগিয়ে আসুন।
+    আপনার এক ব্যাগ রক্ত কারও জন্য আশার আলো হতে পারে।
+  </p>
+
+
+  <iframe
+    src="https://docs.google.com/forms/d/e/1FAIpQLSdziGGKWKIMw2qWrfGOjvkpWxVUgRg06f_SGH6aOBRPt7rD7g/viewform?embedded=true"
+    width="100%"
+    height="900"
+    frameborder="0"
+    marginheight="0"
+    marginwidth="0">
+    Loading…
+  </iframe>
+
 </div>
 
-<h2 class="section-title" id="volunteer">🤝 স্বেচ্ছাসেবক</h2>
-<div class="post"><p>সমাজের মানুষের পাশে দাঁড়াতে আগ্রহী তরুণ-তরুণীদের আমাদের স্বেচ্ছাসেবক কার্যক্রমে যুক্ত হওয়ার আহ্বান জানাচ্ছি।</p><button onclick="location.href='#contact'">যোগাযোগ করুন</button></div>
 
-<h2 class="section-title" id="contact">📞 যোগাযোগ</h2>
-<div class="post"><p><b>ঠিকানা:</b> হাপানিয়া, ধানীখোলা, ত্রিশাল, ময়মনসিংহ</p><p><b>সাধারণ সম্পাদক:</b> রানা আহমেদ</p><p>Facebook Page/Group ও ফোন নম্বর এখানে যুক্ত করা যাবে।</p></div>
+<!-- VOLUNTEER -->
+
+<h2 class="section-title" id="volunteer">
+  🤝 স্বেচ্ছাসেবক
+</h2>
+
+<div class="post">
+
+  <p>
+    সমাজের মানুষের পাশে দাঁড়াতে আগ্রহী তরুণ-তরুণীদের
+    আমাদের স্বেচ্ছাসেবক কার্যক্রমে যুক্ত হওয়ার আহ্বান জানাচ্ছি।
+  </p>
+
+  <button
+    type="button"
+    onclick="location.href='#contact'"
+  >
+    যোগাযোগ করুন
+  </button>
+
+</div>
+
+
+<!-- CONTACT -->
+
+<h2 class="section-title" id="contact">
+  📞 যোগাযোগ
+</h2>
+
+<div class="post">
+
+  <p>
+    <b>ঠিকানা:</b>
+    হাপানিয়া, ধানীখোলা, ত্রিশাল, ময়মনসিংহ
+  </p>
+
+  <p>
+    <b>সাধারণ সম্পাদক:</b>
+    রানা আহমেদ
+  </p>
+
+  <p>
+    Facebook Page/Group ও ফোন নম্বর এখানে যুক্ত করা যাবে।
+  </p>
+
+</div>
+
+
 </main>
 
-<nav class="bottom" style="grid-template-columns:repeat(6,1fr)">
-<a class="active" href="#home"><span>🏠</span>হোম</a>
-<a href="#blood"><span>🩸</span>রক্ত</a>
-<a href="#volunteer"><span>👥</span>ভলান্টিয়ার</a>
-<a href="finance.html"><span>💰</span>হিসাব</a>
-<a href="#activities"><span>🔔</span>কাজ</a>
-<a href="#contact"><span>👤</span>যোগাযোগ</a>
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom">
+
+  <a class="active" href="#home">
+    <span>🏠</span>
+    হোম
+  </a>
+
+  <a href="#blood">
+    <span>🩸</span>
+    রক্ত
+  </a>
+
+  <a href="#volunteer">
+    <span>👥</span>
+    ভলান্টিয়ার
+  </a>
+
+  <a href="finance.html">
+    <span>💰</span>
+    হিসাব
+  </a>
+
+  <a href="#activities">
+    <span>🔔</span>
+    কাজ
+  </a>
+
+  <a href="#contact">
+    <span>👤</span>
+    যোগাযোগ
+  </a>
+
 </nav>
 
-<section style="margin:20px auto;max-width:900px;padding:18px;border-radius:18px;background:#171d23;border:1px solid #2b333b;color:#fff;text-align:center"><h2>💰 সংগঠনের আয়-ব্যয়</h2><p>সংগঠনের আর্থিক হিসাব সবার জন্য উন্মুক্ত।</p><a href="finance.html" style="display:inline-block;padding:11px 18px;border-radius:10px;background:#2563eb;color:#fff;text-decoration:none;font-weight:700">আয়-ব্যয়ের হিসাব দেখুন</a></section>
+
+<!-- FINANCE -->
+
+<section class="finance-box">
+
+  <h2>
+    💰 সংগঠনের আয়-ব্যয়
+  </h2>
+
+  <p>
+    সংগঠনের আর্থিক হিসাব সবার জন্য উন্মুক্ত।
+  </p>
+
+  <a
+    href="finance.html"
+    class="finance-button"
+  >
+    আয়-ব্যয়ের হিসাব দেখুন
+  </a>
+
+</section>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+<!-- PAYMENT SUBMISSION -->
+
+<script>
+
+async function submitPayment(){
+
+  const name =
+    document.getElementById("paymentName").value.trim();
+
+  const bkash =
+    document.getElementById("paymentBkash").value.trim();
+
+  const amount =
+    document.getElementById("paymentAmount").value;
+
+  const trx =
+    document.getElementById("paymentTrx").value.trim();
+
+  const msg =
+    document.getElementById("paymentMsg");
+
+
+  /* তথ্য যাচাই */
+
+  if(!name || !bkash || !amount || !trx){
+
+    msg.textContent =
+      "⚠️ অনুগ্রহ করে সব তথ্য পূরণ করুন।";
+
+    return;
+  }
+
+
+  /* Amount যাচাই */
+
+  if(Number(amount) <= 0){
+
+    msg.textContent =
+      "⚠️ সঠিক টাকার পরিমাণ লিখুন।";
+
+    return;
+  }
+
+
+  /* Transaction ID ছোট হলে */
+
+  if(trx.length < 3){
+
+    msg.textContent =
+      "⚠️ সঠিক Transaction ID লিখুন।";
+
+    return;
+  }
+
+
+  msg.textContent =
+    "⏳ পেমেন্ট তথ্য জমা হচ্ছে...";
+
+
+  try{
+
+
+    const { error } = await sb
+
+      .from("payment_requests")
+
+      .insert([
+
+        {
+
+          name:name,
+
+          bkash_number:bkash,
+
+          amount:Number(amount),
+
+          transaction_id:trx,
+
+          status:"pending"
+
+        }
+
+      ]);
+
+
+    /* Error */
+
+    if(error){
+
+      console.error(error);
+
+      msg.textContent =
+        "❌ পেমেন্ট জমা দেওয়া যায়নি। আবার চেষ্টা করুন।";
+
+      return;
+    }
+
+
+    /* Success */
+
+    msg.textContent =
+      "✅ পেমেন্ট তথ্য সফলভাবে জমা হয়েছে। যাচাই শেষে অনুমোদন করা হবে।";
+
+
+    /* Form clear */
+
+    document.getElementById("paymentName").value = "";
+
+    document.getElementById("paymentBkash").value = "";
+
+    document.getElementById("paymentAmount").value = "";
+
+    document.getElementById("paymentTrx").value = "";
+
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    msg.textContent =
+      "❌ একটি সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।";
+
+  }
+
+}
+
+</script>
+
+
 </body>
 </html>
