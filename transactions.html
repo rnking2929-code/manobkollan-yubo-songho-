@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Transactions - মানবকল্যাণ যুব সংঘ</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#0f172a;
+  color:#fff;
+}
+
+.header{
+  padding:20px 15px;
+  text-align:center;
+  background:#111827;
+  border-bottom:1px solid #334155;
+}
+
+.header h1{
+  margin:0 0 6px;
+  font-size:23px;
+}
+
+.header p{
+  margin:0;
+  color:#94a3b8;
+}
+
+.container{
+  max-width:950px;
+  margin:auto;
+  padding:20px 15px;
+}
+
+.topbar{
+  display:flex;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.topbar a,
+.topbar button{
+  flex:1;
+  padding:12px;
+  border-radius:9px;
+  border:0;
+  text-align:center;
+  text-decoration:none;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.back{
+  background:#334155;
+  color:#fff;
+}
+
+.logout{
+  background:#dc2626;
+  color:#fff;
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.summary-card{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:13px;
+  padding:18px;
+  text-align:center;
+}
+
+.summary-card h3{
+  margin:0 0 10px;
+  font-size:15px;
+  color:#94a3b8;
+}
+
+.summary-card .money{
+  font-size:23px;
+  font-weight:bold;
+}
+
+.income .money{
+  color:#4ade80;
+}
+
+.expense .money{
+  color:#f87171;
+}
+
+.balance .money{
+  color:#60a5fa;
+}
+
+.card{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:14px;
+  padding:18px;
+  margin-bottom:18px;
+}
+
+.card h2{
+  margin-top:0;
+}
+
+label{
+  display:block;
+  margin-top:12px;
+  margin-bottom:5px;
+  color:#cbd5e1;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #475569;
+  background:#1e293b;
+  color:#fff;
+  outline:none;
+}
+
+textarea{
+  min-height:80px;
+  resize:vertical;
+}
+
+.add-button{
+  width:100%;
+  margin-top:15px;
+  padding:13px;
+  border:0;
+  border-radius:9px;
+  background:#2563eb;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.refresh{
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:9px;
+  background:#334155;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  margin-bottom:12px;
+}
+
+.transaction{
+  background:#1e293b;
+  border:1px solid #334155;
+  border-radius:12px;
+  padding:15px;
+  margin-top:12px;
+}
+
+.transaction-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.type{
+  font-weight:bold;
+}
+
+.income-type{
+  color:#4ade80;
+}
+
+.expense-type{
+  color:#f87171;
+}
+
+.amount{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.transaction-info{
+  margin-top:8px;
+  color:#cbd5e1;
+  line-height:1.6;
+}
+
+.delete{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border:0;
+  border-radius:8px;
+  background:#991b1b;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.empty,
+.loading{
+  text-align:center;
+  padding:25px;
+  color:#94a3b8;
+}
+
+.message{
+  text-align:center;
+  margin:10px 0;
+  color:#fbbf24;
+}
+
+@media(max-width:650px){
+
+  .summary{
+    grid-template-columns:1fr;
+  }
+
+  .transaction-top{
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+  <h1>💵 Transactions</h1>
+
+  <p>মানবকল্যাণ যুব সংঘ</p>
+
+</div>
+
+
+<div class="container">
+
+
+  <div class="topbar">
+
+    <a
+      href="admin.html"
+      class="back">
+      ⬅️ Admin
+    </a>
+
+    <button
+      class="logout"
+      onclick="logout()">
+      🚪 Logout
+    </button>
+
+  </div>
+
+
+  <!-- SUMMARY -->
+
+  <div class="summary">
+
+    <div class="summary-card income">
+
+      <h3>💚 মোট আয়</h3>
+
+      <div
+        id="totalIncome"
+        class="money">
+        ৳ 0
+      </div>
+
+    </div>
+
+
+    <div class="summary-card expense">
+
+      <h3>❤️ মোট ব্যয়</h3>
+
+      <div
+        id="totalExpense"
+        class="money">
+        ৳ 0
+      </div>
+
+    </div>
+
+
+    <div class="summary-card balance">
+
+      <h3>💙 বর্তমান ব্যালেন্স</h3>
+
+      <div
+        id="balance"
+        class="money">
+        ৳ 0
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ADD TRANSACTION -->
+
+  <div class="card">
+
+    <h2>➕ নতুন লেনদেন যোগ করুন</h2>
+
+    <label for="type">
+      লেনদেনের ধরন
+    </label>
+
+    <select id="type">
+
+      <option value="income">
+        💚 আয়
+      </option>
+
+      <option value="expense">
+        ❤️ ব্যয়
+      </option>
+
+    </select>
+
+
+    <label for="category">
+      ক্যাটাগরি
+    </label>
+
+    <input
+      id="category"
+      type="text"
+      placeholder="যেমন: মাসিক চাঁদা / খাদ্য সহায়তা">
+
+
+    <label for="amount">
+      টাকার পরিমাণ
+    </label>
+
+    <input
+      id="amount"
+      type="number"
+      min="1"
+      step="0.01"
+      placeholder="যেমন: 500">
+
+
+    <label for="description">
+      বিবরণ
+    </label>
+
+    <textarea
+      id="description"
+      placeholder="লেনদেন সম্পর্কে সংক্ষিপ্ত বিবরণ"></textarea>
+
+
+    <button
+      class="add-button"
+      onclick="addTransaction()">
+      💾 লেনদেন সংরক্ষণ করুন
+    </button>
+
+
+    <div
+      id="message"
+      class="message">
+    </div>
+
+  </div>
+
+
+  <!-- TRANSACTION LIST -->
+
+  <div class="card">
+
+    <h2>📋 সকল লেনদেন</h2>
+
+    <button
+      class="refresh"
+      onclick="loadTransactions()">
+      🔄 Refresh
+    </button>
+
+
+    <div id="transactionList">
+
+      <div class="loading">
+        ⏳ হিসাব লোড হচ্ছে...
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+<script>
+
+const sb = supabase.createClient(
+  window.SUPABASE_URL,
+  window.SUPABASE_ANON_KEY
+);
+
+
+function esc(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+async function checkLogin(){
+
+  const {data} =
+    await sb.auth.getSession();
+
+  if(!data.session){
+
+    window.location.href =
+      "admin.html";
+
+    return false;
+  }
+
+  return true;
+}
+
+
+function money(value){
+
+  return Number(value || 0)
+    .toLocaleString("bn-BD",{
+      minimumFractionDigits:0,
+      maximumFractionDigits:2
+    });
+
+}
+
+
+async function loadTransactions(){
+
+  const loggedIn =
+    await checkLogin();
+
+  if(!loggedIn) return;
+
+
+  const list =
+    document.getElementById(
+      "transactionList"
+    );
+
+
+  list.innerHTML =
+    '<div class="loading">⏳ হিসাব লোড হচ্ছে...</div>';
+
+
+  const {data,error} =
+    await sb
+      .from("transactions")
+      .select("*")
+      .order(
+        "created_at",
+        {ascending:false}
+      );
+
+
+  if(error){
+
+    console.error(error);
+
+    list.innerHTML =
+      '<div class="empty">❌ হিসাব লোড করা যায়নি।</div>';
+
+    return;
+  }
+
+
+  const transactions =
+    data || [];
+
+
+  let income = 0;
+
+  let expense = 0;
+
+
+  transactions.forEach(function(item){
+
+    const amount =
+      Number(item.amount || 0);
+
+
+    if(item.type === "income"){
+
+      income += amount;
+
+    }else if(item.type === "expense"){
+
+      expense += amount;
+
+    }
+
+  });
+
+
+  document.getElementById(
+    "totalIncome"
+  ).textContent =
+    "৳ " + money(income);
+
+
+  document.getElementById(
+    "totalExpense"
+  ).textContent =
+    "৳ " + money(expense);
+
+
+  document.getElementById(
+    "balance"
+  ).textContent =
+    "৳ " + money(income - expense);
+
+
+  if(transactions.length === 0){
+
+    list.innerHTML =
+      '<div class="empty">📭 কোনো লেনদেন নেই।</div>';
+
+    return;
+  }
+
+
+  list.innerHTML =
+    transactions.map(function(item){
+
+      const isIncome =
+        item.type === "income";
+
+
+      const amount =
+        Number(item.amount || 0);
+
+
+      const date =
+        item.created_at
+        ?
+        new Date(
+          item.created_at
+        ).toLocaleString("bn-BD")
+        :
+        "";
+
+
+      return `
+
+        <div class="transaction">
+
+          <div class="transaction-top">
+
+            <div
+              class="type ${
+                isIncome
+                ?
+                "income-type"
+                :
+                "expense-type"
+              }">
+
+              ${
+                isIncome
+                ?
+                "💚 আয়"
+                :
+                "❤️ ব্যয়"
+              }
+
+            </div>
+
+
+            <div class="amount">
+
+              ${
+                isIncome
+                ?
+                "+"
+                :
+                "-"
+              }
+
+              ৳ ${money(amount)}
+
+            </div>
+
+          </div>
+
+
+          <div class="transaction-info">
+
+            <strong>
+              ${esc(
+                item.category ||
+                "ক্যাটাগরি নেই"
+              )}
+            </strong>
+
+            <br>
+
+            📝 ${
+              esc(
+                item.description ||
+                "কোনো বিবরণ নেই"
+              )
+            }
+
+            <br>
+
+            📅 ${esc(date)}
+
+          </div>
+
+
+          <button
+            class="delete"
+            onclick="deleteTransaction('${item.id}')">
+
+            🗑️ Delete
+
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+async function addTransaction(){
+
+  const loggedIn =
+    await checkLogin();
+
+  if(!loggedIn) return;
+
+
+  const type =
+    document.getElementById(
+      "type"
+    ).value;
+
+
+  const category =
+    document.getElementById(
+      "category"
+    ).value.trim();
+
+
+  const amount =
+    Number(
+      document.getElementById(
+        "amount"
+      ).value
+    );
+
+
+  const description =
+    document.getElementById(
+      "description"
+    ).value.trim();
+
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  if(!category){
+
+    message.textContent =
+      "⚠️ ক্যাটাগরি লিখুন।";
+
+    return;
+  }
+
+
+  if(!amount || amount <= 0){
+
+    message.textContent =
+      "⚠️ সঠিক টাকার পরিমাণ দিন।";
+
+    return;
+  }
+
+
+  message.textContent =
+    "⏳ সংরক্ষণ হচ্ছে...";
+
+
+  const {error} =
+    await sb
+      .from("transactions")
+      .insert([{
+
+        type:type,
+
+        category:category,
+
+        amount:amount,
+
+        description:
+          description || null
+
+      }]);
+
+
+  if(error){
+
+    console.error(error);
+
+    message.textContent =
+      "❌ লেনদেন সংরক্ষণ করা যায়নি।";
+
+    return;
+  }
+
+
+  message.textContent =
+    "✅ লেনদেন সফলভাবে সংরক্ষণ হয়েছে।";
+
+
+  document.getElementById(
+    "category"
+  ).value = "";
+
+
+  document.getElementById(
+    "amount"
+  ).value = "";
+
+
+  document.getElementById(
+    "description"
+  ).value = "";
+
+
+  await loadTransactions();
+
+}
+
+
+async function deleteTransaction(id){
+
+  if(
+    !confirm(
+      "এই লেনদেনটি Delete করবেন?"
+    )
+  ){
+
+    return;
+  }
+
+
+  const {error} =
+    await sb
+      .from("transactions")
+      .delete()
+      .eq("id",id);
+
+
+  if(error){
+
+    console.error(error);
+
+    alert(
+      "❌ Delete করা যায়নি।"
+    );
+
+    return;
+  }
+
+
+  alert(
+    "✅ লেনদেন Delete হয়েছে।"
+  );
+
+
+  await loadTransactions();
+
+}
+
+
+async function logout(){
+
+  await sb.auth.signOut();
+
+  window.location.href =
+    "admin.html";
+
+}
+
+
+loadTransactions();
+
+</script>
+
+</body>
+</html>
