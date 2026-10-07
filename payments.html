@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Management - মানবকল্যাণ যুব সংঘ</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#0f172a;
+  color:#fff;
+}
+
+.header{
+  padding:20px 15px;
+  text-align:center;
+  background:#111827;
+  border-bottom:1px solid #334155;
+}
+
+.header h1{
+  margin:0 0 6px;
+  font-size:23px;
+}
+
+.header p{
+  margin:0;
+  color:#94a3b8;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px 15px;
+}
+
+.topbar{
+  display:flex;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.topbar a,
+.topbar button{
+  flex:1;
+  padding:12px;
+  border-radius:9px;
+  border:0;
+  text-align:center;
+  text-decoration:none;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.back{
+  background:#334155;
+  color:#fff;
+}
+
+.logout{
+  background:#dc2626;
+  color:#fff;
+}
+
+.card{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:14px;
+  padding:18px;
+  margin-bottom:15px;
+}
+
+.card h3{
+  margin-top:0;
+}
+
+.payment{
+  border:1px solid #334155;
+  border-radius:12px;
+  padding:15px;
+  margin-top:12px;
+  background:#1e293b;
+}
+
+.row{
+  margin:7px 0;
+  line-height:1.5;
+}
+
+.label{
+  color:#94a3b8;
+}
+
+.amount{
+  font-size:22px;
+  font-weight:bold;
+  margin:8px 0;
+}
+
+.status{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:7px;
+  background:#92400e;
+  color:#fde68a;
+  font-size:13px;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  margin-top:13px;
+}
+
+.actions button{
+  flex:1;
+  padding:11px;
+  border:0;
+  border-radius:8px;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.approve{
+  background:#16a34a;
+}
+
+.reject{
+  background:#dc2626;
+}
+
+.empty{
+  text-align:center;
+  padding:25px;
+  color:#94a3b8;
+}
+
+.loading{
+  text-align:center;
+  padding:20px;
+  color:#94a3b8;
+}
+
+.message{
+  text-align:center;
+  margin:10px 0;
+  color:#fbbf24;
+}
+
+@media(max-width:500px){
+  .actions{
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>💰 Payment Management</h1>
+  <p>মানবকল্যাণ যুব সংঘ</p>
+</div>
+
+<div class="container">
+
+  <div class="topbar">
+    <a class="back" href="admin.html">⬅️ Admin</a>
+    <button class="logout" onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <div class="card">
+    <h2>💰 bKash Payment Requests</h2>
+    <p style="color:#94a3b8">
+      সদস্যদের পাঠানো bKash payment যাচাই করে Approve অথবা Reject করুন।
+    </p>
+
+    <button
+      onclick="loadPayments()"
+      style="width:100%;padding:12px;border:0;border-radius:9px;background:#2563eb;color:#fff;font-weight:bold;cursor:pointer;">
+      🔄 তালিকা Refresh
+    </button>
+
+    <div id="message" class="message"></div>
+
+    <div id="paymentList">
+      <div class="loading">⏳ Payment তালিকা লোড হচ্ছে...</div>
+    </div>
+  </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+
+<script>
+
+const sb = supabase.createClient(
+  window.SUPABASE_URL,
+  window.SUPABASE_ANON_KEY
+);
+
+
+function esc(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function showMessage(text){
+
+  document.getElementById("message").textContent=text;
+
+}
+
+
+async function checkLogin(){
+
+  const {data} = await sb.auth.getSession();
+
+  if(!data.session){
+
+    window.location.href="admin.html";
+    return false;
+  }
+
+  return true;
+}
+
+
+async function loadPayments(){
+
+  const ok = await checkLogin();
+
+  if(!ok) return;
+
+  const list =
+    document.getElementById("paymentList");
+
+  list.innerHTML =
+    '<div class="loading">⏳ Payment তালিকা লোড হচ্ছে...</div>';
+
+  const {data,error} = await sb
+    .from("payment_requests")
+    .select("*")
+    .order("created_at",{ascending:false});
+
+  if(error){
+
+    console.error(error);
+
+    list.innerHTML =
+      '<div class="empty">❌ Payment তালিকা লোড করা যায়নি।</div>';
+
+    return;
+  }
+
+
+  if(!data || data.length===0){
+
+    list.innerHTML =
+      '<div class="empty">📭 কোনো Payment Request নেই।</div>';
+
+    return;
+  }
+
+
+  list.innerHTML = data.map(function(x){
+
+    const status =
+      String(x.status || "pending");
+
+    let statusText = "⏳ Pending";
+
+    if(status==="approved"){
+      statusText="✅ Approved";
+    }
+
+    if(status==="rejected"){
+      statusText="❌ Rejected";
+    }
+
+
+    let buttons="";
+
+    if(status==="pending"){
+
+      buttons = `
+        <div class="actions">
+
+          <button
+            class="approve"
+            onclick="approvePayment('${x.id}')">
+            ✅ Approve
+          </button>
+
+          <button
+            class="reject"
+            onclick="rejectPayment('${x.id}')">
+            ❌ Reject
+          </button>
+
+        </div>
+      `;
+
+    }
+
+
+    const date =
+      x.created_at
+      ? new Date(x.created_at).toLocaleString("bn-BD")
+      : "";
+
+
+    return `
+      <div class="payment">
+
+        <div class="row">
+          <span class="label">নাম:</span>
+          <strong>${esc(x.name || "নাম দেওয়া হয়নি")}</strong>
+        </div>
+
+        <div class="row">
+          <span class="label">bKash নম্বর:</span>
+          ${esc(x.bkash_number || "")}
+        </div>
+
+        <div class="amount">
+          ৳ ${esc(x.amount || 0)}
+        </div>
+
+        <div class="row">
+          <span class="label">Transaction ID:</span>
+          <strong>${esc(x.transaction_id || "")}</strong>
+        </div>
+
+        <div class="row">
+          <span class="label">সময়:</span>
+          ${esc(date)}
+        </div>
+
+        <div class="row">
+          <span class="status">
+            ${statusText}
+          </span>
+        </div>
+
+        ${buttons}
+
+      </div>
+    `;
+
+  }).join("");
+
+}
+
+
+async function approvePayment(id){
+
+  if(!confirm("এই Payment Approve করবেন?")){
+    return;
+  }
+
+
+  showMessage("⏳ Approve করা হচ্ছে...");
+
+
+  const {data:payment,error} =
+    await sb
+      .from("payment_requests")
+      .select("*")
+      .eq("id",id)
+      .single();
+
+
+  if(error || !payment){
+
+    console.error(error);
+
+    showMessage("❌ Payment পাওয়া যায়নি।");
+
+    return;
+  }
+
+
+  const {error:updateError} =
+    await sb
+      .from("payment_requests")
+      .update({
+        status:"approved"
+      })
+      .eq("id",id);
+
+
+  if(updateError){
+
+    console.error(updateError);
+
+    showMessage("❌ Approve করা যায়নি।");
+
+    return;
+  }
+
+
+  const {error:transactionError} =
+    await sb
+      .from("transactions")
+      .insert([{
+        type:"income",
+        category:"Member Contribution",
+        amount:Number(payment.amount),
+        description:
+          "bKash payment - " +
+          String(payment.name || "") +
+          " - TrxID: " +
+          String(payment.transaction_id || "")
+      }]);
+
+
+  if(transactionError){
+
+    console.error(transactionError);
+
+    showMessage(
+      "⚠️ Payment Approved হয়েছে, কিন্তু Transactions-এ যোগ করা যায়নি।"
+    );
+
+    await loadPayments();
+
+    return;
+  }
+
+
+  showMessage("✅ Payment Approved এবং Transactions-এ যোগ হয়েছে।");
+
+  await loadPayments();
+
+}
+
+
+async function rejectPayment(id){
+
+  if(!confirm("এই Payment Reject করবেন?")){
+    return;
+  }
+
+
+  showMessage("⏳ Reject করা হচ্ছে...");
+
+
+  const {error} =
+    await sb
+      .from("payment_requests")
+      .update({
+        status:"rejected"
+      })
+      .eq("id",id);
+
+
+  if(error){
+
+    console.error(error);
+
+    showMessage("❌ Reject করা যায়নি।");
+
+    return;
+  }
+
+
+  showMessage("✅ Payment Reject করা হয়েছে।");
+
+  await loadPayments();
+
+}
+
+
+async function logout(){
+
+  await sb.auth.signOut();
+
+  window.location.href="admin.html";
+
+}
+
+
+loadPayments();
+
+</script>
+
+</body>
+</html>
