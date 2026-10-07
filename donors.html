@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blood Donors - মানবকল্যাণ যুব সংঘ</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#0f172a;
+  color:#fff;
+}
+
+.header{
+  padding:20px 15px;
+  text-align:center;
+  background:#111827;
+  border-bottom:1px solid #334155;
+}
+
+.header h1{
+  margin:0 0 6px;
+  font-size:23px;
+}
+
+.header p{
+  margin:0;
+  color:#94a3b8;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px 15px;
+}
+
+.topbar{
+  display:flex;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.topbar a,
+.topbar button{
+  flex:1;
+  padding:12px;
+  border-radius:9px;
+  border:0;
+  text-align:center;
+  text-decoration:none;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.back{
+  background:#334155;
+  color:#fff;
+}
+
+.logout{
+  background:#dc2626;
+  color:#fff;
+}
+
+.card{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:14px;
+  padding:18px;
+}
+
+.count{
+  display:inline-block;
+  margin:8px 0 15px;
+  padding:7px 12px;
+  border-radius:8px;
+  background:#7f1d1d;
+  color:#fecaca;
+}
+
+.donor{
+  background:#1e293b;
+  border:1px solid #334155;
+  border-radius:12px;
+  padding:15px;
+  margin-top:12px;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+}
+
+.name{
+  font-size:18px;
+  font-weight:bold;
+}
+
+.blood{
+  background:#991b1b;
+  padding:6px 10px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.info{
+  margin-top:10px;
+  line-height:1.7;
+  color:#cbd5e1;
+}
+
+.call{
+  display:block;
+  margin-top:12px;
+  padding:11px;
+  text-align:center;
+  text-decoration:none;
+  border-radius:8px;
+  background:#16a34a;
+  color:#fff;
+  font-weight:bold;
+}
+
+.refresh{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  border:0;
+  border-radius:9px;
+  background:#2563eb;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.empty,
+.loading{
+  text-align:center;
+  padding:25px;
+  color:#94a3b8;
+}
+
+.message{
+  text-align:center;
+  color:#fbbf24;
+  margin:10px 0;
+}
+
+@media(max-width:500px){
+  .top{
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>🩸 Blood Donors</h1>
+  <p>মানবকল্যাণ যুব সংঘ</p>
+</div>
+
+<div class="container">
+
+  <div class="topbar">
+    <a href="admin.html" class="back">⬅️ Admin</a>
+    <button class="logout" onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <div class="card">
+
+    <h2>🩸 রক্তদাতার তালিকা</h2>
+
+    <p style="color:#94a3b8">
+      নিবন্ধিত রক্তদাতাদের যোগাযোগের তথ্য এখানে দেখা যাবে।
+    </p>
+
+    <div id="count" class="count">
+      মোট রক্তদাতা: ০ জন
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <div id="donorList">
+      <div class="loading">
+        ⏳ রক্তদাতার তালিকা লোড হচ্ছে...
+      </div>
+    </div>
+
+    <button class="refresh" onclick="loadDonors()">
+      🔄 তালিকা Refresh
+    </button>
+
+  </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+
+<script>
+
+const sb = supabase.createClient(
+  window.SUPABASE_URL,
+  window.SUPABASE_ANON_KEY
+);
+
+
+function esc(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+async function checkLogin(){
+
+  const {data} =
+    await sb.auth.getSession();
+
+  if(!data.session){
+
+    window.location.href="admin.html";
+
+    return false;
+  }
+
+  return true;
+}
+
+
+async function loadDonors(){
+
+  const loggedIn = await checkLogin();
+
+  if(!loggedIn) return;
+
+  const list =
+    document.getElementById("donorList");
+
+  list.innerHTML =
+    '<div class="loading">⏳ তালিকা লোড হচ্ছে...</div>';
+
+  const {data,error} =
+    await sb
+      .from("blood_donors")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+
+  if(error){
+
+    console.error(error);
+
+    list.innerHTML =
+      '<div class="empty">❌ রক্তদাতার তালিকা লোড করা যায়নি।</div>';
+
+    return;
+  }
+
+
+  const donors = data || [];
+
+
+  document.getElementById("count").textContent =
+    "মোট রক্তদাতা: " + donors.length + " জন";
+
+
+  if(donors.length===0){
+
+    list.innerHTML =
+      '<div class="empty">📭 বর্তমানে কোনো রক্তদাতা নেই।</div>';
+
+    return;
+  }
+
+
+  list.innerHTML = donors.map(function(donor){
+
+    const phone =
+      String(donor.phone || "")
+      .replace(/[^0-9+]/g,"");
+
+
+    const status =
+      donor.status || "available";
+
+
+    let statusText =
+      "🟢 রক্তদানে আগ্রহী";
+
+    if(status !== "available"){
+      statusText =
+        "⚪ " + esc(status);
+    }
+
+
+    return `
+      <div class="donor">
+
+        <div class="top">
+
+          <div class="name">
+            ${esc(donor.name || "নাম দেওয়া হয়নি")}
+          </div>
+
+          <div class="blood">
+            🩸 ${esc(donor.blood_group || "")}
+          </div>
+
+        </div>
+
+
+        <div class="info">
+
+          📍 এলাকা:
+          ${esc(donor.area || "উল্লেখ নেই")}
+
+          <br>
+
+          📞 মোবাইল:
+          ${esc(donor.phone || "নম্বর নেই")}
+
+          <br>
+
+          ${statusText}
+
+        </div>
+
+
+        ${
+          phone
+          ?
+          `<a
+            class="call"
+            href="tel:${esc(phone)}">
+            📞 কল করুন
+          </a>`
+          :
+          ""
+        }
+
+      </div>
+    `;
+
+  }).join("");
+
+}
+
+
+async function logout(){
+
+  await sb.auth.signOut();
+
+  window.location.href="admin.html";
+
+}
+
+
+loadDonors();
+
+</script>
+
+</body>
+</html>
