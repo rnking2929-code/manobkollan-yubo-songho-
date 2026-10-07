@@ -97,12 +97,70 @@ button{
   margin:0
 }
 
+/* =========================
+   VOLUNTEERS
+========================= */
+
+.volunteer-card{
+  border:1px solid #39424b;
+  border-radius:14px;
+  padding:14px;
+  margin:10px 0;
+  background:#11171c
+}
+
+.volunteer-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px
+}
+
+.volunteer-name{
+  font-size:18px;
+  font-weight:800
+}
+
+.volunteer-interest{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  background:#2563eb;
+  font-size:12px;
+  font-weight:700
+}
+
+.volunteer-info{
+  line-height:1.8;
+  color:#d5dbe0
+}
+
+.refresh{
+  background:#374151;
+  margin-top:10px
+}
+
+.count-box{
+  padding:10px 12px;
+  border-radius:10px;
+  background:#0e1317;
+  border:1px solid #39424b;
+  margin-bottom:12px
+}
+
 @media(max-width:600px){
+
   .row{
     grid-template-columns:1fr
   }
 
   .actions{
+    flex-direction:column
+  }
+
+  .volunteer-top{
+    align-items:flex-start;
     flex-direction:column
   }
 }
@@ -116,11 +174,13 @@ button{
 <h1>🔐 অ্যাডমিন প্যানেল</h1>
 
 <p class="muted">
-মানবকল্যাণ যুব সংঘ — আয়/ব্যয় পরিচালনা
+মানবকল্যাণ যুব সংঘ — আয়/ব্যয় ও সদস্য কার্যক্রম পরিচালনা
 </p>
 
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN
+========================= -->
 
 <div id="login" class="card">
 
@@ -145,12 +205,16 @@ placeholder="পাসওয়ার্ড">
 </div>
 
 
-<!-- ADMIN PANEL -->
+<!-- =========================
+     ADMIN PANEL
+========================= -->
 
 <div id="panel" style="display:none">
 
 
-<!-- PAYMENT REQUEST -->
+<!-- =========================
+     PAYMENT REQUEST
+========================= -->
 
 <div class="card">
 
@@ -171,7 +235,45 @@ placeholder="পাসওয়ার্ড">
 </div>
 
 
-<!-- ADD TRANSACTION -->
+<!-- =========================
+     VOLUNTEERS
+========================= -->
+
+<div class="card">
+
+<h2>🤝 স্বেচ্ছাসেবক তালিকা</h2>
+
+<p class="muted">
+ওয়েবসাইটের স্বেচ্ছাসেবক ফর্মে যারা নিবন্ধন করেছেন, তাদের তথ্য এখানে দেখা যাবে।
+</p>
+
+<div id="volunteerCount" class="count-box">
+লোড হচ্ছে...
+</div>
+
+<div id="volunteers">
+
+<p class="muted">
+স্বেচ্ছাসেবক তালিকা লোড হচ্ছে...
+</p>
+
+</div>
+
+<button
+type="button"
+class="refresh"
+onclick="loadVolunteers()">
+
+🔄 স্বেচ্ছাসেবক তালিকা রিফ্রেশ
+
+</button>
+
+</div>
+
+
+<!-- =========================
+     ADD TRANSACTION
+========================= -->
 
 <div class="card">
 
@@ -214,8 +316,7 @@ type="date">
 
 <textarea
 id="note"
-placeholder="নোট">
-</textarea>
+placeholder="নোট"></textarea>
 
 <button id="addBtn">
 লেনদেন সংরক্ষণ
@@ -226,7 +327,9 @@ placeholder="নোট">
 </div>
 
 
-<!-- TRANSACTIONS -->
+<!-- =========================
+     TRANSACTIONS
+========================= -->
 
 <div class="card">
 
@@ -273,7 +376,9 @@ $('date').value =
   new Date().toISOString().slice(0,10);
 
 
-/* নিরাপদভাবে লেখা দেখানো */
+/* =========================
+   নিরাপদভাবে লেখা দেখানো
+========================= */
 
 function esc(s){
 
@@ -401,7 +506,7 @@ async function loadPayments(){
     $('payments').innerHTML = `
 
       <p class="muted">
-        bKash payment_requests টেবিল এখনো তৈরি করা হয়নি।
+        bKash payment_requests টেবিল লোড করা যায়নি।
       </p>
 
     `;
@@ -416,7 +521,7 @@ async function loadPayments(){
     $('payments').innerHTML = `
 
       <p class="muted">
-        কোনো Pending পেমেন্ট নেই।
+        কোনো পেমেন্ট নেই।
       </p>
 
     `;
@@ -539,6 +644,15 @@ async function approvePayment(id){
   } = await sb.auth.getUser();
 
 
+  if(!user){
+
+    alert('অ্যাডমিন লগইন পাওয়া যায়নি।');
+
+    return;
+
+  }
+
+
   const {
     error:insertError
   } = await sb
@@ -647,6 +761,152 @@ async function rejectPayment(id){
 
 
 /* =========================
+   VOLUNTEERS LOAD
+========================= */
+
+async function loadVolunteers(){
+
+  $('volunteers').innerHTML = `
+
+    <p class="muted">
+      ⏳ স্বেচ্ছাসেবক তালিকা লোড হচ্ছে...
+    </p>
+
+  `;
+
+  $('volunteerCount').textContent =
+    '⏳ হিসাব করা হচ্ছে...';
+
+
+  const {
+    data,
+    error
+  } = await sb
+    .from('volunteers')
+    .select('*')
+    .order(
+      'created_at',
+      {ascending:false}
+    );
+
+
+  if(error){
+
+    console.error(error);
+
+    $('volunteerCount').textContent =
+      '⚠️ তালিকা পাওয়া যায়নি';
+
+    $('volunteers').innerHTML = `
+
+      <p class="muted">
+        ❌ স্বেচ্ছাসেবক তালিকা লোড করা যায়নি।
+      </p>
+
+      <p class="muted">
+        ${esc(error.message)}
+      </p>
+
+    `;
+
+    return;
+
+  }
+
+
+  if(!data || data.length === 0){
+
+    $('volunteerCount').textContent =
+      'মোট স্বেচ্ছাসেবক: ০ জন';
+
+    $('volunteers').innerHTML = `
+
+      <p class="muted">
+        বর্তমানে কোনো স্বেচ্ছাসেবক নিবন্ধিত নেই।
+      </p>
+
+    `;
+
+    return;
+
+  }
+
+
+  $('volunteerCount').textContent =
+    'মোট স্বেচ্ছাসেবক: ' +
+    data.length.toLocaleString('bn-BD') +
+    ' জন';
+
+
+  $('volunteers').innerHTML =
+
+    data.map((x,index) => `
+
+      <div class="volunteer-card">
+
+        <div class="volunteer-top">
+
+          <div class="volunteer-name">
+
+            ${index + 1}.
+            ${esc(x.name || 'নাম নেই')}
+
+          </div>
+
+          ${
+            x.interest
+            ? `
+              <span class="volunteer-interest">
+                ${esc(x.interest)}
+              </span>
+            `
+            : ''
+          }
+
+        </div>
+
+
+        <div class="volunteer-info">
+
+          📱 <b>মোবাইল:</b>
+          ${esc(x.phone || 'দেওয়া হয়নি')}
+
+          <br>
+
+          📍 <b>এলাকা:</b>
+          ${esc(x.area || 'উল্লেখ নেই')}
+
+          <br>
+
+          🎂 <b>বয়স:</b>
+          ${esc(x.age || 'উল্লেখ নেই')}
+
+          <br>
+
+          📅 <b>নিবন্ধনের তারিখ:</b>
+          ${x.created_at
+            ? new Date(x.created_at)
+                .toLocaleDateString(
+                  'bn-BD',
+                  {
+                    year:'numeric',
+                    month:'long',
+                    day:'numeric'
+                  }
+                )
+            : 'উল্লেখ নেই'
+          }
+
+        </div>
+
+      </div>
+
+    `).join('');
+
+}
+
+
+/* =========================
    LOGIN CHECK
 ========================= */
 
@@ -669,6 +929,8 @@ async function check(){
 
     loadPayments();
 
+    loadVolunteers();
+
   }
 
 }
@@ -685,7 +947,7 @@ $('loginBtn').onclick = async()=>{
   } = await sb.auth.signInWithPassword({
 
     email:
-      $('email').value,
+      $('email').value.trim(),
 
     password:
       $('password').value
@@ -721,7 +983,7 @@ $('addBtn').onclick = async()=>{
 
   if(
     !amount ||
-    !$('title').value
+    !$('title').value.trim()
   ){
 
     $('msg').textContent =
@@ -737,6 +999,16 @@ $('addBtn').onclick = async()=>{
   } = await sb.auth.getUser();
 
 
+  if(!user){
+
+    $('msg').textContent =
+      'অ্যাডমিন লগইন পাওয়া যায়নি।';
+
+    return;
+
+  }
+
+
   const {
     error
   } = await sb
@@ -750,14 +1022,14 @@ $('addBtn').onclick = async()=>{
         amount,
 
       title:
-        $('title').value,
+        $('title').value.trim(),
 
       donor_name:
-        $('donor').value ||
+        $('donor').value.trim() ||
         'Anonymous',
 
       note:
-        $('note').value,
+        $('note').value.trim(),
 
       transaction_date:
         $('date').value,
@@ -806,7 +1078,9 @@ $('logout').onclick =
   };
 
 
-/* START */
+/* =========================
+   START
+========================= */
 
 check();
 
