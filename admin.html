@@ -1,175 +1,131 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>অ্যাডমিন | মানবকল্যাণ যুব সংঘ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - মানবকল্যাণ যুব সংঘ</title>
 
 <style>
+*{box-sizing:border-box}
+
 body{
-  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
   margin:0;
-  background:#101418;
-  color:#f5f7fa
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#0f172a;
+  color:#fff;
 }
 
-.wrap{
-  max-width:850px;
+.header{
+  padding:25px 18px;
+  text-align:center;
+  background:#111827;
+  border-bottom:1px solid #334155;
+}
+
+.header h1{
+  margin:0 0 8px;
+  font-size:25px;
+}
+
+.header p{
+  margin:0;
+  color:#94a3b8;
+}
+
+.container{
+  max-width:900px;
   margin:auto;
-  padding:20px
+  padding:25px 15px;
 }
 
-.card{
-  background:#171d23;
-  border:1px solid #2b333b;
-  border-radius:18px;
-  padding:18px;
-  margin:14px 0
+.login-box,
+.dashboard{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:15px;
+  padding:20px;
 }
 
-input,select,textarea,button{
+input{
   width:100%;
-  box-sizing:border-box;
-  padding:12px;
-  margin:6px 0;
-  border-radius:10px;
-  border:1px solid #39424b;
-  background:#0e1317;
-  color:#fff
+  padding:13px;
+  margin:8px 0 12px;
+  border-radius:9px;
+  border:1px solid #475569;
+  background:#1e293b;
+  color:#fff;
 }
 
 button{
-  cursor:pointer;
-  background:#2563eb;
+  width:100%;
+  padding:13px;
   border:0;
-  font-weight:700
-}
-
-.approve{
-  background:#16a34a
-}
-
-.reject,.danger{
-  background:#b91c1c
-}
-
-.muted{
-  color:#aeb8c2
-}
-
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
-
-.item{
-  border-top:1px solid #2b333b;
-  padding:12px 0;
-  display:flex;
-  justify-content:space-between;
-  gap:12px
-}
-
-.income{
-  color:#4ade80
-}
-
-.expense{
-  color:#fb7185
-}
-
-.pending{
-  border:1px solid #39424b;
-  border-radius:12px;
-  padding:14px;
-  margin:10px 0
-}
-
-.actions{
-  display:flex;
-  gap:8px;
-  margin-top:10px
-}
-
-.actions button{
-  margin:0
-}
-
-.volunteer-card{
-  border:1px solid #39424b;
-  border-radius:14px;
-  padding:14px;
-  margin:10px 0;
-  background:#11171c
-}
-
-.volunteer-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:8px
-}
-
-.volunteer-name{
-  font-size:18px;
-  font-weight:800
-}
-
-.volunteer-interest{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:20px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:bold;
   background:#2563eb;
-  font-size:12px;
-  font-weight:700
-}
-
-.volunteer-info{
-  line-height:1.8;
-  color:#d5dbe0
-}
-
-.refresh{
-  background:#374151;
-  margin-top:10px
-}
-
-.call-button{
-  display:block;
-  text-align:center;
-  text-decoration:none;
-  background:#16a34a;
   color:#fff;
-  padding:12px;
-  border-radius:10px;
+}
+
+.menu{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:20px;
+}
+
+.menu a{
+  text-decoration:none;
+  color:#fff;
+  background:#1e293b;
+  border:1px solid #334155;
+  border-radius:13px;
+  padding:22px 12px;
+  text-align:center;
+  transition:.2s;
+}
+
+.menu a:hover{
+  background:#263449;
+  transform:translateY(-2px);
+}
+
+.icon{
+  display:block;
+  font-size:32px;
+  margin-bottom:9px;
+}
+
+.menu-title{
+  font-weight:bold;
+  font-size:16px;
+}
+
+.menu-text{
+  display:block;
+  color:#94a3b8;
+  font-size:12px;
+  margin-top:5px;
+}
+
+.logout{
+  margin-top:22px;
+  background:#dc2626;
+}
+
+.msg{
   margin-top:12px;
-  font-weight:700
+  color:#fbbf24;
+  text-align:center;
 }
 
-.count-box{
-  padding:10px 12px;
-  border-radius:10px;
-  background:#0e1317;
-  border:1px solid #39424b;
-  margin-bottom:12px
+.hidden{
+  display:none;
 }
 
-@media(max-width:600px){
-
-  .row{
-    grid-template-columns:1fr
-  }
-
-  .actions{
-    flex-direction:column
-  }
-
-  .volunteer-top{
-    align-items:flex-start;
-    flex-direction:column
+@media(max-width:500px){
+  .menu{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -177,233 +133,93 @@ button{
 
 <body>
 
-<div class="wrap">
-
-<h1>🔐 অ্যাডমিন প্যানেল</h1>
-
-<p class="muted">
-মানবকল্যাণ যুব সংঘ — আয়/ব্যয় ও সদস্য কার্যক্রম পরিচালনা
-</p>
-
-
-<!-- =========================
-     LOGIN
-========================= -->
-
-<div id="login" class="card">
-
-<h2>অ্যাডমিন লগইন</h2>
-
-<input
-id="email"
-type="email"
-placeholder="অ্যাডমিন ইমেইল">
-
-<input
-id="password"
-type="password"
-placeholder="পাসওয়ার্ড">
-
-<button id="loginBtn">
-লগইন
-</button>
-
-<p id="loginMsg" class="muted"></p>
-
+<div class="header">
+  <h1>🛠️ Admin Panel</h1>
+  <p>মানবকল্যাণ যুব সংঘ</p>
 </div>
 
+<div class="container">
 
-<!-- =========================
-     ADMIN PANEL
-========================= -->
+  <!-- LOGIN -->
+  <div id="loginBox" class="login-box">
 
-<div id="panel" style="display:none">
+    <h2>🔐 Admin Login</h2>
 
+    <input
+      type="email"
+      id="email"
+      placeholder="Admin Email"
+      autocomplete="email"
+    >
 
-<!-- =========================
-     BKASH PAYMENT
-========================= -->
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+      autocomplete="current-password"
+    >
 
-<div class="card">
+    <button onclick="login()">🔐 Login</button>
 
-<h2>🧾 bKash পেমেন্ট যাচাই</h2>
+    <div id="loginMsg" class="msg"></div>
 
-<p class="muted">
-সদস্যরা bKash-এ টাকা পাঠিয়ে Transaction ID দিলে এখানে পেমেন্টের তথ্য দেখা যাবে।
-</p>
+  </div>
 
-<div id="payments">
 
-<p class="muted">
-লোড হচ্ছে...
-</p>
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="dashboard hidden">
 
-</div>
+    <h2>📊 Admin Dashboard</h2>
 
-</div>
+    <p style="color:#94a3b8">
+      প্রয়োজনীয় বিভাগ নির্বাচন করুন।
+    </p>
 
+    <div class="menu">
 
-<!-- =========================
-     BLOOD DONORS
-========================= -->
+      <a href="payments.html">
+        <span class="icon">💰</span>
+        <span class="menu-title">Payment</span>
+        <span class="menu-text">bKash Payment যাচাই</span>
+      </a>
 
-<div class="card">
+      <a href="donors.html">
+        <span class="icon">🩸</span>
+        <span class="menu-title">Blood Donors</span>
+        <span class="menu-text">রক্তদাতার তালিকা</span>
+      </a>
 
-<h2>🩸 রক্তদাতা তালিকা</h2>
+      <a href="volunteers.html">
+        <span class="icon">🤝</span>
+        <span class="menu-title">Volunteers</span>
+        <span class="menu-text">স্বেচ্ছাসেবক তালিকা</span>
+      </a>
 
-<p class="muted">
-নিবন্ধিত রক্তদাতাদের তথ্য এখানে দেখা যাবে।
-মোবাইল নম্বর শুধুমাত্র অ্যাডমিন দেখতে পারবেন।
-</p>
+      <a href="transactions.html">
+        <span class="icon">💵</span>
+        <span class="menu-title">Transactions</span>
+        <span class="menu-text">আয়-ব্যয়ের হিসাব</span>
+      </a>
 
-<div id="donorCount" class="count-box">
-লোড হচ্ছে...
-</div>
+      <a href="reports.html">
+        <span class="icon">📊</span>
+        <span class="menu-title">Reports</span>
+        <span class="menu-text">আর্থিক রিপোর্ট</span>
+      </a>
 
-<div id="adminDonors">
+    </div>
 
-<p class="muted">
-রক্তদাতা তালিকা লোড হচ্ছে...
-</p>
+    <button class="logout" onclick="logout()">
+      🚪 Logout
+    </button>
 
-</div>
-
-<button
-type="button"
-class="refresh"
-onclick="loadAdminDonors()">
-
-🔄 রক্তদাতা তালিকা রিফ্রেশ
-
-</button>
-
-</div>
-
-
-<!-- =========================
-     VOLUNTEERS
-========================= -->
-
-<div class="card">
-
-<h2>🤝 স্বেচ্ছাসেবক তালিকা</h2>
-
-<p class="muted">
-ওয়েবসাইটের স্বেচ্ছাসেবক ফর্মে যারা নিবন্ধন করেছেন, তাদের তথ্য এখানে দেখা যাবে।
-</p>
-
-<div id="volunteerCount" class="count-box">
-লোড হচ্ছে...
-</div>
-
-<div id="volunteers">
-
-<p class="muted">
-স্বেচ্ছাসেবক তালিকা লোড হচ্ছে...
-</p>
-
-</div>
-
-<button
-type="button"
-class="refresh"
-onclick="loadVolunteers()">
-
-🔄 স্বেচ্ছাসেবক তালিকা রিফ্রেশ
-
-</button>
-
-</div>
-
-
-<!-- =========================
-     ADD TRANSACTION
-========================= -->
-
-<div class="card">
-
-<h2>➕ নতুন লেনদেন যোগ করুন</h2>
-
-<div class="row">
-
-<select id="type">
-
-<option value="income">
-আয় / জমা
-</option>
-
-<option value="expense">
-খরচ
-</option>
-
-</select>
-
-<input
-id="amount"
-type="number"
-min="1"
-step="0.01"
-placeholder="টাকার পরিমাণ">
-
-</div>
-
-<input
-id="title"
-placeholder="বিবরণ, যেমন: সদস্য চাঁদা / খাদ্য সহায়তা">
-
-<input
-id="donor"
-placeholder="দাতার নাম (না চাইলে Anonymous)">
-
-<input
-id="date"
-type="date">
-
-<textarea
-id="note"
-placeholder="নোট"></textarea>
-
-<button id="addBtn">
-লেনদেন সংরক্ষণ
-</button>
-
-<p id="msg" class="muted"></p>
-
-</div>
-
-
-<!-- =========================
-     TRANSACTIONS
-========================= -->
-
-<div class="card">
-
-<h2>📊 সাম্প্রতিক লেনদেন</h2>
-
-<div id="list">
-
-<p class="muted">
-লোড হচ্ছে...
-</p>
-
-</div>
-
-</div>
-
-
-<button id="logout" class="danger">
-লগআউট
-</button>
-
-</div>
+  </div>
 
 </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script src="config.js"></script>
-
 
 <script>
 
@@ -413,912 +229,84 @@ const sb = supabase.createClient(
 );
 
 
-const $ = id =>
-  document.getElementById(id);
+async function login(){
 
+  const email =
+    document.getElementById("email").value.trim();
 
-$('date').value =
-  new Date().toISOString().slice(0,10);
+  const password =
+    document.getElementById("password").value;
 
+  const msg =
+    document.getElementById("loginMsg");
 
-/* =========================
-   নিরাপদভাবে লেখা দেখানো
-========================= */
-
-function esc(s){
-
-  return String(s ?? '').replace(
-    /[&<>'"]/g,
-    c => ({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      "'":'&#39;',
-      '"':'&quot;'
-    }[c])
-  );
-
-}
-
-
-/* =========================
-   TRANSACTIONS LOAD
-========================= */
-
-async function load(){
-
-  const {
-    data,
-    error
-  } = await sb
-    .from('transactions')
-    .select('*')
-    .order(
-      'transaction_date',
-      {ascending:false}
-    )
-    .order(
-      'created_at',
-      {ascending:false}
-    );
-
-
-  if(error){
-
-    $('list').textContent =
-      error.message;
-
+  if(!email || !password){
+    msg.textContent="⚠️ Email ও Password দিন।";
     return;
-
   }
 
-
-  $('list').innerHTML =
-
-    data.map(x => `
-
-      <div class="item">
-
-        <div>
-
-          <b>
-            ${esc(x.title)}
-          </b>
-
-          <div class="muted">
-
-            ${esc(
-              x.donor_name ||
-              'Anonymous'
-            )}
-
-            ·
-
-            ${esc(
-              x.transaction_date ||
-              ''
-            )}
-
-          </div>
-
-        </div>
-
-        <div class="${x.type}">
-
-          ${
-            x.type === 'income'
-            ? '+'
-            : '−'
-          }
-
-          ৳${Number(
-            x.amount
-          ).toLocaleString('bn-BD')}
-
-        </div>
-
-      </div>
-
-    `).join('')
-
-    ||
-
-    '<p class="muted">কোনো রেকর্ড নেই</p>';
-
-}
-
-
-/* =========================
-   BKASH PAYMENT REQUESTS
-========================= */
-
-async function loadPayments(){
-
-  const {
-    data,
-    error
-  } = await sb
-    .from('payment_requests')
-    .select('*')
-    .order(
-      'created_at',
-      {ascending:false}
-    );
-
-
-  if(error){
-
-    $('payments').innerHTML = `
-
-      <p class="muted">
-        bKash payment_requests টেবিল লোড করা যায়নি।
-      </p>
-
-    `;
-
-    return;
-
-  }
-
-
-  if(!data || data.length === 0){
-
-    $('payments').innerHTML = `
-
-      <p class="muted">
-        কোনো পেমেন্ট নেই।
-      </p>
-
-    `;
-
-    return;
-
-  }
-
-
-  $('payments').innerHTML =
-
-    data.map(x => `
-
-      <div class="pending">
-
-        <b>
-          🧾 ৳${Number(
-            x.amount
-          ).toLocaleString('bn-BD')}
-        </b>
-
-        <div class="muted">
-          নাম:
-          ${esc(x.name || '')}
-        </div>
-
-        <div class="muted">
-          bKash:
-          ${esc(x.bkash_number || '')}
-        </div>
-
-        <div class="muted">
-          Transaction ID:
-          <b>
-            ${esc(x.transaction_id || '')}
-          </b>
-        </div>
-
-        <div class="muted">
-          স্ট্যাটাস:
-          ${esc(x.status || 'pending')}
-        </div>
-
-        ${
-          x.status === 'pending'
-          ? `
-
-          <div class="actions">
-
-            <button
-              class="approve"
-              onclick="approvePayment('${esc(x.id)}')">
-
-              ✅ Approve
-
-            </button>
-
-            <button
-              class="reject"
-              onclick="rejectPayment('${esc(x.id)}')">
-
-              ❌ Reject
-
-            </button>
-
-          </div>
-
-          `
-          : ''
-        }
-
-      </div>
-
-    `).join('');
-
-}
-
-
-/* =========================
-   APPROVE PAYMENT
-========================= */
-
-async function approvePayment(id){
-
-  if(!confirm(
-    'এই পেমেন্টটি Approve করে আয় হিসেবে যোগ করবেন?'
-  )) return;
-
-
-  const {
-    data:payment,
-    error:paymentError
-  } = await sb
-    .from('payment_requests')
-    .select('*')
-    .eq('id',id)
-    .single();
-
-
-  if(paymentError){
-
-    alert(paymentError.message);
-
-    return;
-
-  }
-
-
-  if(payment.status !== 'pending'){
-
-    alert('এই পেমেন্ট ইতোমধ্যে যাচাই করা হয়েছে।');
-
-    return;
-
-  }
-
-
-  const {
-    data:{user}
-  } = await sb.auth.getUser();
-
-
-  if(!user){
-
-    alert('অ্যাডমিন লগইন পাওয়া যায়নি।');
-
-    return;
-
-  }
-
-
-  const {
-    error:insertError
-  } = await sb
-    .from('transactions')
-    .insert({
-
-      type:'income',
-
-      amount:payment.amount,
-
-      title:'bKash সদস্য চাঁদা',
-
-      donor_name:
-        payment.name ||
-        'Anonymous',
-
-      note:
-        'bKash Transaction ID: ' +
-        payment.transaction_id,
-
-      transaction_date:
-        new Date().toISOString().slice(0,10),
-
-      created_by:
-        user.id
-
-    });
-
-
-  if(insertError){
-
-    alert(
-      'আয় হিসেবে যোগ করা যায়নি: ' +
-      insertError.message
-    );
-
-    return;
-
-  }
-
-
-  const {
-    error:updateError
-  } = await sb
-    .from('payment_requests')
-    .update({
-      status:'approved'
-    })
-    .eq('id',id);
-
-
-  if(updateError){
-
-    alert(updateError.message);
-
-    return;
-
-  }
-
-
-  alert(
-    'পেমেন্ট সফলভাবে Approve হয়েছে এবং আয় হিসেবে যোগ হয়েছে।'
-  );
-
-
-  loadPayments();
-
-  load();
-
-}
-
-
-/* =========================
-   REJECT PAYMENT
-========================= */
-
-async function rejectPayment(id){
-
-  if(!confirm(
-    'এই পেমেন্টটি Reject করবেন?'
-  )) return;
-
-
-  const {
-    error
-  } = await sb
-    .from('payment_requests')
-    .update({
-      status:'rejected'
-    })
-    .eq('id',id);
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-
-  }
-
-
-  loadPayments();
-
-}
-
-
-/* =========================
-   BLOOD DONORS
-========================= */
-
-async function loadAdminDonors(){
-
-  $('adminDonors').innerHTML = `
-
-    <p class="muted">
-      ⏳ রক্তদাতা তালিকা লোড হচ্ছে...
-    </p>
-
-  `;
-
-  $('donorCount').textContent =
-    '⏳ হিসাব করা হচ্ছে...';
-
-
-  const {
-    data,
-    error
-  } = await sb
-    .from('blood_donors')
-    .select('*')
-    .order(
-      'created_at',
-      {ascending:false}
-    );
-
-
-  if(error){
-
-    console.error(error);
-
-    $('donorCount').textContent =
-      '⚠️ তালিকা পাওয়া যায়নি';
-
-    $('adminDonors').innerHTML = `
-
-      <p class="muted">
-        ❌ রক্তদাতা তালিকা লোড করা যায়নি।
-      </p>
-
-      <p class="muted">
-        ${esc(error.message)}
-      </p>
-
-    `;
-
-    return;
-
-  }
-
-
-  if(!data || data.length === 0){
-
-    $('donorCount').textContent =
-      'মোট রক্তদাতা: ০ জন';
-
-    $('adminDonors').innerHTML = `
-
-      <p class="muted">
-        বর্তমানে কোনো রক্তদাতা নিবন্ধিত নেই।
-      </p>
-
-    `;
-
-    return;
-
-  }
-
-
-  $('donorCount').textContent =
-    'মোট রক্তদাতা: ' +
-    data.length.toLocaleString('bn-BD') +
-    ' জন';
-
-
-  $('adminDonors').innerHTML =
-
-    data.map((x,index) => {
-
-      const phone =
-        String(x.phone || '')
-          .replace(/[^0-9+]/g,'');
-
-      return `
-
-        <div class="volunteer-card">
-
-          <div class="volunteer-top">
-
-            <div class="volunteer-name">
-
-              ${index + 1}.
-              ${esc(x.name || 'নাম নেই')}
-
-            </div>
-
-            <span class="volunteer-interest">
-
-              🩸 ${esc(
-                x.blood_group ||
-                'গ্রুপ নেই'
-              )}
-
-            </span>
-
-          </div>
-
-
-          <div class="volunteer-info">
-
-            🩸 <b>রক্তের গ্রুপ:</b>
-            ${esc(
-              x.blood_group ||
-              'উল্লেখ নেই'
-            )}
-
-            <br>
-
-            📍 <b>এলাকা:</b>
-            ${esc(
-              x.area ||
-              'উল্লেখ নেই'
-            )}
-
-            <br>
-
-            📱 <b>মোবাইল:</b>
-            ${esc(
-              x.phone ||
-              'নম্বর নেই'
-            )}
-
-            <br>
-
-            🟢 <b>স্ট্যাটাস:</b>
-            ${esc(
-              x.status ||
-              'available'
-            )}
-
-            <br>
-
-            📅 <b>নিবন্ধনের তারিখ:</b>
-            ${
-              x.created_at
-              ? new Date(x.created_at)
-                  .toLocaleDateString(
-                    'bn-BD',
-                    {
-                      year:'numeric',
-                      month:'long',
-                      day:'numeric'
-                    }
-                  )
-              : 'উল্লেখ নেই'
-            }
-
-          </div>
-
-
-          ${
-            phone
-            ? `
-
-              <a
-                href="tel:${esc(phone)}"
-                class="call-button">
-
-                📞 কল করুন
-
-              </a>
-
-            `
-            : ''
-          }
-
-        </div>
-
-      `;
-
-    }).join('');
-
-}
-
-
-/* =========================
-   VOLUNTEERS
-========================= */
-
-async function loadVolunteers(){
-
-  $('volunteers').innerHTML = `
-
-    <p class="muted">
-      ⏳ স্বেচ্ছাসেবক তালিকা লোড হচ্ছে...
-    </p>
-
-  `;
-
-  $('volunteerCount').textContent =
-    '⏳ হিসাব করা হচ্ছে...';
-
-
-  const {
-    data,
-    error
-  } = await sb
-    .from('volunteers')
-    .select('*')
-    .order(
-      'created_at',
-      {ascending:false}
-    );
-
-
-  if(error){
-
-    console.error(error);
-
-    $('volunteerCount').textContent =
-      '⚠️ তালিকা পাওয়া যায়নি';
-
-    $('volunteers').innerHTML = `
-
-      <p class="muted">
-        ❌ স্বেচ্ছাসেবক তালিকা লোড করা যায়নি।
-      </p>
-
-      <p class="muted">
-        ${esc(error.message)}
-      </p>
-
-    `;
-
-    return;
-
-  }
-
-
-  if(!data || data.length === 0){
-
-    $('volunteerCount').textContent =
-      'মোট স্বেচ্ছাসেবক: ০ জন';
-
-    $('volunteers').innerHTML = `
-
-      <p class="muted">
-        বর্তমানে কোনো স্বেচ্ছাসেবক নিবন্ধিত নেই।
-      </p>
-
-    `;
-
-    return;
-
-  }
-
-
-  $('volunteerCount').textContent =
-    'মোট স্বেচ্ছাসেবক: ' +
-    data.length.toLocaleString('bn-BD') +
-    ' জন';
-
-
-  $('volunteers').innerHTML =
-
-    data.map((x,index) => `
-
-      <div class="volunteer-card">
-
-        <div class="volunteer-top">
-
-          <div class="volunteer-name">
-
-            ${index + 1}.
-            ${esc(x.name || 'নাম নেই')}
-
-          </div>
-
-          ${
-            x.interest
-            ? `
-              <span class="volunteer-interest">
-                ${esc(x.interest)}
-              </span>
-            `
-            : ''
-          }
-
-        </div>
-
-
-        <div class="volunteer-info">
-
-          📱 <b>মোবাইল:</b>
-          ${esc(x.phone || 'দেওয়া হয়নি')}
-
-          <br>
-
-          📍 <b>এলাকা:</b>
-          ${esc(x.area || 'উল্লেখ নেই')}
-
-          <br>
-
-          🎂 <b>বয়স:</b>
-          ${esc(x.age || 'উল্লেখ নেই')}
-
-          <br>
-
-          📅 <b>নিবন্ধনের তারিখ:</b>
-          ${
-            x.created_at
-            ? new Date(x.created_at)
-                .toLocaleDateString(
-                  'bn-BD',
-                  {
-                    year:'numeric',
-                    month:'long',
-                    day:'numeric'
-                  }
-                )
-            : 'উল্লেখ নেই'
-          }
-
-        </div>
-
-      </div>
-
-    `).join('');
-
-}
-
-
-/* =========================
-   LOGIN CHECK
-========================= */
-
-async function check(){
-
-  const {
-    data:{session}
-  } = await sb.auth.getSession();
-
-
-  if(session){
-
-    $('login').style.display =
-      'none';
-
-    $('panel').style.display =
-      'block';
-
-    load();
-
-    loadPayments();
-
-    loadAdminDonors();
-
-    loadVolunteers();
-
-  }
-
-}
-
-
-/* =========================
-   LOGIN
-========================= */
-
-$('loginBtn').onclick = async()=>{
-
-  const {
-    error
-  } = await sb.auth.signInWithPassword({
-
-    email:
-      $('email').value.trim(),
-
-    password:
-      $('password').value
-
+  msg.textContent="⏳ Login হচ্ছে...";
+
+  const {error} = await sb.auth.signInWithPassword({
+    email:email,
+    password:password
   });
 
+  if(error){
 
-  $('loginMsg').textContent =
+    console.error(error);
 
-    error
-    ? error.message
-    : 'লগইন সফল';
-
-
-  if(!error){
-
-    check();
-
-  }
-
-};
-
-
-/* =========================
-   MANUAL TRANSACTION
-========================= */
-
-$('addBtn').onclick = async()=>{
-
-  const amount =
-    Number($('amount').value);
-
-
-  if(
-    !amount ||
-    !$('title').value.trim()
-  ){
-
-    $('msg').textContent =
-      'পরিমাণ ও বিবরণ দিন।';
+    msg.textContent=
+      "❌ Login ব্যর্থ। Email বা Password সঠিক কিনা দেখুন।";
 
     return;
-
   }
 
-
-  const {
-    data:{user}
-  } = await sb.auth.getUser();
+  showDashboard();
+}
 
 
-  if(!user){
+async function checkLogin(){
 
-    $('msg').textContent =
-      'অ্যাডমিন লগইন পাওয়া যায়নি।';
+  const {data} =
+    await sb.auth.getSession();
 
-    return;
-
+  if(data.session){
+    showDashboard();
   }
+}
 
 
-  const {
-    error
-  } = await sb
-    .from('transactions')
-    .insert({
+function showDashboard(){
 
-      type:
-        $('type').value,
+  document
+    .getElementById("loginBox")
+    .classList.add("hidden");
 
-      amount:
-        amount,
-
-      title:
-        $('title').value.trim(),
-
-      donor_name:
-        $('donor').value.trim() ||
-        'Anonymous',
-
-      note:
-        $('note').value.trim(),
-
-      transaction_date:
-        $('date').value,
-
-      created_by:
-        user.id
-
-    });
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+}
 
 
-  $('msg').textContent =
+async function logout(){
 
-    error
-    ? error.message
-    : 'সফলভাবে যোগ হয়েছে।';
+  await sb.auth.signOut();
 
+  document
+    .getElementById("dashboard")
+    .classList.add("hidden");
 
-  if(!error){
+  document
+    .getElementById("loginBox")
+    .classList.remove("hidden");
 
-    $('amount').value = '';
-
-    $('title').value = '';
-
-    $('donor').value = '';
-
-    $('note').value = '';
-
-    load();
-
-  }
-
-};
+  document.getElementById("email").value="";
+  document.getElementById("password").value="";
+}
 
 
-/* =========================
-   LOGOUT
-========================= */
-
-$('logout').onclick =
-  async()=>{
-
-    await sb.auth.signOut();
-
-    location.reload();
-
-  };
-
-
-/* =========================
-   START
-========================= */
-
-check();
+checkLogin();
 
 </script>
 
