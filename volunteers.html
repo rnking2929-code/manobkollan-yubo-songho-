@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volunteers - মানবকল্যাণ যুব সংঘ</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#0f172a;
+  color:#fff;
+}
+
+.header{
+  padding:20px 15px;
+  text-align:center;
+  background:#111827;
+  border-bottom:1px solid #334155;
+}
+
+.header h1{
+  margin:0 0 6px;
+  font-size:23px;
+}
+
+.header p{
+  margin:0;
+  color:#94a3b8;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px 15px;
+}
+
+.topbar{
+  display:flex;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.topbar a,
+.topbar button{
+  flex:1;
+  padding:12px;
+  border-radius:9px;
+  border:0;
+  text-align:center;
+  text-decoration:none;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.back{
+  background:#334155;
+  color:#fff;
+}
+
+.logout{
+  background:#dc2626;
+  color:#fff;
+}
+
+.card{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:14px;
+  padding:18px;
+}
+
+.count{
+  display:inline-block;
+  margin:8px 0 15px;
+  padding:7px 12px;
+  border-radius:8px;
+  background:#14532d;
+  color:#bbf7d0;
+}
+
+.volunteer{
+  background:#1e293b;
+  border:1px solid #334155;
+  border-radius:12px;
+  padding:15px;
+  margin-top:12px;
+}
+
+.name{
+  font-size:18px;
+  font-weight:bold;
+}
+
+.info{
+  margin-top:10px;
+  line-height:1.7;
+  color:#cbd5e1;
+}
+
+.interest{
+  display:inline-block;
+  margin-top:8px;
+  padding:6px 9px;
+  border-radius:7px;
+  background:#1d4ed8;
+  color:#dbeafe;
+  font-size:13px;
+}
+
+.call{
+  display:block;
+  margin-top:12px;
+  padding:11px;
+  text-align:center;
+  text-decoration:none;
+  border-radius:8px;
+  background:#16a34a;
+  color:#fff;
+  font-weight:bold;
+}
+
+.refresh{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  border:0;
+  border-radius:9px;
+  background:#2563eb;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.empty,
+.loading{
+  text-align:center;
+  padding:25px;
+  color:#94a3b8;
+}
+
+.message{
+  text-align:center;
+  color:#fbbf24;
+  margin:10px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>🤝 Volunteers</h1>
+  <p>মানবকল্যাণ যুব সংঘ</p>
+</div>
+
+<div class="container">
+
+  <div class="topbar">
+    <a href="admin.html" class="back">⬅️ Admin</a>
+    <button class="logout" onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <div class="card">
+
+    <h2>🤝 স্বেচ্ছাসেবকের তালিকা</h2>
+
+    <p style="color:#94a3b8">
+      সংগঠনের স্বেচ্ছাসেবক হিসেবে নিবন্ধিত সদস্যদের তথ্য।
+    </p>
+
+    <div id="count" class="count">
+      মোট স্বেচ্ছাসেবক: ০ জন
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <div id="volunteerList">
+      <div class="loading">
+        ⏳ স্বেচ্ছাসেবকের তালিকা লোড হচ্ছে...
+      </div>
+    </div>
+
+    <button class="refresh" onclick="loadVolunteers()">
+      🔄 তালিকা Refresh
+    </button>
+
+  </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+
+<script>
+
+const sb = supabase.createClient(
+  window.SUPABASE_URL,
+  window.SUPABASE_ANON_KEY
+);
+
+
+function esc(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+async function checkLogin(){
+
+  const {data} =
+    await sb.auth.getSession();
+
+  if(!data.session){
+
+    window.location.href="admin.html";
+
+    return false;
+  }
+
+  return true;
+}
+
+
+async function loadVolunteers(){
+
+  const loggedIn = await checkLogin();
+
+  if(!loggedIn) return;
+
+  const list =
+    document.getElementById("volunteerList");
+
+  list.innerHTML =
+    '<div class="loading">⏳ তালিকা লোড হচ্ছে...</div>';
+
+
+  const {data,error} =
+    await sb
+      .from("volunteers")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+
+  if(error){
+
+    console.error(error);
+
+    list.innerHTML =
+      '<div class="empty">❌ স্বেচ্ছাসেবকের তালিকা লোড করা যায়নি।</div>';
+
+    return;
+  }
+
+
+  const volunteers = data || [];
+
+
+  document.getElementById("count").textContent =
+    "মোট স্বেচ্ছাসেবক: " + volunteers.length + " জন";
+
+
+  if(volunteers.length===0){
+
+    list.innerHTML =
+      '<div class="empty">📭 বর্তমানে কোনো স্বেচ্ছাসেবক নেই।</div>';
+
+    return;
+  }
+
+
+  list.innerHTML = volunteers.map(function(volunteer){
+
+    const phone =
+      String(volunteer.phone || "")
+      .replace(/[^0-9+]/g,"");
+
+
+    const date =
+      volunteer.created_at
+      ? new Date(volunteer.created_at).toLocaleString("bn-BD")
+      : "";
+
+
+    return `
+      <div class="volunteer">
+
+        <div class="name">
+          🤝 ${esc(volunteer.name || "নাম দেওয়া হয়নি")}
+        </div>
+
+        <div class="info">
+
+          📞 মোবাইল:
+          ${esc(volunteer.phone || "নম্বর নেই")}
+
+          <br>
+
+          📍 এলাকা:
+          ${esc(volunteer.area || "উল্লেখ নেই")}
+
+          <br>
+
+          🎂 বয়স:
+          ${esc(volunteer.age || "উল্লেখ নেই")}
+
+          <br>
+
+          📅 নিবন্ধনের সময়:
+          ${esc(date)}
+
+        </div>
+
+
+        ${
+          volunteer.interest
+          ?
+          `<div class="interest">
+            🎯 ${esc(volunteer.interest)}
+          </div>`
+          :
+          ""
+        }
+
+
+        ${
+          phone
+          ?
+          `<a
+            class="call"
+            href="tel:${esc(phone)}">
+            📞 কল করুন
+          </a>`
+          :
+          ""
+        }
+
+      </div>
+    `;
+
+  }).join("");
+
+}
+
+
+async function logout(){
+
+  await sb.auth.signOut();
+
+  window.location.href="admin.html";
+
+}
+
+
+loadVolunteers();
+
+</script>
+
+</body>
+</html>
