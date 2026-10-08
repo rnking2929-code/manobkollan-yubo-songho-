@@ -46,7 +46,7 @@ body{
   padding:20px;
 }
 
-input{
+input,select{
   width:100%;
   padding:13px;
   margin:8px 0 12px;
@@ -123,9 +123,122 @@ button{
   display:none;
 }
 
+/* Members Management */
+
+.members-box{
+  margin-top:25px;
+  padding-top:25px;
+  border-top:1px solid #334155;
+}
+
+.members-box h3{
+  margin-top:0;
+}
+
+.member-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:15px 0;
+}
+
+.stat{
+  background:#1e293b;
+  border:1px solid #334155;
+  border-radius:10px;
+  padding:14px;
+  text-align:center;
+}
+
+.stat-number{
+  display:block;
+  font-size:24px;
+  font-weight:bold;
+}
+
+.stat-label{
+  display:block;
+  color:#94a3b8;
+  font-size:12px;
+  margin-top:5px;
+}
+
+.member-list{
+  display:grid;
+  gap:10px;
+  margin-top:15px;
+}
+
+.member{
+  background:#1e293b;
+  border:1px solid #334155;
+  border-radius:11px;
+  padding:14px;
+}
+
+.member-name{
+  font-size:17px;
+  font-weight:bold;
+  margin-bottom:7px;
+}
+
+.member-info{
+  color:#cbd5e1;
+  font-size:13px;
+  line-height:1.8;
+}
+
+.badge{
+  display:inline-block;
+  padding:3px 7px;
+  border-radius:5px;
+  background:#14532d;
+  color:#bbf7d0;
+  margin-right:5px;
+  font-size:11px;
+}
+
+.badge.inactive{
+  background:#7f1d1d;
+  color:#fecaca;
+}
+
+.member-actions{
+  display:flex;
+  gap:7px;
+  margin-top:10px;
+}
+
+.member-actions button{
+  flex:1;
+  padding:9px;
+}
+
+.edit-btn{
+  background:#2563eb;
+}
+
+.delete-btn{
+  background:#dc2626;
+}
+
+.cancel-btn{
+  background:#475569;
+  display:none;
+}
+
 @media(max-width:500px){
+
   .menu{
     grid-template-columns:1fr;
+  }
+
+  .member-stats{
+    grid-template-columns:1fr;
+  }
+
+  .member-actions{
+    flex-direction:column;
   }
 }
 </style>
@@ -195,6 +308,13 @@ button{
         <span class="menu-text">স্বেচ্ছাসেবক তালিকা</span>
       </a>
 
+      <!-- NEW MEMBERS MENU -->
+      <a href="#membersManagement" onclick="openMembers()">
+        <span class="icon">👥</span>
+        <span class="menu-title">Members</span>
+        <span class="menu-text">সদস্য ব্যবস্থাপনা</span>
+      </a>
+
       <a href="transactions.html">
         <span class="icon">💵</span>
         <span class="menu-title">Transactions</span>
@@ -208,6 +328,139 @@ button{
       </a>
 
     </div>
+
+
+    <!-- MEMBERS MANAGEMENT -->
+    <div
+      id="membersManagement"
+      class="members-box hidden"
+    >
+
+      <h3>👥 Members Management</h3>
+
+      <p style="color:#94a3b8;font-size:13px">
+        এখান থেকেই সংগঠনের সদস্যদের তথ্য পরিচালনা করুন।
+      </p>
+
+
+      <!-- Statistics -->
+
+      <div class="member-stats">
+
+        <div class="stat">
+          <span
+            id="totalMembers"
+            class="stat-number"
+          >0</span>
+
+          <span class="stat-label">
+            মোট সদস্য
+          </span>
+        </div>
+
+        <div class="stat">
+          <span
+            id="activeMembers"
+            class="stat-number"
+          >0</span>
+
+          <span class="stat-label">
+            Active
+          </span>
+        </div>
+
+        <div class="stat">
+          <span
+            id="inactiveMembers"
+            class="stat-number"
+          >0</span>
+
+          <span class="stat-label">
+            Inactive
+          </span>
+        </div>
+
+      </div>
+
+
+      <!-- Add / Edit Form -->
+
+      <input
+        type="hidden"
+        id="memberId"
+      >
+
+      <label>সদস্যের নাম</label>
+
+      <input
+        type="text"
+        id="memberName"
+        placeholder="সদস্যের নাম"
+      >
+
+
+      <label>পদ / ভূমিকা</label>
+
+      <input
+        type="text"
+        id="memberRole"
+        value="সদস্য"
+        placeholder="যেমন: সদস্য"
+      >
+
+
+      <label>এলাকা</label>
+
+      <input
+        type="text"
+        id="memberArea"
+        placeholder="এলাকার নাম"
+      >
+
+
+      <label>Status</label>
+
+      <select id="memberStatus">
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+
+
+      <button
+        id="memberSaveBtn"
+        onclick="saveMember()"
+      >
+        ➕ সদস্য যোগ করুন
+      </button>
+
+      <button
+        id="memberCancelBtn"
+        class="cancel-btn"
+        onclick="cancelMemberEdit()"
+      >
+        বাতিল
+      </button>
+
+
+      <div
+        id="memberMsg"
+        class="msg"
+      ></div>
+
+
+      <!-- Members List -->
+
+      <div
+        id="memberList"
+        class="member-list"
+      >
+        <div style="color:#94a3b8;text-align:center">
+          সদস্যদের তালিকা লোড হচ্ছে...
+        </div>
+      </div>
+
+    </div>
+
 
     <button class="logout" onclick="logout()">
       🚪 Logout
@@ -229,6 +482,10 @@ const sb = supabase.createClient(
 );
 
 
+/* =========================
+   LOGIN
+========================= */
+
 async function login(){
 
   const email =
@@ -241,30 +498,45 @@ async function login(){
     document.getElementById("loginMsg");
 
   if(!email || !password){
-    msg.textContent="⚠️ Email ও Password দিন।";
+
+    msg.textContent =
+      "⚠️ Email ও Password দিন।";
+
     return;
   }
 
-  msg.textContent="⏳ Login হচ্ছে...";
+  msg.textContent =
+    "⏳ Login হচ্ছে...";
 
-  const {error} = await sb.auth.signInWithPassword({
-    email:email,
-    password:password
-  });
+
+  const {error} =
+    await sb.auth.signInWithPassword({
+
+      email:email,
+      password:password
+
+    });
+
 
   if(error){
 
     console.error(error);
 
-    msg.textContent=
+    msg.textContent =
       "❌ Login ব্যর্থ। Email বা Password সঠিক কিনা দেখুন।";
 
     return;
   }
 
+
   showDashboard();
+
 }
 
+
+/* =========================
+   CHECK LOGIN
+========================= */
 
 async function checkLogin(){
 
@@ -272,10 +544,17 @@ async function checkLogin(){
     await sb.auth.getSession();
 
   if(data.session){
+
     showDashboard();
+
   }
+
 }
 
+
+/* =========================
+   SHOW DASHBOARD
+========================= */
 
 function showDashboard(){
 
@@ -286,23 +565,479 @@ function showDashboard(){
   document
     .getElementById("dashboard")
     .classList.remove("hidden");
+
 }
 
+
+/* =========================
+   LOGOUT
+========================= */
 
 async function logout(){
 
   await sb.auth.signOut();
 
+
   document
     .getElementById("dashboard")
     .classList.add("hidden");
+
 
   document
     .getElementById("loginBox")
     .classList.remove("hidden");
 
+
   document.getElementById("email").value="";
   document.getElementById("password").value="";
+
+}
+
+
+/* =========================
+   MEMBERS
+========================= */
+
+function openMembers(){
+
+  const box =
+    document.getElementById("membersManagement");
+
+  box.classList.remove("hidden");
+
+  loadMembers();
+
+  setTimeout(() => {
+
+    box.scrollIntoView({
+      behavior:"smooth"
+    });
+
+  },100);
+
+}
+
+
+/* =========================
+   LOAD MEMBERS
+========================= */
+
+async function loadMembers(){
+
+  const list =
+    document.getElementById("memberList");
+
+
+  list.innerHTML =
+    '<div style="color:#94a3b8;text-align:center">⏳ লোড হচ্ছে...</div>';
+
+
+  const {data,error} =
+    await sb
+      .from("members")
+      .select("*")
+      .order("joined_at",{
+        ascending:false
+      });
+
+
+  if(error){
+
+    console.error(error);
+
+    list.innerHTML =
+      '<div style="color:#fca5a5;text-align:center">❌ সদস্যদের তথ্য লোড করা যায়নি।</div>';
+
+    return;
+
+  }
+
+
+  const total =
+    data ? data.length : 0;
+
+  const active =
+    data
+      ? data.filter(
+          m => m.status === "active"
+        ).length
+      : 0;
+
+  const inactive =
+    total - active;
+
+
+  document.getElementById("totalMembers")
+    .textContent = total;
+
+  document.getElementById("activeMembers")
+    .textContent = active;
+
+  document.getElementById("inactiveMembers")
+    .textContent = inactive;
+
+
+  if(!data || data.length === 0){
+
+    list.innerHTML =
+      '<div style="color:#94a3b8;text-align:center;padding:20px">এখনও কোনো সদস্য যোগ করা হয়নি।</div>';
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    data.map(member => {
+
+      const name =
+        escapeHTML(member.name);
+
+      const role =
+        escapeHTML(
+          member.role || "সদস্য"
+        );
+
+      const area =
+        escapeHTML(
+          member.area || "এলাকা উল্লেখ নেই"
+        );
+
+
+      const isActive =
+        member.status === "active";
+
+
+      return `
+
+        <div class="member">
+
+          <div class="member-name">
+            ${name}
+          </div>
+
+          <div class="member-info">
+
+            <span
+              class="badge ${isActive ? "" : "inactive"}"
+            >
+              ${isActive ? "Active" : "Inactive"}
+            </span>
+
+            🏷️ ${role}
+
+            <br>
+
+            📍 ${area}
+
+          </div>
+
+
+          <div class="member-actions">
+
+            <button
+              class="edit-btn"
+              onclick="editMember('${member.id}')"
+            >
+              ✏️ Edit
+            </button>
+
+            <button
+              class="delete-btn"
+              onclick="deleteMember('${member.id}')"
+            >
+              🗑️ Delete
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================
+   SAVE MEMBER
+========================= */
+
+async function saveMember(){
+
+  const id =
+    document
+      .getElementById("memberId")
+      .value.trim();
+
+
+  const name =
+    document
+      .getElementById("memberName")
+      .value.trim();
+
+
+  const role =
+    document
+      .getElementById("memberRole")
+      .value.trim();
+
+
+  const area =
+    document
+      .getElementById("memberArea")
+      .value.trim();
+
+
+  const status =
+    document
+      .getElementById("memberStatus")
+      .value;
+
+
+  const msg =
+    document.getElementById("memberMsg");
+
+
+  if(!name){
+
+    msg.textContent =
+      "⚠️ সদস্যের নাম দিন।";
+
+    return;
+
+  }
+
+
+  msg.textContent =
+    "⏳ সংরক্ষণ হচ্ছে...";
+
+
+  const memberData = {
+
+    name:name,
+
+    role:role || "সদস্য",
+
+    area:area || null,
+
+    status:status
+
+  };
+
+
+  let result;
+
+
+  if(id){
+
+    result =
+      await sb
+        .from("members")
+        .update(memberData)
+        .eq("id",id);
+
+  }else{
+
+    result =
+      await sb
+        .from("members")
+        .insert(memberData);
+
+  }
+
+
+  if(result.error){
+
+    console.error(result.error);
+
+    msg.textContent =
+      "❌ সংরক্ষণ করা যায়নি।";
+
+    return;
+
+  }
+
+
+  msg.textContent =
+    id
+      ? "✅ সদস্যের তথ্য আপডেট হয়েছে।"
+      : "✅ নতুন সদস্য যোগ হয়েছে।";
+
+
+  clearMemberForm();
+
+  loadMembers();
+
+}
+
+
+/* =========================
+   EDIT MEMBER
+========================= */
+
+async function editMember(id){
+
+  const {data,error} =
+    await sb
+      .from("members")
+      .select("*")
+      .eq("id",id)
+      .single();
+
+
+  if(error){
+
+    console.error(error);
+
+    document.getElementById("memberMsg")
+      .textContent =
+      "❌ সদস্যের তথ্য পাওয়া যায়নি।";
+
+    return;
+
+  }
+
+
+  document.getElementById("memberId")
+    .value = data.id;
+
+  document.getElementById("memberName")
+    .value = data.name || "";
+
+  document.getElementById("memberRole")
+    .value = data.role || "সদস্য";
+
+  document.getElementById("memberArea")
+    .value = data.area || "";
+
+  document.getElementById("memberStatus")
+    .value = data.status || "active";
+
+
+  document.getElementById("memberSaveBtn")
+    .textContent =
+    "💾 তথ্য আপডেট করুন";
+
+
+  document.getElementById("memberCancelBtn")
+    .style.display =
+    "block";
+
+
+  document.getElementById("memberName")
+    .focus();
+
+}
+
+
+/* =========================
+   DELETE MEMBER
+========================= */
+
+async function deleteMember(id){
+
+  const confirmDelete =
+    confirm(
+      "আপনি কি এই সদস্যকে Delete করতে চান?"
+    );
+
+
+  if(!confirmDelete) return;
+
+
+  const {error} =
+    await sb
+      .from("members")
+      .delete()
+      .eq("id",id);
+
+
+  if(error){
+
+    console.error(error);
+
+    document.getElementById("memberMsg")
+      .textContent =
+      "❌ সদস্য Delete করা যায়নি।";
+
+    return;
+
+  }
+
+
+  document.getElementById("memberMsg")
+    .textContent =
+    "✅ সদস্য Delete হয়েছে।";
+
+
+  loadMembers();
+
+}
+
+
+/* =========================
+   CLEAR FORM
+========================= */
+
+function clearMemberForm(){
+
+  document.getElementById("memberId")
+    .value = "";
+
+  document.getElementById("memberName")
+    .value = "";
+
+  document.getElementById("memberRole")
+    .value = "সদস্য";
+
+  document.getElementById("memberArea")
+    .value = "";
+
+  document.getElementById("memberStatus")
+    .value = "active";
+
+
+  document.getElementById("memberSaveBtn")
+    .textContent =
+    "➕ সদস্য যোগ করুন";
+
+
+  document.getElementById("memberCancelBtn")
+    .style.display =
+    "none";
+
+}
+
+
+/* =========================
+   CANCEL EDIT
+========================= */
+
+function cancelMemberEdit(){
+
+  clearMemberForm();
+
+  document.getElementById("memberMsg")
+    .textContent = "";
+
+}
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
 }
 
 
