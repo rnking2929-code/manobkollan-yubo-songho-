@@ -1459,3 +1459,234 @@ async function approveApplication(id){
   */
 
   const {data:application,error:fetchError} =
+    await sb
+      .from("member_applications")
+      .select("*")
+      .eq("id",id)
+      .single();
+
+
+  if(fetchError || !application){
+
+    console.error(fetchError);
+
+    msg.textContent =
+      "❌ আবেদনকারীর তথ্য পাওয়া যায়নি।";
+
+    return;
+
+  }
+
+
+  if(application.status === "approved"){
+
+    msg.textContent =
+      "ℹ️ এই আবেদনটি আগেই Approved হয়েছে।";
+
+    loadApplications();
+
+    return;
+
+  }
+
+
+  /*
+    Add applicant to members
+  */
+
+  const {error:memberError} =
+    await sb
+      .from("members")
+      .insert({
+
+        name:application.name,
+
+        role:"সদস্য",
+
+        area:application.area || null,
+
+        status:"active"
+
+      });
+
+
+  if(memberError){
+
+    console.error(memberError);
+
+    msg.textContent =
+      "❌ সদস্য হিসেবে যোগ করা যায়নি।";
+
+    return;
+
+  }
+
+
+  /*
+    Update application status
+  */
+
+  const {error:updateError} =
+    await sb
+      .from("member_applications")
+      .update({
+        status:"approved"
+      })
+      .eq("id",id);
+
+
+  if(updateError){
+
+    console.error(updateError);
+
+    msg.textContent =
+      "⚠️ সদস্য যোগ হয়েছে, কিন্তু আবেদনটির Status আপডেট হয়নি।";
+
+    loadApplications();
+    loadMembers();
+
+    return;
+
+  }
+
+
+  msg.textContent =
+    "✅ আবেদন Approved এবং সদস্য তালিকায় যোগ হয়েছে।";
+
+
+  loadApplications();
+  loadMembers();
+
+}
+
+
+/* =========================
+   REJECT APPLICATION
+========================= */
+
+async function rejectApplication(id){
+
+  const confirmReject =
+    confirm(
+      "এই আবেদনটি Reject করতে চান?"
+    );
+
+
+  if(!confirmReject) return;
+
+
+  const msg =
+    document.getElementById("applicationMsg");
+
+
+  msg.textContent =
+    "⏳ Reject করা হচ্ছে...";
+
+
+  const {error} =
+    await sb
+      .from("member_applications")
+      .update({
+        status:"rejected"
+      })
+      .eq("id",id);
+
+
+  if(error){
+
+    console.error(error);
+
+    msg.textContent =
+      "❌ আবেদন Reject করা যায়নি।";
+
+    return;
+
+  }
+
+
+  msg.textContent =
+    "✅ আবেদনটি Reject করা হয়েছে।";
+
+
+  loadApplications();
+
+}
+
+
+/* =========================
+   DELETE APPLICATION
+========================= */
+
+async function deleteApplication(id){
+
+  const confirmDelete =
+    confirm(
+      "আপনি কি এই আবেদনটি Delete করতে চান?"
+    );
+
+
+  if(!confirmDelete) return;
+
+
+  const msg =
+    document.getElementById("applicationMsg");
+
+
+  msg.textContent =
+    "⏳ Delete করা হচ্ছে...";
+
+
+  const {error} =
+    await sb
+      .from("member_applications")
+      .delete()
+      .eq("id",id);
+
+
+  if(error){
+
+    console.error(error);
+
+    msg.textContent =
+      "❌ আবেদন Delete করা যায়নি।";
+
+    return;
+
+  }
+
+
+  msg.textContent =
+    "✅ আবেদনটি Delete হয়েছে।";
+
+
+  loadApplications();
+
+}
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+checkLogin();
+
+</script>
+
+</body>
+</html>
