@@ -5,8 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>স্বেচ্ছাসেবক - মানবকল্যাণ যুব সংঘ</title>
 
@@ -22,8 +21,6 @@ body{
   background:#0f172a;
   color:#fff;
 }
-
-/* HEADER */
 
 .header{
   text-align:center;
@@ -42,15 +39,11 @@ body{
   color:#94a3b8;
 }
 
-/* CONTAINER */
-
 .container{
   max-width:850px;
   margin:auto;
   padding:25px 15px;
 }
-
-/* BOX */
 
 .box{
   background:#111827;
@@ -64,8 +57,6 @@ body{
   margin-top:0;
 }
 
-/* FORM */
-
 label{
   display:block;
   margin-top:12px;
@@ -77,21 +68,19 @@ label{
 input,
 select,
 textarea{
-
   width:100%;
-
   padding:13px;
-
   border-radius:9px;
-
   border:1px solid #475569;
-
   background:#1e293b;
-
   color:#fff;
-
   font-size:14px;
+}
 
+input:focus,
+textarea:focus{
+  outline:none;
+  border-color:#22c55e;
 }
 
 textarea{
@@ -100,42 +89,33 @@ textarea{
 }
 
 button{
-
   width:100%;
-
   padding:13px;
-
   margin-top:15px;
-
   border:0;
-
   border-radius:9px;
-
   background:#16a34a;
-
   color:#fff;
-
   font-weight:bold;
-
   font-size:15px;
-
   cursor:pointer;
-
 }
 
 button:hover{
   opacity:.9;
 }
 
-/* MESSAGE */
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
 
 .msg{
   text-align:center;
   margin-top:12px;
   color:#fbbf24;
+  line-height:1.7;
 }
-
-/* VOLUNTEERS */
 
 .volunteer-list{
   display:grid;
@@ -143,68 +123,39 @@ button:hover{
 }
 
 .volunteer{
-
   background:#1e293b;
-
   border:1px solid #334155;
-
   border-radius:12px;
-
   padding:15px;
-
 }
 
 .volunteer-name{
-
   font-size:18px;
-
   font-weight:bold;
-
   margin-bottom:7px;
-
 }
 
 .volunteer-info{
-
   color:#cbd5e1;
-
   font-size:13px;
-
   line-height:1.8;
-
 }
 
 .badge{
-
   display:inline-block;
-
   padding:4px 8px;
-
   border-radius:5px;
-
   background:#14532d;
-
   color:#bbf7d0;
-
   font-size:11px;
-
 }
-
-/* FOOTER */
 
 .footer{
-
   text-align:center;
-
   color:#64748b;
-
   font-size:12px;
-
   padding:25px 10px;
-
 }
-
-/* MOBILE */
 
 @media(max-width:500px){
 
@@ -237,7 +188,6 @@ button:hover{
   </p>
 
 </div>
-
 
 
 <div class="container">
@@ -329,6 +279,7 @@ button:hover{
 
 
   <button
+    id="submitBtn"
     onclick="submitVolunteer()"
   >
     🤝 স্বেচ্ছাসেবক হওয়ার আবেদন করুন
@@ -355,7 +306,9 @@ button:hover{
   </h2>
 
   <p style="color:#94a3b8;font-size:13px">
+
     অনুমোদিত স্বেচ্ছাসেবকদের তালিকা
+
   </p>
 
 
@@ -368,7 +321,9 @@ button:hover{
       text-align:center;
       color:#94a3b8;
     ">
+
       ⏳ তালিকা লোড হচ্ছে...
+
     </div>
 
   </div>
@@ -389,7 +344,9 @@ button:hover{
 
 
 
-<!-- SUPABASE -->
+<!-- =========================
+     SUPABASE
+========================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -399,7 +356,22 @@ button:hover{
 <script>
 
 /* =========================
-   SUPABASE
+   CHECK CONFIG
+========================= */
+
+if(
+  !window.SUPABASE_URL ||
+  !window.SUPABASE_ANON_KEY
+){
+
+  document.getElementById("msg").innerHTML =
+    "❌ Supabase configuration পাওয়া যায়নি।";
+
+}
+
+
+/* =========================
+   SUPABASE CLIENT
 ========================= */
 
 const sb = supabase.createClient(
@@ -410,6 +382,22 @@ const sb = supabase.createClient(
 
 );
 
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
 
 
 /* =========================
@@ -465,7 +453,14 @@ async function submitVolunteer(){
       .getElementById("msg");
 
 
-  /* VALIDATION */
+  const submitBtn =
+    document
+      .getElementById("submitBtn");
+
+
+  /* =========================
+     VALIDATION
+  ========================= */
 
   if(!name){
 
@@ -517,85 +512,145 @@ async function submitVolunteer(){
   }
 
 
+  /* =========================
+     SUBMITTING
+  ========================= */
+
   msg.textContent =
     "⏳ আবেদন জমা হচ্ছে...";
 
 
-  /* INSERT */
-
-  const {error} =
-
-    await sb
-      .from("volunteer_applications")
-      .insert({
-
-        name:name,
-
-        phone:phone,
-
-        age:age,
-
-        area:area,
-
-        profession:
-          profession || null,
-
-        reason:reason,
-
-        status:"pending"
-
-      });
+  submitBtn.disabled = true;
 
 
-  if(error){
+  try{
 
-    console.error(error);
+    /* =========================
+       INSERT INTO SUPABASE
+    ========================= */
 
-    msg.textContent =
-      "❌ আবেদন জমা হয়নি। আবার চেষ্টা করুন।";
+    const { data, error } =
 
-    return;
+      await sb
+        .from("volunteer_applications")
+        .insert({
+
+          name: name,
+
+          phone: phone,
+
+          age: Number(age),
+
+          area: area,
+
+          profession:
+            profession || null,
+
+          reason: reason,
+
+          status: "pending"
+
+        })
+        .select();
+
+
+    /* =========================
+       ERROR
+    ========================= */
+
+    if(error){
+
+      console.error(
+        "SUPABASE ERROR:",
+        error
+      );
+
+
+      msg.innerHTML =
+        "❌ আবেদন জমা হয়নি।<br>" +
+        "<small>" +
+        escapeHTML(error.message) +
+        "</small>";
+
+      submitBtn.disabled = false;
+
+      return;
+
+    }
+
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    console.log(
+      "VOLUNTEER SUCCESS:",
+      data
+    );
+
+
+    msg.innerHTML =
+      "✅ আপনার আবেদন সফলভাবে জমা হয়েছে।<br>" +
+      "Admin যাচাই করার পর অনুমোদন করা হবে।";
+
+
+    /* =========================
+       CLEAR FORM
+    ========================= */
+
+    document
+      .getElementById("name")
+      .value = "";
+
+
+    document
+      .getElementById("phone")
+      .value = "";
+
+
+    document
+      .getElementById("age")
+      .value = "";
+
+
+    document
+      .getElementById("area")
+      .value = "";
+
+
+    document
+      .getElementById("profession")
+      .value = "";
+
+
+    document
+      .getElementById("reason")
+      .value = "";
+
+
+  }catch(error){
+
+    console.error(
+      "SYSTEM ERROR:",
+      error
+    );
+
+
+    msg.innerHTML =
+      "❌ একটি সমস্যা হয়েছে।<br>" +
+      "<small>" +
+      escapeHTML(
+        error.message ||
+        String(error)
+      ) +
+      "</small>";
 
   }
 
 
-  msg.textContent =
-    "✅ আপনার আবেদন সফলভাবে জমা হয়েছে। Admin যাচাই করার পর অনুমোদন করা হবে।";
-
-
-  /* CLEAR */
-
-  document
-    .getElementById("name")
-    .value = "";
-
-
-  document
-    .getElementById("phone")
-    .value = "";
-
-
-  document
-    .getElementById("age")
-    .value = "";
-
-
-  document
-    .getElementById("area")
-    .value = "";
-
-
-  document
-    .getElementById("profession")
-    .value = "";
-
-
-  document
-    .getElementById("reason")
-    .value = "";
+  submitBtn.disabled = false;
 
 }
-
 
 
 /* =========================
@@ -609,106 +664,135 @@ async function loadVolunteers(){
       .getElementById("volunteerList");
 
 
-  const {data,error} =
+  try{
 
-    await sb
-      .from("volunteer_applications")
-      .select(
-        "id,name,area,profession,status,created_at"
-      )
-      .eq("status","approved")
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
+    const {data,error} =
+
+      await sb
+        .from("volunteer_applications")
+        .select(
+          "id,name,area,profession,status,created_at"
+        )
+        .eq(
+          "status",
+          "approved"
+        )
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        );
+
+
+    if(error){
+
+      console.error(
+        "LOAD ERROR:",
+        error
       );
 
 
-  if(error){
+      list.innerHTML =
+        '<div style="' +
+        'text-align:center;' +
+        'color:#fca5a5;' +
+        '">' +
+        '❌ তালিকা লোড করা যায়নি।' +
+        '</div>';
 
-    console.error(error);
+      return;
+
+    }
+
+
+    if(
+      !data ||
+      data.length === 0
+    ){
+
+      list.innerHTML =
+        '<div style="' +
+        'text-align:center;' +
+        'color:#94a3b8;' +
+        'padding:15px' +
+        '">' +
+        'এখনও কোনো অনুমোদিত স্বেচ্ছাসেবক নেই।' +
+        '</div>';
+
+      return;
+
+    }
+
+
+    /* =========================
+       DISPLAY
+    ========================= */
 
     list.innerHTML =
-      '<div style="text-align:center;color:#fca5a5">❌ তালিকা লোড করা যায়নি।</div>';
 
-    return;
+      data.map(
+        function(v){
+
+          return `
+
+            <div class="volunteer">
+
+              <div class="volunteer-name">
+
+                ${escapeHTML(v.name)}
+
+              </div>
+
+              <div class="volunteer-info">
+
+                <span class="badge">
+                  Active Volunteer
+                </span>
+
+                <br>
+
+                📍 এলাকা:
+                ${escapeHTML(
+                  v.area ||
+                  "উল্লেখ নেই"
+                )}
+
+                <br>
+
+                💼 পেশা:
+                ${escapeHTML(
+                  v.profession ||
+                  "উল্লেখ নেই"
+                )}
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      ).join("");
+
+  }catch(error){
+
+    console.error(
+      "LIST ERROR:",
+      error
+    );
+
+    list.innerHTML =
+      '<div style="' +
+      'text-align:center;' +
+      'color:#fca5a5;' +
+      '">' +
+      '❌ তালিকা লোড করা যায়নি।' +
+      '</div>';
 
   }
 
-
-  if(!data || data.length === 0){
-
-    list.innerHTML =
-      '<div style="text-align:center;color:#94a3b8;padding:15px">এখনও কোনো অনুমোদিত স্বেচ্ছাসেবক নেই।</div>';
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-
-    data.map(v => {
-
-      return `
-
-        <div class="volunteer">
-
-          <div class="volunteer-name">
-
-            ${escapeHTML(v.name)}
-
-          </div>
-
-          <div class="volunteer-info">
-
-            <span class="badge">
-              Active Volunteer
-            </span>
-
-            <br>
-
-            📍 এলাকা:
-            ${escapeHTML(v.area || "উল্লেখ নেই")}
-
-            <br>
-
-            💼 পেশা:
-            ${escapeHTML(v.profession || "উল্লেখ নেই")}
-
-          </div>
-
-        </div>
-
-      `;
-
-    }).join("");
-
 }
-
-
-
-/* =========================
-   SECURITY
-========================= */
-
-function escapeHTML(value){
-
-  return String(value ?? "")
-
-    .replace(/&/g,"&amp;")
-
-    .replace(/</g,"&lt;")
-
-    .replace(/>/g,"&gt;")
-
-    .replace(/"/g,"&quot;")
-
-    .replace(/'/g,"&#039;");
-
-}
-
 
 
 /* =========================
