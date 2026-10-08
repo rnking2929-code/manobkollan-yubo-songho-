@@ -1,446 +1,812 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>সদস্য — মানবকল্যাণ যুব সংঘ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
+<title>সদস্য | মানবকল্যাণ যুব সংঘ</title>
 
-    body{
-      font-family:Arial,"Noto Sans Bengali",sans-serif;
-      background:#07111f;
-      color:#fff;
-      padding-bottom:80px;
-    }
+<meta name="theme-color" content="#171717">
 
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
+<style>
 
-    .topbar{
-      background:#0d1b2a;
-      padding:16px 18px;
-      text-align:center;
-      border-bottom:1px solid #24364a;
-      position:sticky;
-      top:0;
-      z-index:10;
-    }
+*{
+  box-sizing:border-box;
+}
 
-    .topbar h1{
-      font-size:20px;
-      margin-bottom:5px;
-    }
+html,body{
+  margin:0;
+  background:#111;
+  color:#eee;
+  font-family:"Noto Sans Bengali","SolaimanLipi",Arial,sans-serif;
+}
 
-    .topbar p{
-      color:#aebdca;
-      font-size:13px;
-    }
+body{
+  padding-bottom:85px;
+}
 
-    .container{
-      max-width:900px;
-      margin:auto;
-      padding:20px 15px;
-    }
+a{
+  text-decoration:none;
+  color:inherit;
+}
 
-    .hero{
-      text-align:center;
-      padding:25px 10px;
-    }
+/* TOP BAR */
 
-    .hero .icon{
-      font-size:55px;
-      margin-bottom:10px;
-    }
+.topbar{
+  height:64px;
+  background:#1b1b1b;
+  border-bottom:1px solid #3a3a3a;
+  display:flex;
+  align-items:center;
+  padding:0 15px;
+  gap:12px;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
 
-    .hero h2{
-      font-size:28px;
-      margin-bottom:8px;
-    }
+.logo{
+  width:42px;
+  height:42px;
+  border-radius:9px;
+  background:#ddd;
+  display:grid;
+  place-items:center;
+  color:#087443;
+  font-weight:900;
+  font-size:11px;
+  text-align:center;
+}
 
-    .hero p{
-      color:#b8c5d1;
-      line-height:1.7;
-    }
+.brand{
+  font-size:20px;
+  font-weight:800;
+  color:#4bb7ff;
+  white-space:nowrap;
+}
 
-    .card{
-      background:#0d1b2a;
-      border:1px solid #24364a;
-      border-radius:16px;
-      padding:20px;
-      margin-bottom:18px;
-      box-shadow:0 8px 25px rgba(0,0,0,.18);
-    }
+/* MAIN */
 
-    .card h3{
-      margin-bottom:15px;
-      font-size:20px;
-    }
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:20px 14px;
+}
 
-    .count{
-      text-align:center;
-      font-size:32px;
-      font-weight:bold;
-      margin:10px 0 5px;
-    }
+.card{
+  background:#1b1b1b;
+  border:1px solid #303030;
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:18px;
+}
 
-    .count-label{
-      text-align:center;
-      color:#aebdca;
-      font-size:14px;
-    }
+.title{
+  text-align:center;
+  font-size:27px;
+  margin:5px 0 8px;
+}
 
-    .member-list{
-      display:grid;
-      gap:12px;
-    }
+.subtitle{
+  text-align:center;
+  color:#aaa;
+  line-height:1.7;
+  margin-bottom:20px;
+}
 
-    .member{
-      background:#081522;
-      border:1px solid #26394d;
-      border-radius:12px;
-      padding:15px;
-    }
+/* APPLICATION */
 
-    .member-name{
-      font-size:18px;
-      font-weight:bold;
-      margin-bottom:8px;
-    }
+.form-title{
+  font-size:22px;
+  margin:0 0 8px;
+}
 
-    .member-info{
-      color:#b9c7d3;
-      font-size:14px;
-      line-height:1.8;
-    }
+.form-info{
+  color:#aaa;
+  font-size:14px;
+  line-height:1.7;
+  margin-bottom:15px;
+}
 
-    .role{
-      display:inline-block;
-      background:#163451;
-      padding:5px 9px;
-      border-radius:7px;
-      margin-right:6px;
-    }
+label{
+  display:block;
+  font-weight:700;
+  margin:13px 0 6px;
+}
 
-    .empty{
-      text-align:center;
-      color:#9eacb8;
-      padding:20px;
-    }
+input,
+textarea{
+  width:100%;
+  padding:13px;
+  border-radius:9px;
+  border:1px solid #444;
+  background:#111;
+  color:#fff;
+  font-size:15px;
+  font-family:inherit;
+  outline:none;
+}
 
-    .links{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-      margin-top:15px;
-    }
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
 
-    .link-box{
-      background:#132438;
-      border:1px solid #263b51;
-      padding:13px;
-      border-radius:10px;
-      text-align:center;
-      font-size:14px;
-    }
+input:focus,
+textarea:focus{
+  border-color:#54b8ff;
+}
 
-    .bottom-nav{
-      position:fixed;
-      bottom:0;
-      left:0;
-      right:0;
-      height:65px;
-      background:#0d1b2a;
-      border-top:1px solid #24364a;
-      display:flex;
-      justify-content:space-around;
-      align-items:center;
-      z-index:20;
-    }
+.submit{
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  border:0;
+  border-radius:9px;
+  background:#1877f2;
+  color:#fff;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+}
 
-    .bottom-nav a{
-      text-align:center;
-      font-size:12px;
-      color:#b9c7d3;
-    }
+.submit:disabled{
+  opacity:.6;
+}
 
-    .bottom-nav span{
-      display:block;
-      font-size:20px;
-      margin-bottom:3px;
-    }
+.message{
+  display:none;
+  margin-top:15px;
+  padding:13px;
+  border-radius:9px;
+  line-height:1.6;
+}
 
-    @media(max-width:600px){
-      .hero h2{
-        font-size:24px;
-      }
+.success{
+  background:#123d2c;
+  color:#b7f0d2;
+}
 
-      .links{
-        grid-template-columns:1fr;
-      }
-    }
-  </style>
+.error{
+  background:#421d1d;
+  color:#ffbaba;
+}
+
+/* MEMBERS */
+
+.members-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.members-header h2{
+  margin:0;
+  font-size:22px;
+}
+
+.count{
+  background:#087443;
+  padding:7px 12px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:800;
+}
+
+.member{
+  background:#111;
+  border:1px solid #303030;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:10px;
+}
+
+.member:last-child{
+  margin-bottom:0;
+}
+
+.member-name{
+  font-size:18px;
+  font-weight:800;
+}
+
+.member-role{
+  color:#54b8ff;
+  margin-top:5px;
+}
+
+.member-area{
+  color:#aaa;
+  font-size:14px;
+  margin-top:5px;
+}
+
+.empty{
+  text-align:center;
+  color:#999;
+  padding:25px 10px;
+}
+
+/* BACK */
+
+.back{
+  display:block;
+  text-align:center;
+  background:#292929;
+  padding:12px;
+  border-radius:9px;
+  margin-top:15px;
+}
+
+/* BOTTOM NAV */
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:70px;
+  background:#191919;
+  border-top:1px solid #454545;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  z-index:30;
+}
+
+.bottom a{
+  text-align:center;
+  padding-top:7px;
+  font-size:12px;
+  color:#aaa;
+}
+
+.bottom a.active{
+  color:#54b8ff;
+}
+
+.bottom span{
+  display:block;
+  font-size:24px;
+  line-height:30px;
+}
+
+@media(min-width:700px){
+
+  body{
+    max-width:700px;
+    margin:auto;
+    background:#0d0d0d;
+  }
+
+  .topbar,
+  .bottom{
+    max-width:700px;
+    margin:auto;
+  }
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-  <header class="topbar">
-    <h1>👥 মানবকল্যাণ যুব সংঘ</h1>
-    <p>ঐক্য • মানবতা • স্বেচ্ছাসেবা</p>
-  </header>
 
-  <main class="container">
+<!-- TOP BAR -->
 
-    <section class="hero">
-      <div class="icon">👥</div>
+<header class="topbar">
 
-      <h2>আমাদের সদস্যবৃন্দ</h2>
+  <div class="logo">
+    মযুস
+  </div>
 
-      <p>
-        মানবকল্যাণ যুব সংঘের সদস্যদের তালিকা।
-        সংগঠনের কার্যক্রমে সদস্যদের অংশগ্রহণ ও সহযোগিতাই
-        আমাদের এগিয়ে যাওয়ার শক্তি।
-      </p>
+  <div class="brand">
+    মানবকল্যাণ যুব সংঘ
+  </div>
 
-      <a
-        href="index.html"
-        style="display:inline-block;margin-top:12px;color:#b9c7d3;font-size:14px;"
-      >
-        ← হোম পেজে ফিরে যান
-      </a>
-    </section>
+</header>
 
 
-    <!-- Member Count -->
-    <section class="card">
-
-      <h3>📊 সদস্য সংখ্যা</h3>
-
-      <div id="memberCount" class="count">
-        —
-      </div>
-
-      <div class="count-label">
-        নিবন্ধিত সদস্য
-      </div>
-
-    </section>
+<main class="container">
 
 
-    <!-- Member List -->
-    <section class="card">
+<!-- HEADER -->
 
-      <h3>👥 সদস্যদের তালিকা</h3>
+<section class="card">
 
-      <p style="color:#9eacb8;font-size:13px;margin-bottom:15px;">
-        সংগঠনের সদস্যদের প্রকাশ্য তথ্য এখানে দেখা যাবে।
-        ব্যক্তিগত মোবাইল নম্বর প্রকাশ করা হবে না।
-      </p>
+  <h1 class="title">
+    👥 সদস্য
+  </h1>
 
-      <div id="memberList" class="member-list">
-
-        <div class="empty">
-          সদস্যদের তালিকা লোড হচ্ছে...
-        </div>
-
-      </div>
-
-    </section>
+  <p class="subtitle">
+    মানবকল্যাণ যুব সংঘের সঙ্গে যুক্ত হয়ে
+    মানবতার সেবায় অংশ নিন।
+  </p>
 
 
-    <!-- Other Pages -->
-    <section class="card">
+  <!-- APPLICATION FORM -->
 
-      <h3>আরও দেখুন</h3>
+  <h2 class="form-title">
+    📝 সদস্য হওয়ার আবেদন
+  </h2>
 
-      <div class="links">
-
-        <a class="link-box" href="blood.html">
-          🩸 রক্তদান
-        </a>
-
-        <a class="link-box" href="volunteer.html">
-          🤝 স্বেচ্ছাসেবক
-        </a>
-
-        <a class="link-box" href="activities.html">
-          📅 কর্মপরিকল্পনা
-        </a>
-
-        <a class="link-box" href="finance.html">
-          💰 প্রকাশ্য হিসাব
-        </a>
-
-      </div>
-
-    </section>
-
-  </main>
+  <p class="form-info">
+    নিচের তথ্যগুলো পূরণ করে আবেদন পাঠান।
+    আপনার আবেদন Admin যাচাই করার পর অনুমোদন করা হবে।
+  </p>
 
 
-  <!-- Bottom Navigation -->
-  <nav class="bottom-nav">
-
-    <a href="index.html">
-      <span>🏠</span>
-      হোম
-    </a>
-
-    <a href="organization.html">
-      <span>🏢</span>
-      সংগঠন
-    </a>
-
-    <a href="blood.html">
-      <span>🩸</span>
-      রক্ত
-    </a>
-
-    <a href="volunteer.html">
-      <span>🤝</span>
-      স্বেচ্ছাসেবক
-    </a>
-
-    <a href="contact.html">
-      <span>📞</span>
-      যোগাযোগ
-    </a>
-
-  </nav>
+  <form id="memberForm">
 
 
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js"></script>
+    <label for="name">
+      নাম *
+    </label>
 
-  <script>
+    <input
+      type="text"
+      id="name"
+      placeholder="আপনার পূর্ণ নাম"
+      required
+    >
 
-    const sb = supabase.createClient(
-      window.SUPABASE_URL,
-      window.SUPABASE_ANON_KEY
+
+    <label for="phone">
+      মোবাইল নম্বর *
+    </label>
+
+    <input
+      type="tel"
+      id="phone"
+      placeholder="01XXXXXXXXX"
+      required
+    >
+
+
+    <label for="area">
+      এলাকা / ঠিকানা
+    </label>
+
+    <input
+      type="text"
+      id="area"
+      placeholder="আপনার এলাকা"
+    >
+
+
+    <label for="age">
+      বয়স
+    </label>
+
+    <input
+      type="number"
+      id="age"
+      placeholder="আপনার বয়স"
+      min="13"
+      max="100"
+    >
+
+
+    <label for="profession">
+      পেশা
+    </label>
+
+    <input
+      type="text"
+      id="profession"
+      placeholder="শিক্ষার্থী / চাকরি / ব্যবসা ইত্যাদি"
+    >
+
+
+    <label for="reason">
+      কেন সংগঠনে যুক্ত হতে চান?
+    </label>
+
+    <textarea
+      id="reason"
+      placeholder="সংক্ষেপে লিখুন..."
+    ></textarea>
+
+
+    <button
+      type="submit"
+      class="submit"
+      id="submitBtn"
+    >
+      📩 সদস্য হওয়ার আবেদন পাঠান
+    </button>
+
+  </form>
+
+
+  <div
+    id="message"
+    class="message"
+  ></div>
+
+</section>
+
+
+<!-- APPROVED MEMBERS -->
+
+<section class="card">
+
+  <div class="members-header">
+
+    <h2>
+      👥 আমাদের সদস্য
+    </h2>
+
+    <div
+      class="count"
+      id="memberCount"
+    >
+      ০ জন
+    </div>
+
+  </div>
+
+
+  <div id="membersList">
+
+    <div class="empty">
+      সদস্যদের তালিকা লোড হচ্ছে...
+    </div>
+
+  </div>
+
+</section>
+
+
+<a
+  class="back"
+  href="index.html"
+>
+  ← হোম পেজে ফিরে যান
+</a>
+
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom">
+
+  <a href="index.html">
+    <span>🏠</span>
+    হোম
+  </a>
+
+  <a href="blood.html">
+    <span>🩸</span>
+    রক্ত
+  </a>
+
+  <a class="active" href="members.html">
+    <span>👥</span>
+    সদস্য
+  </a>
+
+  <a href="organization.html">
+    <span>🏢</span>
+    সংগঠন
+  </a>
+
+</nav>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+<script>
+
+const sb = supabase.createClient(
+  window.SUPABASE_URL,
+  window.SUPABASE_ANON_KEY
+);
+
+
+/* =========================
+   MEMBER APPLICATION
+========================= */
+
+const form =
+  document.getElementById("memberForm");
+
+const message =
+  document.getElementById("message");
+
+const submitBtn =
+  document.getElementById("submitBtn");
+
+
+form.addEventListener(
+  "submit",
+  async function(e){
+
+    e.preventDefault();
+
+    message.style.display = "none";
+
+    submitBtn.disabled = true;
+
+    submitBtn.innerText =
+      "আবেদন জমা হচ্ছে...";
+
+
+    const name =
+      document.getElementById("name")
+      .value.trim();
+
+    const phone =
+      document.getElementById("phone")
+      .value.trim();
+
+    const area =
+      document.getElementById("area")
+      .value.trim();
+
+    const ageValue =
+      document.getElementById("age")
+      .value;
+
+    const age =
+      ageValue
+      ? Number(ageValue)
+      : null;
+
+    const profession =
+      document.getElementById("profession")
+      .value.trim();
+
+    const reason =
+      document.getElementById("reason")
+      .value.trim();
+
+
+    if(!name || !phone){
+
+      showError(
+        "নাম এবং মোবাইল নম্বর অবশ্যই দিতে হবে।"
+      );
+
+      resetButton();
+
+      return;
+    }
+
+
+    if(phone.length < 10 || phone.length > 20){
+
+      showError(
+        "সঠিক মোবাইল নম্বর দিন।"
+      );
+
+      resetButton();
+
+      return;
+    }
+
+
+    if(age !== null &&
+       (age < 13 || age > 100)){
+
+      showError(
+        "বয়স ১৩ থেকে ১০০ বছরের মধ্যে হতে হবে।"
+      );
+
+      resetButton();
+
+      return;
+    }
+
+
+    const { error } = await sb
+      .from("member_applications")
+      .insert([{
+
+        name: name,
+
+        phone: phone,
+
+        area: area || null,
+
+        age: age,
+
+        profession: profession || null,
+
+        reason: reason || null,
+
+        status: "pending"
+
+      }]);
+
+
+    if(error){
+
+      console.error(error);
+
+      showError(
+        "আবেদন জমা হয়নি। আবার চেষ্টা করুন।"
+      );
+
+      resetButton();
+
+      return;
+    }
+
+
+    message.className =
+      "message success";
+
+    message.style.display =
+      "block";
+
+    message.innerHTML =
+      "✅ আপনার সদস্য হওয়ার আবেদন সফলভাবে জমা হয়েছে।<br>" +
+      "Admin যাচাই করার পর আপনাকে সদস্য হিসেবে অনুমোদন করবেন।";
+
+
+    form.reset();
+
+    resetButton();
+
+  }
+);
+
+
+function resetButton(){
+
+  submitBtn.disabled = false;
+
+  submitBtn.innerText =
+    "📩 সদস্য হওয়ার আবেদন পাঠান";
+
+}
+
+
+function showError(text){
+
+  message.className =
+    "message error";
+
+  message.style.display =
+    "block";
+
+  message.innerText =
+    "❌ " + text;
+
+}
+
+
+/* =========================
+   APPROVED MEMBERS LIST
+========================= */
+
+async function loadMembers(){
+
+  const list =
+    document.getElementById("membersList");
+
+  const count =
+    document.getElementById("memberCount");
+
+
+  const { data, error } = await sb
+    .from("members")
+    .select(
+      "id,name,role,area,status,joined_at"
+    )
+    .eq("status","active")
+    .order(
+      "joined_at",
+      {
+        ascending:false
+      }
     );
 
 
-    function escapeHTML(value){
+  if(error){
 
-      return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+    console.error(error);
+
+    list.innerHTML =
+      '<div class="empty">' +
+      'সদস্যদের তালিকা লোড করা যাচ্ছে না।' +
+      '</div>';
+
+    return;
+  }
+
+
+  count.innerText =
+    (data ? data.length : 0) + " জন";
+
+
+  if(!data || data.length === 0){
+
+    list.innerHTML =
+      '<div class="empty">' +
+      'এখনো কোনো অনুমোদিত সদস্য নেই।' +
+      '</div>';
+
+    return;
+  }
+
+
+  list.innerHTML = "";
+
+
+  data.forEach(member => {
+
+    const item =
+      document.createElement("div");
+
+    item.className = "member";
+
+
+    const name =
+      document.createElement("div");
+
+    name.className =
+      "member-name";
+
+    name.textContent =
+      member.name || "নাম নেই";
+
+
+    const role =
+      document.createElement("div");
+
+    role.className =
+      "member-role";
+
+    role.textContent =
+      member.role || "সদস্য";
+
+
+    const area =
+      document.createElement("div");
+
+    area.className =
+      "member-area";
+
+    area.textContent =
+      member.area
+      ? "📍 " + member.area
+      : "";
+
+
+    item.appendChild(name);
+
+    item.appendChild(role);
+
+    if(member.area){
+
+      item.appendChild(area);
 
     }
 
 
-    async function loadMembers(){
+    list.appendChild(item);
 
-      const list =
-        document.getElementById("memberList");
+  });
 
-      const count =
-        document.getElementById("memberCount");
+}
 
 
-      list.innerHTML =
-        '<div class="empty">তালিকা লোড হচ্ছে...</div>';
+loadMembers();
 
-
-      /*
-        members টেবিল তৈরি না হওয়া পর্যন্ত
-        এখানে error দেখাতে পারে।
-      */
-
-      const { data, error } = await sb
-        .from("members")
-        .select("id,name,role,area,status,joined_at")
-        .eq("status","active")
-        .order("joined_at",{ascending:false});
-
-
-      if(error){
-
-        console.error(error);
-
-        count.textContent = "—";
-
-        list.innerHTML = `
-          <div class="empty">
-            সদস্যদের তালিকা এখনো প্রস্তুত করা হয়নি।
-          </div>
-        `;
-
-        return;
-      }
-
-
-      count.textContent =
-        data ? data.length : 0;
-
-
-      if(!data || data.length === 0){
-
-        list.innerHTML = `
-          <div class="empty">
-            এখনো কোনো সক্রিয় সদস্যের তথ্য যোগ করা হয়নি।
-          </div>
-        `;
-
-        return;
-      }
-
-
-      list.innerHTML = data.map(member => {
-
-        const name =
-          escapeHTML(member.name);
-
-        const role =
-          escapeHTML(member.role || "সদস্য");
-
-        const area =
-          escapeHTML(member.area || "এলাকা উল্লেখ নেই");
-
-
-        return `
-          <div class="member">
-
-            <div class="member-name">
-              ${name}
-            </div>
-
-            <div class="member-info">
-
-              <span class="role">
-                ${role}
-              </span>
-
-              📍 ${area}
-
-            </div>
-
-          </div>
-        `;
-
-      }).join("");
-
-    }
-
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      loadMembers
-    );
-
-  </script>
+</script>
 
 </body>
 </html>
