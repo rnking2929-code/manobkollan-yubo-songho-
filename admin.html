@@ -51,7 +51,9 @@ body{
   padding:20px;
 }
 
-input,select,textarea{
+input,
+select,
+textarea{
   width:100%;
   padding:13px;
   margin:8px 0 12px;
@@ -75,6 +77,10 @@ button{
   font-weight:bold;
   background:#2563eb;
   color:#fff;
+}
+
+button:hover{
+  opacity:.9;
 }
 
 .menu{
@@ -130,23 +136,13 @@ button{
 }
 
 .hidden{
-  display:none;
+  display:none !important;
 }
 
 
 /* =========================
-   MEMBERS MANAGEMENT
+   COMMON STATS
 ========================= */
-
-.members-box{
-  margin-top:25px;
-  padding-top:25px;
-  border-top:1px solid #334155;
-}
-
-.members-box h3{
-  margin-top:0;
-}
 
 .member-stats,
 .application-stats,
@@ -157,10 +153,7 @@ button{
   margin:15px 0;
 }
 
-.application-stats{
-  grid-template-columns:repeat(4,1fr);
-}
-
+.application-stats,
 .work-stats{
   grid-template-columns:repeat(4,1fr);
 }
@@ -184,6 +177,21 @@ button{
   color:#94a3b8;
   font-size:12px;
   margin-top:5px;
+}
+
+
+/* =========================
+   MEMBERS
+========================= */
+
+.members-box{
+  margin-top:25px;
+  padding-top:25px;
+  border-top:1px solid #334155;
+}
+
+.members-box h3{
+  margin-top:0;
 }
 
 .member-list,
@@ -229,17 +237,17 @@ button{
   font-size:11px;
 }
 
-.badge.inactive{
-  background:#7f1d1d;
-  color:#fecaca;
-}
-
 .badge.pending{
   background:#78350f;
   color:#fde68a;
 }
 
 .badge.rejected{
+  background:#7f1d1d;
+  color:#fecaca;
+}
+
+.badge.inactive{
   background:#7f1d1d;
   color:#fecaca;
 }
@@ -291,7 +299,7 @@ button{
 
 
 /* =========================
-   APPLICATION MANAGEMENT
+   APPLICATIONS
 ========================= */
 
 .applications-box{
@@ -311,7 +319,7 @@ button{
 
 
 /* =========================
-   WORK MANAGEMENT
+   OUR WORK
 ========================= */
 
 .work-box{
@@ -322,6 +330,10 @@ button{
 
 .work-box h3{
   margin-top:0;
+}
+
+.work-card{
+  overflow:hidden;
 }
 
 .work-image{
@@ -342,6 +354,7 @@ button{
 
 .work-description{
   line-height:1.7;
+  white-space:pre-line;
 }
 
 .work-actions{
@@ -359,6 +372,10 @@ button{
 }
 
 
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:650px){
 
   .application-stats,
@@ -367,7 +384,6 @@ button{
   }
 
 }
-
 
 @media(max-width:500px){
 
@@ -395,6 +411,10 @@ button{
 
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <div class="header">
 
@@ -470,6 +490,8 @@ button{
   <div class="menu">
 
 
+    <!-- PAYMENT -->
+
     <a href="payments.html">
 
       <span class="icon">💰</span>
@@ -484,6 +506,8 @@ button{
 
     </a>
 
+
+    <!-- BLOOD DONORS -->
 
     <a href="donors.html">
 
@@ -500,6 +524,8 @@ button{
     </a>
 
 
+    <!-- VOLUNTEERS -->
+
     <a href="volunteers.html">
 
       <span class="icon">🤝</span>
@@ -514,6 +540,8 @@ button{
 
     </a>
 
+
+    <!-- MEMBERS -->
 
     <a
       href="#membersManagement"
@@ -533,6 +561,8 @@ button{
     </a>
 
 
+    <!-- MEMBER APPLICATIONS -->
+
     <a
       href="#applicationsManagement"
       onclick="openApplications()"
@@ -551,7 +581,9 @@ button{
     </a>
 
 
-    <!-- NEW WORK MANAGEMENT -->
+    <!-- =========================
+         OUR WORK
+    ========================= -->
 
     <a
       href="#workManagement"
@@ -571,6 +603,8 @@ button{
     </a>
 
 
+    <!-- TRANSACTIONS -->
+
     <a href="transactions.html">
 
       <span class="icon">💵</span>
@@ -585,6 +619,8 @@ button{
 
     </a>
 
+
+    <!-- REPORTS -->
 
     <a href="reports.html">
 
@@ -901,7 +937,7 @@ button{
     </p>
 
 
-    <!-- WORK STATISTICS -->
+    <!-- STATISTICS -->
 
     <div class="work-stats">
 
@@ -1016,6 +1052,10 @@ button{
 </div>
 
 
+<!-- =========================
+     SUPABASE
+========================= -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="config.js"></script>
@@ -1099,8 +1139,17 @@ async function login(){
 
 async function checkLogin(){
 
-  const {data} =
+  const {data,error} =
     await sb.auth.getSession();
+
+
+  if(error){
+
+    console.error(error);
+
+    return;
+
+  }
 
 
   if(data.session){
@@ -1474,7 +1523,7 @@ async function editMember(id){
     document
       .getElementById("memberMsg")
       .textContent =
-      "❌ সদস্যের তথ্য পাওয়া যায়নি。";
+      "❌ সদস্যের তথ্য পাওয়া যায়নি।";
 
     return;
 
@@ -1897,6 +1946,7 @@ async function loadApplications(){
 
             ${
               status === "pending"
+
               ?
 
               `
@@ -2204,7 +2254,8 @@ function openWorkManagement(){
   setTimeout(() => {
 
     box.scrollIntoView({
-      behavior:"smooth"
+      behavior:"smooth",
+      block:"start"
     });
 
   },100);
@@ -2244,11 +2295,14 @@ async function loadWorkPosts(){
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "WORK LOAD ERROR:",
+      error
+    );
 
 
     list.innerHTML =
-      '<div style="color:#fca5a5;text-align:center">❌ কাজের তালিকা লোড করা যায়নি।</div>';
+      '<div style="color:#fca5a5;text-align:center;padding:20px">❌ কাজের তালিকা লোড করা যায়নি।</div>';
 
 
     msg.textContent =
@@ -2398,7 +2452,9 @@ async function loadWorkPosts(){
         }catch(e){
 
           workDate =
-            work.work_date;
+            escapeHTML(
+              work.work_date
+            );
 
         }
 
@@ -2442,37 +2498,38 @@ async function loadWorkPosts(){
 
           ${
             imageUrl
-              ?
 
-              `
+            ?
 
-              <img
-                class="work-image"
-                src="${imageUrl}"
-                alt="${title}"
-                loading="lazy"
-              >
+            `
 
-              `
+            <img
+              class="work-image"
+              src="${imageUrl}"
+              alt="${title}"
+              loading="lazy"
+            >
 
-              :
+            `
 
-              `
+            :
 
-              <div
-                style="
-                  background:#0f172a;
-                  padding:40px 10px;
-                  text-align:center;
-                  border-radius:10px;
-                  margin-bottom:12px;
-                  color:#94a3b8;
-                "
-              >
-                🖼️ কোনো ছবি নেই
-              </div>
+            `
 
-              `
+            <div
+              style="
+                background:#0f172a;
+                padding:40px 10px;
+                text-align:center;
+                border-radius:10px;
+                margin-bottom:12px;
+                color:#94a3b8;
+              "
+            >
+              🖼️ কোনো ছবি নেই
+            </div>
+
+            `
 
           }
 
@@ -2605,7 +2662,10 @@ async function approveWork(id){
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "APPROVE WORK ERROR:",
+      error
+    );
 
 
     msg.textContent =
@@ -2618,10 +2678,10 @@ async function approveWork(id){
 
 
   msg.textContent =
-    "✅ কাজটি Approved হয়েছে এবং এখন প্রকাশ করা যাবে।";
+    "✅ কাজটি Approved হয়েছে।";
 
 
-  loadWorkPosts();
+  await loadWorkPosts();
 
 }
 
@@ -2660,7 +2720,10 @@ async function rejectWork(id){
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "REJECT WORK ERROR:",
+      error
+    );
 
 
     msg.textContent =
@@ -2676,7 +2739,7 @@ async function rejectWork(id){
     "✅ কাজটি Reject করা হয়েছে।";
 
 
-  loadWorkPosts();
+  await loadWorkPosts();
 
 }
 
@@ -2713,7 +2776,10 @@ async function deleteWork(id){
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "DELETE WORK ERROR:",
+      error
+    );
 
 
     msg.textContent =
@@ -2729,13 +2795,13 @@ async function deleteWork(id){
     "✅ কাজটি Delete হয়েছে।";
 
 
-  loadWorkPosts();
+  await loadWorkPosts();
 
 }
 
 
 /* =====================================================
-   SECURITY
+   ESCAPE HTML
 ===================================================== */
 
 function escapeHTML(value){
