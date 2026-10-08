@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard - মানবকল্যাণ যুব সংঘ</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#020617;
+  color:#fff;
+}
+
+/* HEADER */
+
+.header{
+  background:#0f172a;
+  border-bottom:1px solid #334155;
+  padding:25px 15px;
+  text-align:center;
+}
+
+.header h1{
+  margin:0;
+  font-size:27px;
+}
+
+.header p{
+  margin:8px 0 0;
+  color:#94a3b8;
+}
+
+/* CONTAINER */
+
+.container{
+  width:100%;
+  max-width:1050px;
+  margin:auto;
+  padding:25px 15px;
+}
+
+/* LOGIN */
+
+.login-box{
+  max-width:450px;
+  margin:40px auto;
+  padding:25px;
+  background:#0f172a;
+  border:1px solid #334155;
+  border-radius:18px;
+}
+
+.login-box h2{
+  text-align:center;
+  margin-top:0;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin:8px 0 15px;
+  border-radius:9px;
+  border:1px solid #475569;
+  background:#1e293b;
+  color:#fff;
+  font-size:15px;
+}
+
+button{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:9px;
+  background:#2563eb;
+  color:#fff;
+  font-weight:bold;
+  font-size:15px;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+.msg{
+  text-align:center;
+  margin-top:12px;
+  color:#fbbf24;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+  background:#0f172a;
+  border:1px solid #334155;
+  border-radius:18px;
+  padding:20px;
+}
+
+.dashboard-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.dashboard-top h2{
+  margin:0;
+}
+
+.dashboard-top p{
+  margin:6px 0 0;
+  color:#94a3b8;
+  font-size:13px;
+}
+
+.logout{
+  width:auto;
+  min-width:110px;
+  background:#dc2626;
+}
+
+/* ADMIN INFO */
+
+.admin-info{
+  background:#1e293b;
+  border:1px solid #334155;
+  border-radius:13px;
+  padding:15px;
+  margin-bottom:20px;
+}
+
+.admin-info strong{
+  color:#93c5fd;
+}
+
+/* MENU GRID */
+
+.menu{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+/* CARD */
+
+.card{
+  text-decoration:none;
+  color:#fff;
+  background:#1e293b;
+  border:1px solid #334155;
+  border-radius:15px;
+  padding:22px 15px;
+  min-height:150px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  background:#263449;
+  border-color:#64748b;
+}
+
+.icon{
+  font-size:38px;
+  margin-bottom:10px;
+}
+
+.title{
+  font-size:17px;
+  font-weight:bold;
+}
+
+.text{
+  color:#94a3b8;
+  font-size:12px;
+  margin-top:6px;
+  line-height:1.5;
+}
+
+/* SPECIAL CARD */
+
+.main-card{
+  background:#172554;
+  border-color:#1d4ed8;
+}
+
+/* FOOTER */
+
+.footer{
+  text-align:center;
+  color:#64748b;
+  font-size:12px;
+  margin-top:25px;
+  padding:15px;
+  border-top:1px solid #1e293b;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+  .menu{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:500px){
+
+  .container{
+    padding:15px 10px;
+  }
+
+  .dashboard{
+    padding:15px;
+  }
+
+  .dashboard-top{
+    flex-direction:column;
+    align-items:stretch;
+    text-align:center;
+  }
+
+  .logout{
+    width:100%;
+  }
+
+  .menu{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    min-height:125px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<div class="header">
+
+  <h1>🛠️ Admin Control Center</h1>
+
+  <p>
+    মানবকল্যাণ যুব সংঘ
+  </p>
+
+</div>
+
+
+
+<div class="container">
+
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<div id="loginBox" class="login-box">
+
+  <h2>🔐 Admin Login</h2>
+
+  <p style="
+    text-align:center;
+    color:#94a3b8;
+    font-size:13px;
+  ">
+    Dashboard-এ প্রবেশ করতে Admin Login করুন।
+  </p>
+
+
+  <input
+    type="email"
+    id="email"
+    placeholder="Admin Email"
+    autocomplete="email"
+  >
+
+
+  <input
+    type="password"
+    id="password"
+    placeholder="Password"
+    autocomplete="current-password"
+  >
+
+
+  <button onclick="login()">
+    🔐 Login
+  </button>
+
+
+  <div
+    id="loginMsg"
+    class="msg"
+  ></div>
+
+</div>
+
+
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<div
+  id="dashboard"
+  class="dashboard hidden"
+>
+
+
+  <div class="dashboard-top">
+
+    <div>
+
+      <h2>
+        📊 Admin Dashboard
+      </h2>
+
+      <p>
+        মানবকল্যাণ যুব সংঘের সকল বিভাগ নিয়ন্ত্রণ করুন।
+      </p>
+
+    </div>
+
+
+    <button
+      class="logout"
+      onclick="logout()"
+    >
+      🚪 Logout
+    </button>
+
+  </div>
+
+
+
+  <!-- ADMIN INFO -->
+
+  <div class="admin-info">
+
+    👤 <strong>Admin:</strong>
+
+    <span id="adminEmail">
+      Loading...
+    </span>
+
+    <br>
+
+    🟢 <strong>Status:</strong>
+    Logged in
+
+  </div>
+
+
+
+  <!-- =========================
+       CONTROL MENU
+  ========================= -->
+
+  <div class="menu">
+
+
+    <!-- CURRENT ADMIN PANEL -->
+
+    <a
+      href="admin.html"
+      class="card main-card"
+    >
+
+      <span class="icon">
+        🛠️
+      </span>
+
+      <span class="title">
+        Main Admin Panel
+      </span>
+
+      <span class="text">
+        সদস্য ও আবেদনসহ মূল Admin Control
+      </span>
+
+    </a>
+
+
+
+    <!-- PAYMENT -->
+
+    <a
+      href="payments.html"
+      class="card"
+    >
+
+      <span class="icon">
+        💰
+      </span>
+
+      <span class="title">
+        Payment
+      </span>
+
+      <span class="text">
+        bKash Payment যাচাই
+      </span>
+
+    </a>
+
+
+
+    <!-- BLOOD -->
+
+    <a
+      href="donors.html"
+      class="card"
+    >
+
+      <span class="icon">
+        🩸
+      </span>
+
+      <span class="title">
+        Blood Donors
+      </span>
+
+      <span class="text">
+        রক্তদাতাদের তালিকা
+      </span>
+
+    </a>
+
+
+
+    <!-- VOLUNTEERS -->
+
+    <a
+      href="volunteers.html"
+      class="card"
+    >
+
+      <span class="icon">
+        🤝
+      </span>
+
+      <span class="title">
+        Volunteers
+      </span>
+
+      <span class="text">
+        স্বেচ্ছাসেবকদের ব্যবস্থাপনা
+      </span>
+
+    </a>
+
+
+
+    <!-- MEMBERS -->
+
+    <a
+      href="admin.html#membersManagement"
+      class="card"
+    >
+
+      <span class="icon">
+        👥
+      </span>
+
+      <span class="title">
+        Members
+      </span>
+
+      <span class="text">
+        সদস্যদের তথ্য পরিচালনা
+      </span>
+
+    </a>
+
+
+
+    <!-- APPLICATIONS -->
+
+    <a
+      href="admin.html#applicationsManagement"
+      class="card"
+    >
+
+      <span class="icon">
+        📋
+      </span>
+
+      <span class="title">
+        Member Applications
+      </span>
+
+      <span class="text">
+        সদস্য হওয়ার আবেদন যাচাই
+      </span>
+
+    </a>
+
+
+
+    <!-- TRANSACTIONS -->
+
+    <a
+      href="transactions.html"
+      class="card"
+    >
+
+      <span class="icon">
+        💵
+      </span>
+
+      <span class="title">
+        Transactions
+      </span>
+
+      <span class="text">
+        আয়-ব্যয়ের হিসাব
+      </span>
+
+    </a>
+
+
+
+    <!-- REPORTS -->
+
+    <a
+      href="reports.html"
+      class="card"
+    >
+
+      <span class="icon">
+        📊
+      </span>
+
+      <span class="title">
+        Reports
+      </span>
+
+      <span class="text">
+        আর্থিক রিপোর্ট
+      </span>
+
+    </a>
+
+
+
+    <!-- WEBSITE -->
+
+    <a
+      href="index.html"
+      class="card"
+    >
+
+      <span class="icon">
+        🌐
+      </span>
+
+      <span class="title">
+        Website
+      </span>
+
+      <span class="text">
+        Public Website দেখুন
+      </span>
+
+    </a>
+
+
+
+  </div>
+
+
+
+  <div class="footer">
+
+    © মানবকল্যাণ যুব সংঘ
+    <br>
+    Admin Control Center
+
+  </div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+<script>
+
+/* =========================
+   SUPABASE
+========================= */
+
+const sb = supabase.createClient(
+  window.SUPABASE_URL,
+  window.SUPABASE_ANON_KEY
+);
+
+
+
+/* =========================
+   LOGIN
+========================= */
+
+async function login(){
+
+  const email =
+    document
+      .getElementById("email")
+      .value
+      .trim();
+
+
+  const password =
+    document
+      .getElementById("password")
+      .value;
+
+
+  const msg =
+    document
+      .getElementById("loginMsg");
+
+
+  if(!email || !password){
+
+    msg.textContent =
+      "⚠️ Email ও Password দিন।";
+
+    return;
+
+  }
+
+
+  msg.textContent =
+    "⏳ Login হচ্ছে...";
+
+
+  const {data,error} =
+    await sb.auth.signInWithPassword({
+
+      email:email,
+      password:password
+
+    });
+
+
+  if(error){
+
+    console.error(error);
+
+    msg.textContent =
+      "❌ Login ব্যর্থ। Email অথবা Password সঠিক কিনা দেখুন।";
+
+    return;
+
+  }
+
+
+  showDashboard(
+    data.user
+  );
+
+}
+
+
+
+/* =========================
+   CHECK LOGIN
+========================= */
+
+async function checkLogin(){
+
+  const {data,error} =
+    await sb.auth.getSession();
+
+
+  if(error){
+
+    console.error(error);
+
+    return;
+
+  }
+
+
+  if(data.session){
+
+    showDashboard(
+      data.session.user
+    );
+
+  }
+
+}
+
+
+
+/* =========================
+   SHOW DASHBOARD
+========================= */
+
+function showDashboard(user){
+
+  document
+    .getElementById("loginBox")
+    .classList
+    .add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList
+    .remove("hidden");
+
+
+  document
+    .getElementById("adminEmail")
+    .textContent =
+    user?.email || "Admin";
+
+}
+
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+async function logout(){
+
+  await sb.auth.signOut();
+
+
+  document
+    .getElementById("dashboard")
+    .classList
+    .add("hidden");
+
+
+  document
+    .getElementById("loginBox")
+    .classList
+    .remove("hidden");
+
+
+  document
+    .getElementById("email")
+    .value = "";
+
+
+  document
+    .getElementById("password")
+    .value = "";
+
+
+  document
+    .getElementById("loginMsg")
+    .textContent = "";
+
+}
+
+
+
+/* =========================
+   START
+========================= */
+
+checkLogin();
+
+</script>
+
+</body>
+</html>
