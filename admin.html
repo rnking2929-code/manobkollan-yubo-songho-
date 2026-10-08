@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Admin Dashboard - মানবকল্যাণ যুব সংঘ</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -46,7 +51,7 @@ body{
   padding:20px;
 }
 
-input,select{
+input,select,textarea{
   width:100%;
   padding:13px;
   margin:8px 0 12px;
@@ -54,6 +59,11 @@ input,select{
   border:1px solid #475569;
   background:#1e293b;
   color:#fff;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
 }
 
 button{
@@ -123,6 +133,7 @@ button{
   display:none;
 }
 
+
 /* =========================
    MEMBERS MANAGEMENT
 ========================= */
@@ -138,7 +149,8 @@ button{
 }
 
 .member-stats,
-.application-stats{
+.application-stats,
+.work-stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:10px;
@@ -146,6 +158,10 @@ button{
 }
 
 .application-stats{
+  grid-template-columns:repeat(4,1fr);
+}
+
+.work-stats{
   grid-template-columns:repeat(4,1fr);
 }
 
@@ -171,14 +187,16 @@ button{
 }
 
 .member-list,
-.application-list{
+.application-list,
+.work-list{
   display:grid;
   gap:10px;
   margin-top:15px;
 }
 
 .member,
-.application{
+.application,
+.work-card{
   background:#1e293b;
   border:1px solid #334155;
   border-radius:11px;
@@ -186,14 +204,16 @@ button{
 }
 
 .member-name,
-.application-name{
+.application-name,
+.work-title{
   font-size:17px;
   font-weight:bold;
   margin-bottom:7px;
 }
 
 .member-info,
-.application-info{
+.application-info,
+.work-info{
   color:#cbd5e1;
   font-size:13px;
   line-height:1.8;
@@ -225,14 +245,16 @@ button{
 }
 
 .member-actions,
-.application-actions{
+.application-actions,
+.work-actions{
   display:flex;
   gap:7px;
   margin-top:10px;
 }
 
 .member-actions button,
-.application-actions button{
+.application-actions button,
+.work-actions button{
   flex:1;
   padding:9px;
 }
@@ -258,13 +280,15 @@ button{
   background:#d97706;
 }
 
-.application-reason{
+.application-reason,
+.work-description{
   margin-top:8px;
   padding:10px;
   background:#0f172a;
   border-radius:8px;
   color:#cbd5e1;
 }
+
 
 /* =========================
    APPLICATION MANAGEMENT
@@ -285,12 +309,65 @@ button{
   margin-bottom:15px;
 }
 
+
+/* =========================
+   WORK MANAGEMENT
+========================= */
+
+.work-box{
+  margin-top:30px;
+  padding-top:25px;
+  border-top:1px solid #334155;
+}
+
+.work-box h3{
+  margin-top:0;
+}
+
+.work-image{
+  width:100%;
+  max-height:320px;
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:12px;
+  display:block;
+  background:#0f172a;
+}
+
+.work-meta{
+  color:#cbd5e1;
+  font-size:13px;
+  line-height:1.9;
+}
+
+.work-description{
+  line-height:1.7;
+}
+
+.work-actions{
+  margin-top:12px;
+}
+
+.work-actions button{
+  min-height:42px;
+}
+
+.work-status-message{
+  margin-top:10px;
+  color:#fbbf24;
+  text-align:center;
+}
+
+
 @media(max-width:650px){
 
-  .application-stats{
+  .application-stats,
+  .work-stats{
     grid-template-columns:repeat(2,1fr);
   }
+
 }
+
 
 @media(max-width:500px){
 
@@ -299,310 +376,650 @@ button{
   }
 
   .member-stats,
-  .application-stats{
+  .application-stats,
+  .work-stats{
     grid-template-columns:1fr;
   }
 
   .member-actions,
-  .application-actions{
+  .application-actions,
+  .work-actions{
     flex-direction:column;
   }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
+
 <div class="header">
+
   <h1>🛠️ Admin Panel</h1>
-  <p>মানবকল্যাণ যুব সংঘ</p>
+
+  <p>
+    মানবকল্যাণ যুব সংঘ
+  </p>
+
 </div>
+
 
 <div class="container">
 
-  <!-- LOGIN -->
-  <div id="loginBox" class="login-box">
 
-    <h2>🔐 Admin Login</h2>
+<!-- =========================
+     LOGIN
+========================= -->
 
-    <input
-      type="email"
-      id="email"
-      placeholder="Admin Email"
-      autocomplete="email"
+<div
+  id="loginBox"
+  class="login-box"
+>
+
+  <h2>🔐 Admin Login</h2>
+
+  <input
+    type="email"
+    id="email"
+    placeholder="Admin Email"
+    autocomplete="email"
+  >
+
+  <input
+    type="password"
+    id="password"
+    placeholder="Password"
+    autocomplete="current-password"
+  >
+
+  <button onclick="login()">
+    🔐 Login
+  </button>
+
+  <div
+    id="loginMsg"
+    class="msg"
+  ></div>
+
+</div>
+
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<div
+  id="dashboard"
+  class="dashboard hidden"
+>
+
+  <h2>📊 Admin Dashboard</h2>
+
+  <p style="color:#94a3b8">
+    প্রয়োজনীয় বিভাগ নির্বাচন করুন।
+  </p>
+
+
+  <!-- =========================
+       MENU
+  ========================= -->
+
+  <div class="menu">
+
+
+    <a href="payments.html">
+
+      <span class="icon">💰</span>
+
+      <span class="menu-title">
+        Payment
+      </span>
+
+      <span class="menu-text">
+        bKash Payment যাচাই
+      </span>
+
+    </a>
+
+
+    <a href="donors.html">
+
+      <span class="icon">🩸</span>
+
+      <span class="menu-title">
+        Blood Donors
+      </span>
+
+      <span class="menu-text">
+        রক্তদাতার তালিকা
+      </span>
+
+    </a>
+
+
+    <a href="volunteers.html">
+
+      <span class="icon">🤝</span>
+
+      <span class="menu-title">
+        Volunteers
+      </span>
+
+      <span class="menu-text">
+        স্বেচ্ছাসেবক তালিকা
+      </span>
+
+    </a>
+
+
+    <a
+      href="#membersManagement"
+      onclick="openMembers()"
     >
 
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-      autocomplete="current-password"
+      <span class="icon">👥</span>
+
+      <span class="menu-title">
+        Members
+      </span>
+
+      <span class="menu-text">
+        সদস্য ব্যবস্থাপনা
+      </span>
+
+    </a>
+
+
+    <a
+      href="#applicationsManagement"
+      onclick="openApplications()"
     >
 
-    <button onclick="login()">🔐 Login</button>
+      <span class="icon">📋</span>
 
-    <div id="loginMsg" class="msg"></div>
+      <span class="menu-title">
+        Member Applications
+      </span>
+
+      <span class="menu-text">
+        সদস্য হওয়ার আবেদন
+      </span>
+
+    </a>
+
+
+    <!-- NEW WORK MANAGEMENT -->
+
+    <a
+      href="#workManagement"
+      onclick="openWorkManagement()"
+    >
+
+      <span class="icon">📸</span>
+
+      <span class="menu-title">
+        Our Work
+      </span>
+
+      <span class="menu-text">
+        জমা দেওয়া কাজ অনুমোদন
+      </span>
+
+    </a>
+
+
+    <a href="transactions.html">
+
+      <span class="icon">💵</span>
+
+      <span class="menu-title">
+        Transactions
+      </span>
+
+      <span class="menu-text">
+        আয়-ব্যয়ের হিসাব
+      </span>
+
+    </a>
+
+
+    <a href="reports.html">
+
+      <span class="icon">📊</span>
+
+      <span class="menu-title">
+        Reports
+      </span>
+
+      <span class="menu-text">
+        আর্থিক রিপোর্ট
+      </span>
+
+    </a>
+
 
   </div>
 
 
-  <!-- DASHBOARD -->
-  <div id="dashboard" class="dashboard hidden">
+  <!-- =========================
+       MEMBERS MANAGEMENT
+  ========================= -->
 
-    <h2>📊 Admin Dashboard</h2>
+  <div
+    id="membersManagement"
+    class="members-box hidden"
+  >
 
-    <p style="color:#94a3b8">
-      প্রয়োজনীয় বিভাগ নির্বাচন করুন।
+    <h3>
+      👥 Members Management
+    </h3>
+
+    <p style="color:#94a3b8;font-size:13px">
+      এখান থেকেই সংগঠনের সদস্যদের তথ্য পরিচালনা করুন।
     </p>
 
-    <div class="menu">
 
-      <a href="payments.html">
-        <span class="icon">💰</span>
-        <span class="menu-title">Payment</span>
-        <span class="menu-text">bKash Payment যাচাই</span>
-      </a>
+    <div class="member-stats">
 
-      <a href="donors.html">
-        <span class="icon">🩸</span>
-        <span class="menu-title">Blood Donors</span>
-        <span class="menu-text">রক্তদাতার তালিকা</span>
-      </a>
+      <div class="stat">
 
-      <a href="volunteers.html">
-        <span class="icon">🤝</span>
-        <span class="menu-title">Volunteers</span>
-        <span class="menu-text">স্বেচ্ছাসেবক তালিকা</span>
-      </a>
+        <span
+          id="totalMembers"
+          class="stat-number"
+        >
+          0
+        </span>
 
-      <a href="#membersManagement" onclick="openMembers()">
-        <span class="icon">👥</span>
-        <span class="menu-title">Members</span>
-        <span class="menu-text">সদস্য ব্যবস্থাপনা</span>
-      </a>
+        <span class="stat-label">
+          মোট সদস্য
+        </span>
 
-      <a href="#applicationsManagement" onclick="openApplications()">
-        <span class="icon">📋</span>
-        <span class="menu-title">Member Applications</span>
-        <span class="menu-text">সদস্য হওয়ার আবেদন</span>
-      </a>
+      </div>
 
-      <a href="transactions.html">
-        <span class="icon">💵</span>
-        <span class="menu-title">Transactions</span>
-        <span class="menu-text">আয়-ব্যয়ের হিসাব</span>
-      </a>
 
-      <a href="reports.html">
-        <span class="icon">📊</span>
-        <span class="menu-title">Reports</span>
-        <span class="menu-text">আর্থিক রিপোর্ট</span>
-      </a>
+      <div class="stat">
+
+        <span
+          id="activeMembers"
+          class="stat-number"
+        >
+          0
+        </span>
+
+        <span class="stat-label">
+          Active
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span
+          id="inactiveMembers"
+          class="stat-number"
+        >
+          0
+        </span>
+
+        <span class="stat-label">
+          Inactive
+        </span>
+
+      </div>
 
     </div>
 
 
-    <!-- =========================
-         MEMBERS MANAGEMENT
-    ========================= -->
-
-    <div
-      id="membersManagement"
-      class="members-box hidden"
+    <input
+      type="hidden"
+      id="memberId"
     >
 
-      <h3>👥 Members Management</h3>
 
-      <p style="color:#94a3b8;font-size:13px">
-        এখান থেকেই সংগঠনের সদস্যদের তথ্য পরিচালনা করুন।
-      </p>
+    <label>
+      সদস্যের নাম
+    </label>
 
-      <div class="member-stats">
-
-        <div class="stat">
-          <span id="totalMembers" class="stat-number">0</span>
-          <span class="stat-label">মোট সদস্য</span>
-        </div>
-
-        <div class="stat">
-          <span id="activeMembers" class="stat-number">0</span>
-          <span class="stat-label">Active</span>
-        </div>
-
-        <div class="stat">
-          <span id="inactiveMembers" class="stat-number">0</span>
-          <span class="stat-label">Inactive</span>
-        </div>
-
-      </div>
-
-      <input type="hidden" id="memberId">
-
-      <label>সদস্যের নাম</label>
-
-      <input
-        type="text"
-        id="memberName"
-        placeholder="সদস্যের নাম"
-      >
-
-      <label>পদ / ভূমিকা</label>
-
-      <input
-        type="text"
-        id="memberRole"
-        value="সদস্য"
-        placeholder="যেমন: সদস্য"
-      >
-
-      <label>এলাকা</label>
-
-      <input
-        type="text"
-        id="memberArea"
-        placeholder="এলাকার নাম"
-      >
-
-      <label>Status</label>
-
-      <select id="memberStatus">
-        <option value="active">Active</option>
-        <option value="inactive">Inactive</option>
-      </select>
-
-      <button
-        id="memberSaveBtn"
-        onclick="saveMember()"
-      >
-        ➕ সদস্য যোগ করুন
-      </button>
-
-      <button
-        id="memberCancelBtn"
-        class="cancel-btn"
-        onclick="cancelMemberEdit()"
-      >
-        বাতিল
-      </button>
-
-      <div id="memberMsg" class="msg"></div>
-
-      <div id="memberList" class="member-list">
-        <div style="color:#94a3b8;text-align:center">
-          সদস্যদের তালিকা লোড হচ্ছে...
-        </div>
-      </div>
-
-    </div>
-
-
-    <!-- =========================
-         MEMBER APPLICATIONS
-    ========================= -->
-
-    <div
-      id="applicationsManagement"
-      class="applications-box hidden"
+    <input
+      type="text"
+      id="memberName"
+      placeholder="সদস্যের নাম"
     >
 
-      <h3>📋 Member Applications</h3>
 
-      <p style="color:#94a3b8;font-size:13px">
-        এখানে নতুন সদস্য হওয়ার আবেদনগুলো যাচাই ও পরিচালনা করুন।
-      </p>
+    <label>
+      পদ / ভূমিকা
+    </label>
 
-
-      <!-- APPLICATION STATISTICS -->
-
-      <div class="application-stats">
-
-        <div class="stat">
-          <span
-            id="totalApplications"
-            class="stat-number"
-          >0</span>
-
-          <span class="stat-label">
-            মোট আবেদন
-          </span>
-        </div>
+    <input
+      type="text"
+      id="memberRole"
+      value="সদস্য"
+      placeholder="যেমন: সদস্য"
+    >
 
 
-        <div class="stat">
-          <span
-            id="pendingApplications"
-            class="stat-number"
-          >0</span>
+    <label>
+      এলাকা
+    </label>
 
-          <span class="stat-label">
-            Pending
-          </span>
-        </div>
-
-
-        <div class="stat">
-          <span
-            id="approvedApplications"
-            class="stat-number"
-          >0</span>
-
-          <span class="stat-label">
-            Approved
-          </span>
-        </div>
+    <input
+      type="text"
+      id="memberArea"
+      placeholder="এলাকার নাম"
+    >
 
 
-        <div class="stat">
-          <span
-            id="rejectedApplications"
-            class="stat-number"
-          >0</span>
+    <label>
+      Status
+    </label>
 
-          <span class="stat-label">
-            Rejected
-          </span>
-        </div>
+    <select id="memberStatus">
 
-      </div>
+      <option value="active">
+        Active
+      </option>
 
+      <option value="inactive">
+        Inactive
+      </option>
 
-      <button
-        class="refresh-btn"
-        onclick="loadApplications()"
-      >
-        🔄 আবেদন তালিকা Refresh
-      </button>
+    </select>
 
 
-      <div
-        id="applicationMsg"
-        class="msg"
-      ></div>
-
-
-      <div
-        id="applicationList"
-        class="application-list"
-      >
-        <div style="color:#94a3b8;text-align:center">
-          আবেদনগুলো লোড হচ্ছে...
-        </div>
-      </div>
-
-    </div>
-
-
-    <button class="logout" onclick="logout()">
-      🚪 Logout
+    <button
+      id="memberSaveBtn"
+      onclick="saveMember()"
+    >
+      ➕ সদস্য যোগ করুন
     </button>
 
+
+    <button
+      id="memberCancelBtn"
+      class="cancel-btn"
+      onclick="cancelMemberEdit()"
+    >
+      বাতিল
+    </button>
+
+
+    <div
+      id="memberMsg"
+      class="msg"
+    ></div>
+
+
+    <div
+      id="memberList"
+      class="member-list"
+    >
+
+      <div style="color:#94a3b8;text-align:center">
+        সদস্যদের তালিকা লোড হচ্ছে...
+      </div>
+
+    </div>
+
   </div>
+
+
+  <!-- =========================
+       MEMBER APPLICATIONS
+  ========================= -->
+
+  <div
+    id="applicationsManagement"
+    class="applications-box hidden"
+  >
+
+    <h3>
+      📋 Member Applications
+    </h3>
+
+    <p style="color:#94a3b8;font-size:13px">
+      এখানে নতুন সদস্য হওয়ার আবেদনগুলো যাচাই ও পরিচালনা করুন।
+    </p>
+
+
+    <div class="application-stats">
+
+
+      <div class="stat">
+
+        <span
+          id="totalApplications"
+          class="stat-number"
+        >
+          0
+        </span>
+
+        <span class="stat-label">
+          মোট আবেদন
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span
+          id="pendingApplications"
+          class="stat-number"
+        >
+          0
+        </span>
+
+        <span class="stat-label">
+          Pending
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span
+          id="approvedApplications"
+          class="stat-number"
+        >
+          0
+        </span>
+
+        <span class="stat-label">
+          Approved
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span
+          id="rejectedApplications"
+          class="stat-number"
+        >
+          0
+        </span>
+
+        <span class="stat-label">
+          Rejected
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="refresh-btn"
+      onclick="loadApplications()"
+    >
+      🔄 আবেদন তালিকা Refresh
+    </button>
+
+
+    <div
+      id="applicationMsg"
+      class="msg"
+    ></div>
+
+
+    <div
+      id="applicationList"
+      class="application-list"
+    >
+
+      <div style="color:#94a3b8;text-align:center">
+        আবেদনগুলো লোড হচ্ছে...
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       OUR WORK MANAGEMENT
+  ========================= -->
+
+  <div
+    id="workManagement"
+    class="work-box hidden"
+  >
+
+    <h3>
+      📸 আমাদের করা কাজ — Management
+    </h3>
+
+    <p style="color:#94a3b8;font-size:13px">
+      ওয়েবসাইটে জমা দেওয়া কাজগুলো এখান থেকে যাচাই করে প্রকাশ করুন।
+    </p>
+
+
+    <!-- WORK STATISTICS -->
+
+    <div class="work-stats">
+
+
+      <div class="stat">
+
+        <span
+          id="totalWorks"
+          class="stat-number"
+        >
+          0
+        </span>
+
+        <span class="stat-label">
+          মোট কাজ
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span
+          id="pendingWorks"
+          class="stat-number"
+        >
+          0
+        </span>
+
+        <span class="stat-label">
+          Pending
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span
+          id="approvedWorks"
+          class="stat-number"
+        >
+          0
+        </span>
+
+        <span class="stat-label">
+          Approved
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span
+          id="rejectedWorks"
+          class="stat-number"
+        >
+          0
+        </span>
+
+        <span class="stat-label">
+          Rejected
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+    <button
+      class="refresh-btn"
+      onclick="loadWorkPosts()"
+    >
+      🔄 কাজের তালিকা Refresh
+    </button>
+
+
+    <div
+      id="workMsg"
+      class="work-status-message"
+    ></div>
+
+
+    <div
+      id="workList"
+      class="work-list"
+    >
+
+      <div style="color:#94a3b8;text-align:center">
+        কাজগুলো লোড হচ্ছে...
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- LOGOUT -->
+
+  <button
+    class="logout"
+    onclick="logout()"
+  >
+    🚪 Logout
+  </button>
+
+
+</div>
 
 </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="config.js"></script>
+
 
 <script>
 
@@ -612,20 +1029,28 @@ const sb = supabase.createClient(
 );
 
 
-/* =========================
+/* =====================================================
    LOGIN
-========================= */
+===================================================== */
 
 async function login(){
 
   const email =
-    document.getElementById("email").value.trim();
+    document
+      .getElementById("email")
+      .value
+      .trim();
+
 
   const password =
-    document.getElementById("password").value;
+    document
+      .getElementById("password")
+      .value;
+
 
   const msg =
     document.getElementById("loginMsg");
+
 
   if(!email || !password){
 
@@ -633,7 +1058,9 @@ async function login(){
       "⚠️ Email ও Password দিন।";
 
     return;
+
   }
+
 
   msg.textContent =
     "⏳ Login হচ্ছে...";
@@ -643,6 +1070,7 @@ async function login(){
     await sb.auth.signInWithPassword({
 
       email:email,
+
       password:password
 
     });
@@ -656,6 +1084,7 @@ async function login(){
       "❌ Login ব্যর্থ। Email বা Password সঠিক কিনা দেখুন।";
 
     return;
+
   }
 
 
@@ -664,14 +1093,15 @@ async function login(){
 }
 
 
-/* =========================
+/* =====================================================
    CHECK LOGIN
-========================= */
+===================================================== */
 
 async function checkLogin(){
 
   const {data} =
     await sb.auth.getSession();
+
 
   if(data.session){
 
@@ -682,9 +1112,9 @@ async function checkLogin(){
 }
 
 
-/* =========================
+/* =====================================================
    SHOW DASHBOARD
-========================= */
+===================================================== */
 
 function showDashboard(){
 
@@ -692,6 +1122,7 @@ function showDashboard(){
     .getElementById("loginBox")
     .classList.add("hidden");
 
+
   document
     .getElementById("dashboard")
     .classList.remove("hidden");
@@ -699,40 +1130,47 @@ function showDashboard(){
 }
 
 
-/* =========================
+/* =====================================================
    LOGOUT
-========================= */
+===================================================== */
 
 async function logout(){
 
   await sb.auth.signOut();
 
+
   document
     .getElementById("dashboard")
     .classList.add("hidden");
+
 
   document
     .getElementById("loginBox")
     .classList.remove("hidden");
 
-  document.getElementById("email").value="";
-  document.getElementById("password").value="";
+
+  document.getElementById("email").value = "";
+
+  document.getElementById("password").value = "";
 
 }
 
 
-/* =========================
+/* =====================================================
    MEMBERS
-========================= */
+===================================================== */
 
 function openMembers(){
 
   const box =
     document.getElementById("membersManagement");
 
+
   box.classList.remove("hidden");
 
+
   loadMembers();
+
 
   setTimeout(() => {
 
@@ -745,9 +1183,9 @@ function openMembers(){
 }
 
 
-/* =========================
+/* =====================================================
    LOAD MEMBERS
-========================= */
+===================================================== */
 
 async function loadMembers(){
 
@@ -772,6 +1210,7 @@ async function loadMembers(){
 
     console.error(error);
 
+
     list.innerHTML =
       '<div style="color:#fca5a5;text-align:center">❌ সদস্যদের তথ্য লোড করা যায়নি।</div>';
 
@@ -783,6 +1222,7 @@ async function loadMembers(){
   const total =
     data ? data.length : 0;
 
+
   const active =
     data
       ? data.filter(
@@ -790,17 +1230,23 @@ async function loadMembers(){
         ).length
       : 0;
 
+
   const inactive =
     total - active;
 
 
-  document.getElementById("totalMembers")
+  document
+    .getElementById("totalMembers")
     .textContent = total;
 
-  document.getElementById("activeMembers")
+
+  document
+    .getElementById("activeMembers")
     .textContent = active;
 
-  document.getElementById("inactiveMembers")
+
+  document
+    .getElementById("inactiveMembers")
     .textContent = inactive;
 
 
@@ -820,10 +1266,12 @@ async function loadMembers(){
       const name =
         escapeHTML(member.name);
 
+
       const role =
         escapeHTML(
           member.role || "সদস্য"
         );
+
 
       const area =
         escapeHTML(
@@ -869,6 +1317,7 @@ async function loadMembers(){
               ✏️ Edit
             </button>
 
+
             <button
               class="delete-btn"
               onclick="deleteMember('${member.id}')"
@@ -887,34 +1336,38 @@ async function loadMembers(){
 }
 
 
-/* =========================
+/* =====================================================
    SAVE MEMBER
-========================= */
+===================================================== */
 
 async function saveMember(){
 
   const id =
     document
       .getElementById("memberId")
-      .value.trim();
+      .value
+      .trim();
 
 
   const name =
     document
       .getElementById("memberName")
-      .value.trim();
+      .value
+      .trim();
 
 
   const role =
     document
       .getElementById("memberRole")
-      .value.trim();
+      .value
+      .trim();
 
 
   const area =
     document
       .getElementById("memberArea")
-      .value.trim();
+      .value
+      .trim();
 
 
   const status =
@@ -1000,9 +1453,9 @@ async function saveMember(){
 }
 
 
-/* =========================
+/* =====================================================
    EDIT MEMBER
-========================= */
+===================================================== */
 
 async function editMember(id){
 
@@ -1018,50 +1471,63 @@ async function editMember(id){
 
     console.error(error);
 
-    document.getElementById("memberMsg")
+    document
+      .getElementById("memberMsg")
       .textContent =
-      "❌ সদস্যের তথ্য পাওয়া যায়নি।";
+      "❌ সদস্যের তথ্য পাওয়া যায়নি。";
 
     return;
 
   }
 
 
-  document.getElementById("memberId")
+  document
+    .getElementById("memberId")
     .value = data.id;
 
-  document.getElementById("memberName")
+
+  document
+    .getElementById("memberName")
     .value = data.name || "";
 
-  document.getElementById("memberRole")
+
+  document
+    .getElementById("memberRole")
     .value = data.role || "সদস্য";
 
-  document.getElementById("memberArea")
+
+  document
+    .getElementById("memberArea")
     .value = data.area || "";
 
-  document.getElementById("memberStatus")
+
+  document
+    .getElementById("memberStatus")
     .value = data.status || "active";
 
 
-  document.getElementById("memberSaveBtn")
+  document
+    .getElementById("memberSaveBtn")
     .textContent =
     "💾 তথ্য আপডেট করুন";
 
 
-  document.getElementById("memberCancelBtn")
+  document
+    .getElementById("memberCancelBtn")
     .style.display =
     "block";
 
 
-  document.getElementById("memberName")
+  document
+    .getElementById("memberName")
     .focus();
 
 }
 
 
-/* =========================
+/* =====================================================
    DELETE MEMBER
-========================= */
+===================================================== */
 
 async function deleteMember(id){
 
@@ -1085,7 +1551,9 @@ async function deleteMember(id){
 
     console.error(error);
 
-    document.getElementById("memberMsg")
+
+    document
+      .getElementById("memberMsg")
       .textContent =
       "❌ সদস্য Delete করা যায়নি।";
 
@@ -1094,7 +1562,8 @@ async function deleteMember(id){
   }
 
 
-  document.getElementById("memberMsg")
+  document
+    .getElementById("memberMsg")
     .textContent =
     "✅ সদস্য Delete হয়েছে।";
 
@@ -1104,71 +1573,82 @@ async function deleteMember(id){
 }
 
 
-/* =========================
-   CLEAR FORM
-========================= */
+/* =====================================================
+   CLEAR MEMBER FORM
+===================================================== */
 
 function clearMemberForm(){
 
-  document.getElementById("memberId")
+  document
+    .getElementById("memberId")
     .value = "";
 
-  document.getElementById("memberName")
+
+  document
+    .getElementById("memberName")
     .value = "";
 
-  document.getElementById("memberRole")
+
+  document
+    .getElementById("memberRole")
     .value = "সদস্য";
 
-  document.getElementById("memberArea")
+
+  document
+    .getElementById("memberArea")
     .value = "";
 
-  document.getElementById("memberStatus")
+
+  document
+    .getElementById("memberStatus")
     .value = "active";
 
 
-  document.getElementById("memberSaveBtn")
+  document
+    .getElementById("memberSaveBtn")
     .textContent =
     "➕ সদস্য যোগ করুন";
 
 
-  document.getElementById("memberCancelBtn")
+  document
+    .getElementById("memberCancelBtn")
     .style.display =
     "none";
 
 }
 
 
-/* =========================
-   CANCEL EDIT
-========================= */
+/* =====================================================
+   CANCEL MEMBER EDIT
+===================================================== */
 
 function cancelMemberEdit(){
 
   clearMemberForm();
 
-  document.getElementById("memberMsg")
+
+  document
+    .getElementById("memberMsg")
     .textContent = "";
 
 }
 
 
 /* =====================================================
-   MEMBER APPLICATION MANAGEMENT
+   MEMBER APPLICATIONS
 ===================================================== */
-
-
-/* =========================
-   OPEN APPLICATIONS
-========================= */
 
 function openApplications(){
 
   const box =
     document.getElementById("applicationsManagement");
 
+
   box.classList.remove("hidden");
 
+
   loadApplications();
+
 
   setTimeout(() => {
 
@@ -1181,14 +1661,15 @@ function openApplications(){
 }
 
 
-/* =========================
+/* =====================================================
    LOAD APPLICATIONS
-========================= */
+===================================================== */
 
 async function loadApplications(){
 
   const list =
     document.getElementById("applicationList");
+
 
   const msg =
     document.getElementById("applicationMsg");
@@ -1196,6 +1677,7 @@ async function loadApplications(){
 
   list.innerHTML =
     '<div style="color:#94a3b8;text-align:center">⏳ আবেদনগুলো লোড হচ্ছে...</div>';
+
 
   msg.textContent = "";
 
@@ -1213,11 +1695,14 @@ async function loadApplications(){
 
     console.error(error);
 
+
     list.innerHTML =
       '<div style="color:#fca5a5;text-align:center">❌ আবেদনগুলো লোড করা যায়নি।</div>';
 
+
     msg.textContent =
       "⚠️ Admin login এবং Supabase permission পরীক্ষা করুন।";
+
 
     return;
 
@@ -1250,16 +1735,23 @@ async function loadApplications(){
     ).length;
 
 
-  document.getElementById("totalApplications")
+  document
+    .getElementById("totalApplications")
     .textContent = total;
 
-  document.getElementById("pendingApplications")
+
+  document
+    .getElementById("pendingApplications")
     .textContent = pending;
 
-  document.getElementById("approvedApplications")
+
+  document
+    .getElementById("approvedApplications")
     .textContent = approved;
 
-  document.getElementById("rejectedApplications")
+
+  document
+    .getElementById("rejectedApplications")
     .textContent = rejected;
 
 
@@ -1279,32 +1771,50 @@ async function loadApplications(){
       const name =
         escapeHTML(application.name);
 
+
       const phone =
-        escapeHTML(application.phone || "নম্বর নেই");
+        escapeHTML(
+          application.phone || "নম্বর নেই"
+        );
+
 
       const area =
-        escapeHTML(application.area || "উল্লেখ নেই");
+        escapeHTML(
+          application.area || "উল্লেখ নেই"
+        );
+
 
       const age =
-        escapeHTML(application.age || "উল্লেখ নেই");
+        escapeHTML(
+          application.age || "উল্লেখ নেই"
+        );
+
 
       const profession =
-        escapeHTML(application.profession || "উল্লেখ নেই");
+        escapeHTML(
+          application.profession || "উল্লেখ নেই"
+        );
+
 
       const reason =
-        escapeHTML(application.reason || "কোনো কারণ দেওয়া হয়নি");
+        escapeHTML(
+          application.reason || "কোনো কারণ দেওয়া হয়নি"
+        );
+
 
       const status =
         application.status || "pending";
 
 
       let statusText = "Pending";
+
       let statusClass = "pending";
 
 
       if(status === "approved"){
 
         statusText = "Approved";
+
         statusClass = "";
 
       }
@@ -1313,6 +1823,7 @@ async function loadApplications(){
       if(status === "rejected"){
 
         statusText = "Rejected";
+
         statusClass = "rejected";
 
       }
@@ -1397,6 +1908,7 @@ async function loadApplications(){
                 ✅ Approve
               </button>
 
+
               <button
                 class="reject-btn"
                 onclick="rejectApplication('${application.id}')"
@@ -1431,9 +1943,9 @@ async function loadApplications(){
 }
 
 
-/* =========================
+/* =====================================================
    APPROVE APPLICATION
-========================= */
+===================================================== */
 
 async function approveApplication(id){
 
@@ -1454,11 +1966,10 @@ async function approveApplication(id){
     "⏳ Approve করা হচ্ছে...";
 
 
-  /*
-    First get application
-  */
-
-  const {data:application,error:fetchError} =
+  const {
+    data:application,
+    error:fetchError
+  } =
     await sb
       .from("member_applications")
       .select("*")
@@ -1470,8 +1981,10 @@ async function approveApplication(id){
 
     console.error(fetchError);
 
+
     msg.textContent =
       "❌ আবেদনকারীর তথ্য পাওয়া যায়নি।";
+
 
     return;
 
@@ -1483,16 +1996,13 @@ async function approveApplication(id){
     msg.textContent =
       "ℹ️ এই আবেদনটি আগেই Approved হয়েছে।";
 
+
     loadApplications();
 
     return;
 
   }
 
-
-  /*
-    Add applicant to members
-  */
 
   const {error:memberError} =
     await sb
@@ -1514,17 +2024,15 @@ async function approveApplication(id){
 
     console.error(memberError);
 
+
     msg.textContent =
       "❌ সদস্য হিসেবে যোগ করা যায়নি।";
+
 
     return;
 
   }
 
-
-  /*
-    Update application status
-  */
 
   const {error:updateError} =
     await sb
@@ -1539,10 +2047,13 @@ async function approveApplication(id){
 
     console.error(updateError);
 
+
     msg.textContent =
       "⚠️ সদস্য যোগ হয়েছে, কিন্তু আবেদনটির Status আপডেট হয়নি।";
 
+
     loadApplications();
+
     loadMembers();
 
     return;
@@ -1555,14 +2066,15 @@ async function approveApplication(id){
 
 
   loadApplications();
+
   loadMembers();
 
 }
 
 
-/* =========================
+/* =====================================================
    REJECT APPLICATION
-========================= */
+===================================================== */
 
 async function rejectApplication(id){
 
@@ -1596,8 +2108,10 @@ async function rejectApplication(id){
 
     console.error(error);
 
+
     msg.textContent =
       "❌ আবেদন Reject করা যায়নি।";
+
 
     return;
 
@@ -1613,9 +2127,9 @@ async function rejectApplication(id){
 }
 
 
-/* =========================
+/* =====================================================
    DELETE APPLICATION
-========================= */
+===================================================== */
 
 async function deleteApplication(id){
 
@@ -1647,8 +2161,10 @@ async function deleteApplication(id){
 
     console.error(error);
 
+
     msg.textContent =
       "❌ আবেদন Delete করা যায়নি।";
+
 
     return;
 
@@ -1664,25 +2180,584 @@ async function deleteApplication(id){
 }
 
 
+/* =====================================================
+   OUR WORK MANAGEMENT
+===================================================== */
+
+
 /* =========================
-   SECURITY
+   OPEN WORK MANAGEMENT
 ========================= */
 
-function escapeHTML(value){
+function openWorkManagement(){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  const box =
+    document.getElementById("workManagement");
+
+
+  box.classList.remove("hidden");
+
+
+  loadWorkPosts();
+
+
+  setTimeout(() => {
+
+    box.scrollIntoView({
+      behavior:"smooth"
+    });
+
+  },100);
 
 }
 
 
 /* =========================
-   START
+   LOAD WORK POSTS
 ========================= */
+
+async function loadWorkPosts(){
+
+  const list =
+    document.getElementById("workList");
+
+
+  const msg =
+    document.getElementById("workMsg");
+
+
+  list.innerHTML =
+    '<div style="color:#94a3b8;text-align:center">⏳ কাজগুলো লোড হচ্ছে...</div>';
+
+
+  msg.textContent = "";
+
+
+  const {data,error} =
+    await sb
+      .from("work_posts")
+      .select("*")
+      .order("created_at",{
+        ascending:false
+      });
+
+
+  if(error){
+
+    console.error(error);
+
+
+    list.innerHTML =
+      '<div style="color:#fca5a5;text-align:center">❌ কাজের তালিকা লোড করা যায়নি।</div>';
+
+
+    msg.textContent =
+      "⚠️ Supabase permission পরীক্ষা করুন।";
+
+
+    return;
+
+  }
+
+
+  const works =
+    data || [];
+
+
+  /* =========================
+     STATISTICS
+  ========================= */
+
+  const total =
+    works.length;
+
+
+  const pending =
+    works.filter(
+      w => w.status === "pending"
+    ).length;
+
+
+  const approved =
+    works.filter(
+      w => w.status === "approved"
+    ).length;
+
+
+  const rejected =
+    works.filter(
+      w => w.status === "rejected"
+    ).length;
+
+
+  document
+    .getElementById("totalWorks")
+    .textContent = total;
+
+
+  document
+    .getElementById("pendingWorks")
+    .textContent = pending;
+
+
+  document
+    .getElementById("approvedWorks")
+    .textContent = approved;
+
+
+  document
+    .getElementById("rejectedWorks")
+    .textContent = rejected;
+
+
+  if(works.length === 0){
+
+    list.innerHTML =
+      '<div style="color:#94a3b8;text-align:center;padding:20px">এখনও কোনো কাজ জমা দেওয়া হয়নি।</div>';
+
+    return;
+
+  }
+
+
+  /* =========================
+     WORK CARDS
+  ========================= */
+
+  list.innerHTML =
+    works.map(work => {
+
+
+      const title =
+        escapeHTML(
+          work.title || "কাজের নাম নেই"
+        );
+
+
+      const location =
+        escapeHTML(
+          work.location || "স্থান উল্লেখ নেই"
+        );
+
+
+      const description =
+        escapeHTML(
+          work.description || "বিস্তারিত দেওয়া হয়নি"
+        );
+
+
+      const status =
+        work.status || "pending";
+
+
+      let statusText =
+        "Pending";
+
+
+      let statusClass =
+        "pending";
+
+
+      if(status === "approved"){
+
+        statusText =
+          "Approved";
+
+        statusClass =
+          "";
+
+      }
+
+
+      if(status === "rejected"){
+
+        statusText =
+          "Rejected";
+
+        statusClass =
+          "rejected";
+
+      }
+
+
+      let workDate =
+        "তারিখ নেই";
+
+
+      if(work.work_date){
+
+        try{
+
+          workDate =
+            new Date(
+              work.work_date + "T00:00:00"
+            ).toLocaleDateString(
+              "bn-BD"
+            );
+
+        }catch(e){
+
+          workDate =
+            work.work_date;
+
+        }
+
+      }
+
+
+      let createdDate =
+        "";
+
+
+      if(work.created_at){
+
+        try{
+
+          createdDate =
+            new Date(
+              work.created_at
+            ).toLocaleString(
+              "bn-BD"
+            );
+
+        }catch(e){
+
+          createdDate = "";
+
+        }
+
+      }
+
+
+      const imageUrl =
+        escapeHTML(
+          work.image_url || ""
+        );
+
+
+      return `
+
+        <div class="work-card">
+
+
+          ${
+            imageUrl
+              ?
+
+              `
+
+              <img
+                class="work-image"
+                src="${imageUrl}"
+                alt="${title}"
+                loading="lazy"
+              >
+
+              `
+
+              :
+
+              `
+
+              <div
+                style="
+                  background:#0f172a;
+                  padding:40px 10px;
+                  text-align:center;
+                  border-radius:10px;
+                  margin-bottom:12px;
+                  color:#94a3b8;
+                "
+              >
+                🖼️ কোনো ছবি নেই
+              </div>
+
+              `
+
+          }
+
+
+          <div class="work-title">
+            ${title}
+          </div>
+
+
+          <div class="work-info">
+
+            <span class="badge ${statusClass}">
+              ${statusText}
+            </span>
+
+            <br>
+
+            📅 <strong>কাজের তারিখ:</strong>
+            ${workDate}
+
+            <br>
+
+            📍 <strong>স্থান:</strong>
+            ${location}
+
+            <br>
+
+            🕒 <strong>জমা দেওয়ার সময়:</strong>
+            ${createdDate}
+
+          </div>
+
+
+          <div class="work-description">
+
+            📝 <strong>বিস্তারিত:</strong>
+
+            <br>
+
+            ${description}
+
+          </div>
+
+
+          <div class="work-actions">
+
+
+            ${
+              status === "pending"
+
+              ?
+
+              `
+
+              <button
+                class="approve-btn"
+                onclick="approveWork('${work.id}')"
+              >
+                ✅ Approve
+              </button>
+
+
+              <button
+                class="reject-btn"
+                onclick="rejectWork('${work.id}')"
+              >
+                ❌ Reject
+              </button>
+
+              `
+
+              :
+
+              ""
+
+            }
+
+
+            <button
+              class="delete-btn"
+              onclick="deleteWork('${work.id}')"
+            >
+              🗑️ Delete
+            </button>
+
+
+          </div>
+
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   APPROVE WORK
+===================================================== */
+
+async function approveWork(id){
+
+  const confirmApprove =
+    confirm(
+      "এই কাজটি Approve করে ওয়েবসাইটে প্রকাশ করতে চান?"
+    );
+
+
+  if(!confirmApprove) return;
+
+
+  const msg =
+    document.getElementById("workMsg");
+
+
+  msg.textContent =
+    "⏳ কাজটি Approve করা হচ্ছে...";
+
+
+  const {error} =
+    await sb
+      .from("work_posts")
+      .update({
+        status:"approved"
+      })
+      .eq("id",id);
+
+
+  if(error){
+
+    console.error(error);
+
+
+    msg.textContent =
+      "❌ কাজটি Approve করা যায়নি।";
+
+
+    return;
+
+  }
+
+
+  msg.textContent =
+    "✅ কাজটি Approved হয়েছে এবং এখন প্রকাশ করা যাবে।";
+
+
+  loadWorkPosts();
+
+}
+
+
+/* =====================================================
+   REJECT WORK
+===================================================== */
+
+async function rejectWork(id){
+
+  const confirmReject =
+    confirm(
+      "এই কাজটি Reject করতে চান?"
+    );
+
+
+  if(!confirmReject) return;
+
+
+  const msg =
+    document.getElementById("workMsg");
+
+
+  msg.textContent =
+    "⏳ কাজটি Reject করা হচ্ছে...";
+
+
+  const {error} =
+    await sb
+      .from("work_posts")
+      .update({
+        status:"rejected"
+      })
+      .eq("id",id);
+
+
+  if(error){
+
+    console.error(error);
+
+
+    msg.textContent =
+      "❌ কাজটি Reject করা যায়নি।";
+
+
+    return;
+
+  }
+
+
+  msg.textContent =
+    "✅ কাজটি Reject করা হয়েছে।";
+
+
+  loadWorkPosts();
+
+}
+
+
+/* =====================================================
+   DELETE WORK
+===================================================== */
+
+async function deleteWork(id){
+
+  const confirmDelete =
+    confirm(
+      "আপনি কি এই কাজটি Delete করতে চান?"
+    );
+
+
+  if(!confirmDelete) return;
+
+
+  const msg =
+    document.getElementById("workMsg");
+
+
+  msg.textContent =
+    "⏳ কাজটি Delete করা হচ্ছে...";
+
+
+  const {error} =
+    await sb
+      .from("work_posts")
+      .delete()
+      .eq("id",id);
+
+
+  if(error){
+
+    console.error(error);
+
+
+    msg.textContent =
+      "❌ কাজটি Delete করা যায়নি।";
+
+
+    return;
+
+  }
+
+
+  msg.textContent =
+    "✅ কাজটি Delete হয়েছে।";
+
+
+  loadWorkPosts();
+
+}
+
+
+/* =====================================================
+   SECURITY
+===================================================== */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+
+    .replace(/&/g,"&amp;")
+
+    .replace(/</g,"&lt;")
+
+    .replace(/>/g,"&gt;")
+
+    .replace(/"/g,"&quot;")
+
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
 
 checkLogin();
 
