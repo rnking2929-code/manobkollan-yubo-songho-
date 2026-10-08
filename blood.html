@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>রক্তদান — মানবকল্যাণ যুব সংঘ</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      font-family:Arial,"Noto Sans Bengali",sans-serif;
+      background:#07111f;
+      color:#fff;
+      padding-bottom:80px;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .topbar{
+      background:#0d1b2a;
+      padding:16px 18px;
+      text-align:center;
+      border-bottom:1px solid #24364a;
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+
+    .topbar h1{
+      font-size:20px;
+      margin-bottom:5px;
+    }
+
+    .topbar p{
+      color:#aebdca;
+      font-size:13px;
+    }
+
+    .container{
+      max-width:900px;
+      margin:auto;
+      padding:20px 15px;
+    }
+
+    .hero{
+      text-align:center;
+      padding:25px 10px;
+    }
+
+    .hero .icon{
+      font-size:55px;
+      margin-bottom:10px;
+    }
+
+    .hero h2{
+      font-size:28px;
+      margin-bottom:8px;
+    }
+
+    .hero p{
+      color:#b8c5d1;
+      line-height:1.7;
+    }
+
+    .card{
+      background:#0d1b2a;
+      border:1px solid #24364a;
+      border-radius:16px;
+      padding:20px;
+      margin-bottom:18px;
+      box-shadow:0 8px 25px rgba(0,0,0,.18);
+    }
+
+    .card h3{
+      margin-bottom:16px;
+      font-size:20px;
+    }
+
+    label{
+      display:block;
+      margin:12px 0 6px;
+      color:#dbe5ed;
+      font-size:14px;
+    }
+
+    input,select{
+      width:100%;
+      padding:13px;
+      border-radius:10px;
+      border:1px solid #354b61;
+      background:#081522;
+      color:#fff;
+      outline:none;
+      font-size:15px;
+    }
+
+    input:focus,select:focus{
+      border-color:#e53935;
+    }
+
+    .btn{
+      width:100%;
+      border:0;
+      border-radius:10px;
+      padding:14px;
+      margin-top:17px;
+      background:#d62828;
+      color:#fff;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      opacity:.9;
+    }
+
+    .message{
+      margin-top:12px;
+      padding:10px;
+      border-radius:8px;
+      display:none;
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .donor-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .donor{
+      background:#081522;
+      border:1px solid #26394d;
+      border-radius:12px;
+      padding:15px;
+    }
+
+    .donor-name{
+      font-size:18px;
+      font-weight:bold;
+      margin-bottom:8px;
+    }
+
+    .donor-info{
+      color:#b9c7d3;
+      font-size:14px;
+      line-height:1.8;
+    }
+
+    .blood{
+      display:inline-block;
+      background:#d62828;
+      color:#fff;
+      padding:5px 9px;
+      border-radius:7px;
+      font-weight:bold;
+      margin-right:7px;
+    }
+
+    .empty{
+      text-align:center;
+      color:#9eacb8;
+      padding:20px;
+    }
+
+    .back{
+      display:inline-block;
+      margin-top:5px;
+      color:#b9c7d3;
+      font-size:14px;
+    }
+
+    .links{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:15px;
+    }
+
+    .link-box{
+      background:#132438;
+      border:1px solid #263b51;
+      padding:13px;
+      border-radius:10px;
+      text-align:center;
+      font-size:14px;
+    }
+
+    .bottom-nav{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      height:65px;
+      background:#0d1b2a;
+      border-top:1px solid #24364a;
+      display:flex;
+      justify-content:space-around;
+      align-items:center;
+      z-index:20;
+    }
+
+    .bottom-nav a{
+      text-align:center;
+      font-size:12px;
+      color:#b9c7d3;
+    }
+
+    .bottom-nav span{
+      display:block;
+      font-size:20px;
+      margin-bottom:3px;
+    }
+
+    @media(max-width:600px){
+      .hero h2{
+        font-size:24px;
+      }
+
+      .links{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <h1>🩸 মানবকল্যাণ যুব সংঘ</h1>
+    <p>ঐক্য • মানবতা • স্বেচ্ছাসেবা</p>
+  </header>
+
+  <main class="container">
+
+    <section class="hero">
+      <div class="icon">🩸</div>
+      <h2>রক্তদান কর্মসূচি</h2>
+      <p>
+        আপনার এক ব্যাগ রক্ত একজন মানুষের জীবনে আশার আলো হয়ে উঠতে পারে।
+        রক্তদাতা হিসেবে নিবন্ধন করুন এবং মানবতার কাজে পাশে থাকুন।
+      </p>
+
+      <a class="back" href="index.html">← হোম পেজে ফিরে যান</a>
+    </section>
+
+    <!-- Registration -->
+    <section class="card">
+      <h3>🩸 রক্তদাতা হিসেবে নিবন্ধন</h3>
+
+      <label for="donorName">নাম</label>
+      <input
+        id="donorName"
+        type="text"
+        placeholder="আপনার নাম লিখুন"
+      >
+
+      <label for="bloodGroup">ব্লাড গ্রুপ</label>
+      <select id="bloodGroup">
+        <option value="">ব্লাড গ্রুপ নির্বাচন করুন</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+      </select>
+
+      <label for="area">এলাকা</label>
+      <input
+        id="area"
+        type="text"
+        placeholder="আপনার এলাকা"
+      >
+
+      <label for="phone">মোবাইল নম্বর</label>
+      <input
+        id="phone"
+        type="tel"
+        placeholder="মোবাইল নম্বর"
+      >
+
+      <button class="btn" onclick="registerDonor()">
+        রক্তদাতা হিসেবে নিবন্ধন করুন
+      </button>
+
+      <div id="message" class="message"></div>
+    </section>
+
+    <!-- Donor List -->
+    <section class="card">
+      <h3>🩸 রক্তদাতাদের তালিকা</h3>
+
+      <p style="color:#9eacb8;font-size:13px;margin-bottom:15px;">
+        নিবন্ধিত সক্রিয় রক্তদাতাদের তালিকা। ব্যক্তিগত মোবাইল নম্বর
+        এখানে প্রকাশ করা হয় না।
+      </p>
+
+      <div id="donorList" class="donor-list">
+        <div class="empty">তালিকা লোড হচ্ছে...</div>
+      </div>
+    </section>
+
+    <!-- Other pages -->
+    <section class="card">
+      <h3>আরও দেখুন</h3>
+
+      <div class="links">
+        <a class="link-box" href="volunteer.html">🤝 স্বেচ্ছাসেবক</a>
+        <a class="link-box" href="members.html">👥 সদস্য</a>
+        <a class="link-box" href="activities.html">📅 কর্মপরিকল্পনা</a>
+        <a class="link-box" href="finance.html">💰 প্রকাশ্য হিসাব</a>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="index.html">
+      <span>🏠</span>
+      হোম
+    </a>
+
+    <a href="organization.html">
+      <span>🏢</span>
+      সংগঠন
+    </a>
+
+    <a href="blood.html">
+      <span>🩸</span>
+      রক্ত
+    </a>
+
+    <a href="volunteer.html">
+      <span>🤝</span>
+      স্বেচ্ছাসেবক
+    </a>
+
+    <a href="contact.html">
+      <span>📞</span>
+      যোগাযোগ
+    </a>
+  </nav>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+
+  <script>
+    const sb = supabase.createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_ANON_KEY
+    );
+
+    function escapeHTML(value){
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function showMessage(text, success){
+      const box = document.getElementById("message");
+
+      box.style.display = "block";
+      box.textContent = text;
+
+      if(success){
+        box.style.background = "#123d2a";
+        box.style.color = "#a8f0c7";
+      }else{
+        box.style.background = "#401b1b";
+        box.style.color = "#ffb4b4";
+      }
+    }
+
+    async function registerDonor(){
+
+      const name =
+        document.getElementById("donorName").value.trim();
+
+      const blood_group =
+        document.getElementById("bloodGroup").value.trim();
+
+      const area =
+        document.getElementById("area").value.trim();
+
+      const phone =
+        document.getElementById("phone").value.trim();
+
+      if(!name){
+        showMessage("দয়া করে আপনার নাম লিখুন।", false);
+        return;
+      }
+
+      if(!blood_group){
+        showMessage("দয়া করে ব্লাড গ্রুপ নির্বাচন করুন।", false);
+        return;
+      }
+
+      if(!phone){
+        showMessage("দয়া করে মোবাইল নম্বর দিন।", false);
+        return;
+      }
+
+      if(phone.length < 10 || phone.length > 20){
+        showMessage("সঠিক মোবাইল নম্বর দিন।", false);
+        return;
+      }
+
+      const { error } = await sb
+        .from("blood_donors")
+        .insert({
+          name: name,
+          blood_group: blood_group,
+          area: area || null,
+          phone: phone,
+          status: "available"
+        });
+
+      if(error){
+        console.error(error);
+        showMessage(
+          "নিবন্ধন করা যায়নি। আবার চেষ্টা করুন।",
+          false
+        );
+        return;
+      }
+
+      showMessage(
+        "✅ সফলভাবে রক্তদাতা হিসেবে নিবন্ধন হয়েছে। ধন্যবাদ!",
+        true
+      );
+
+      document.getElementById("donorName").value = "";
+      document.getElementById("bloodGroup").value = "";
+      document.getElementById("area").value = "";
+      document.getElementById("phone").value = "";
+
+      loadDonors();
+    }
+
+    async function loadDonors(){
+
+      const list = document.getElementById("donorList");
+
+      list.innerHTML =
+        '<div class="empty">তালিকা লোড হচ্ছে...</div>';
+
+      const { data, error } = await sb
+        .rpc("get_public_blood_donors");
+
+      if(error){
+        console.error(error);
+
+        list.innerHTML =
+          '<div class="empty">রক্তদাতাদের তালিকা এখন পাওয়া যাচ্ছে না।</div>';
+
+        return;
+      }
+
+      if(!data || data.length === 0){
+
+        list.innerHTML =
+          '<div class="empty">এখনও কোনো রক্তদাতা নিবন্ধন করেননি।</div>';
+
+        return;
+      }
+
+      list.innerHTML = data.map(donor => {
+
+        const name =
+          escapeHTML(donor.name);
+
+        const blood =
+          escapeHTML(donor.blood_group);
+
+        const area =
+          escapeHTML(donor.area || "এলাকা উল্লেখ নেই");
+
+        return `
+          <div class="donor">
+            <div class="donor-name">
+              ${name}
+            </div>
+
+            <div class="donor-info">
+              <span class="blood">${blood}</span>
+              📍 ${area}
+            </div>
+          </div>
+        `;
+
+      }).join("");
+    }
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      loadDonors
+    );
+  </script>
+
+</body>
+</html>
