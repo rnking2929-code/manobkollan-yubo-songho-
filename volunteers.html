@@ -206,6 +206,32 @@ button:disabled{
 
 }
 
+.delete-btn{
+
+  width:auto;
+
+  margin-top:12px;
+
+  padding:8px 13px;
+
+  background:#dc2626;
+
+  color:#fff;
+
+  border-radius:7px;
+
+  font-size:12px;
+
+}
+
+.delete-btn:hover{
+
+  background:#b91c1c;
+
+  opacity:1;
+
+}
+
 .footer{
 
   text-align:center;
@@ -666,7 +692,7 @@ async function submitVolunteer(){
 
 
     /* =========================
-       CLEAR
+       CLEAR FORM
     ========================= */
 
     document
@@ -700,10 +726,10 @@ async function submitVolunteer(){
 
 
     /* =========================
-       RELOAD PUBLIC LIST
+       RELOAD LIST
     ========================= */
 
-    loadVolunteers();
+    await loadVolunteers();
 
 
   }catch(error){
@@ -732,7 +758,7 @@ async function submitVolunteer(){
 
 
 /* =========================
-   LOAD PUBLIC VOLUNTEERS
+   LOAD VOLUNTEERS
 ========================= */
 
 async function loadVolunteers(){
@@ -751,6 +777,10 @@ async function loadVolunteers(){
 
 
   try{
+
+    /* =========================
+       GET VOLUNTEERS
+    ========================= */
 
     const {data,error} =
 
@@ -817,6 +847,17 @@ async function loadVolunteers(){
 
 
     /* =========================
+       CHECK LOGIN
+    ========================= */
+
+    const {
+      data:{
+        user
+      }
+    } = await sb.auth.getUser();
+
+
+    /* =========================
        DISPLAY
     ========================= */
 
@@ -871,6 +912,22 @@ async function loadVolunteers(){
 
               </div>
 
+
+              ${
+                user
+                ?
+                `
+                  <button
+                    class="delete-btn"
+                    onclick="deleteVolunteer('${v.id}')"
+                  >
+                    🗑️ ডিলেট
+                  </button>
+                `
+                :
+                ""
+              }
+
             </div>
 
           `;
@@ -892,6 +949,131 @@ async function loadVolunteers(){
       'style="color:#fca5a5">' +
       '❌ তালিকা লোড করা যায়নি।' +
       '</div>';
+
+  }
+
+}
+
+
+/* =========================
+   DELETE VOLUNTEER
+========================= */
+
+async function deleteVolunteer(id){
+
+  /* =========================
+     CHECK LOGIN
+  ========================= */
+
+  const {
+    data:{
+      user
+    }
+  } = await sb.auth.getUser();
+
+
+  if(!user){
+
+    alert(
+      "⚠️ ডিলেট করার জন্য Admin Login করতে হবে।"
+    );
+
+    return;
+
+  }
+
+
+  /* =========================
+     CONFIRM
+  ========================= */
+
+  const confirmDelete =
+
+    confirm(
+      "⚠️ আপনি কি এই স্বেচ্ছাসেবককে ডিলেট করতে চান?\n\n" +
+      "ডিলেট করলে তথ্যটি স্থায়ীভাবে মুছে যাবে।"
+    );
+
+
+  if(!confirmDelete){
+
+    return;
+
+  }
+
+
+  try{
+
+    /* =========================
+       DELETE
+    ========================= */
+
+    const {error} =
+
+      await sb
+        .from(
+          "volunteer_applications"
+        )
+        .delete()
+        .eq(
+          "id",
+          id
+        );
+
+
+    /* =========================
+       ERROR
+    ========================= */
+
+    if(error){
+
+      console.error(
+        "DELETE ERROR:",
+        error
+      );
+
+
+      alert(
+        "❌ ডিলেট করা যায়নি!\n\n" +
+        error.message
+      );
+
+      return;
+
+    }
+
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    alert(
+      "✅ স্বেচ্ছাসেবকের তথ্য ডিলেট করা হয়েছে।"
+    );
+
+
+    /* =========================
+       RELOAD
+    ========================= */
+
+    await loadVolunteers();
+
+
+  }catch(error){
+
+    console.error(
+      "DELETE SYSTEM ERROR:",
+      error
+    );
+
+
+    alert(
+      "❌ সমস্যা হয়েছে!\n\n" +
+      (
+        error.message ||
+        String(error)
+      )
+    );
 
   }
 
