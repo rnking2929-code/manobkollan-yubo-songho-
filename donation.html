@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>অনুদান দিন | মানবকল্যাণ যুব সংঘ</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  background:#111;
+  color:#eee;
+  font-family:"Noto Sans Bengali","SolaimanLipi",Arial,sans-serif;
+}
+
+body{
+  padding-bottom:85px;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.topbar{
+  height:64px;
+  background:#1b1b1b;
+  border-bottom:1px solid #3a3a3a;
+  display:flex;
+  align-items:center;
+  padding:0 15px;
+  gap:12px;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.logo{
+  width:42px;
+  height:42px;
+  border-radius:9px;
+  background:#ddd;
+  display:grid;
+  place-items:center;
+  color:#087443;
+  font-weight:900;
+  font-size:11px;
+  text-align:center;
+}
+
+.brand{
+  font-size:20px;
+  font-weight:800;
+  color:#4bb7ff;
+}
+
+.container{
+  padding:20px 14px;
+  max-width:700px;
+  margin:auto;
+}
+
+.card{
+  background:#1b1b1b;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:16px;
+  border:1px solid #303030;
+}
+
+.title{
+  text-align:center;
+  font-size:27px;
+  margin:5px 0 10px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#aaa;
+  line-height:1.7;
+}
+
+.bkash{
+  background:linear-gradient(135deg,#063e2c,#087b52);
+  border-radius:15px;
+  padding:22px;
+  text-align:center;
+  margin-top:18px;
+}
+
+.bkash-title{
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+.number{
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.copy{
+  display:inline-block;
+  margin-top:12px;
+  background:#fff;
+  color:#111;
+  padding:9px 18px;
+  border-radius:8px;
+  font-weight:800;
+  border:0;
+  cursor:pointer;
+}
+
+.steps{
+  line-height:1.9;
+  color:#ddd;
+}
+
+.steps strong{
+  color:#fff;
+}
+
+form{
+  margin-top:15px;
+}
+
+label{
+  display:block;
+  margin:13px 0 6px;
+  font-weight:700;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  border-radius:9px;
+  border:1px solid #444;
+  background:#111;
+  color:#fff;
+  font-size:15px;
+  outline:none;
+}
+
+input:focus{
+  border-color:#54b8ff;
+}
+
+.submit{
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  border:0;
+  border-radius:9px;
+  background:#1877f2;
+  color:#fff;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.message{
+  margin-top:15px;
+  padding:12px;
+  border-radius:8px;
+  display:none;
+  line-height:1.6;
+}
+
+.success{
+  background:#123d2c;
+  color:#b7f0d2;
+}
+
+.error{
+  background:#421d1d;
+  color:#ffbaba;
+}
+
+.back{
+  display:block;
+  text-align:center;
+  background:#292929;
+  padding:12px;
+  border-radius:9px;
+  margin-top:15px;
+}
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:70px;
+  background:#191919;
+  border-top:1px solid #454545;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  z-index:30;
+}
+
+.bottom a{
+  text-align:center;
+  padding-top:8px;
+  font-size:12px;
+  color:#aaa;
+}
+
+.bottom a.active{
+  color:#54b8ff;
+}
+
+.bottom span{
+  display:block;
+  font-size:23px;
+  line-height:29px;
+}
+
+@media(min-width:700px){
+
+  body{
+    max-width:700px;
+    margin:auto;
+    background:#0d0d0d;
+  }
+
+  .topbar,
+  .bottom{
+    max-width:700px;
+    margin:auto;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <div class="logo">
+    মযুস
+  </div>
+
+  <div class="brand">
+    মানবকল্যাণ যুব সংঘ
+  </div>
+
+</header>
+
+
+<main class="container">
+
+  <section class="card">
+
+    <h1 class="title">
+      💰 মানবকল্যাণে অনুদান দিন
+    </h1>
+
+    <p class="subtitle">
+      আপনার সামর্থ্য অনুযায়ী সহযোগিতা করুন।
+      আপনার সহযোগিতা অসহায় ও সুবিধাবঞ্চিত মানুষের পাশে
+      দাঁড়াতে আমাদের সহায়তা করবে। 🤝
+    </p>
+
+    <div class="bkash">
+
+      <div class="bkash-title">
+        🟢 bKash নম্বর
+      </div>
+
+      <div class="number" id="bkashNumber">
+        +8801318425093
+      </div>
+
+      <button class="copy" onclick="copyNumber()">
+        📋 নম্বর কপি করুন
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>📌 টাকা পাঠানোর নিয়ম</h2>
+
+    <div class="steps">
+
+      <p>
+        <strong>১.</strong>
+        উপরের bKash নম্বরে আপনার অনুদানের টাকা পাঠান।
+      </p>
+
+      <p>
+        <strong>২.</strong>
+        টাকা পাঠানোর পর আপনার নাম, bKash নম্বর,
+        টাকার পরিমাণ এবং Transaction ID নিচের ফর্মে দিন।
+      </p>
+
+      <p>
+        <strong>৩.</strong>
+        Submit করার পর Admin আপনার পেমেন্ট যাচাই করবেন।
+      </p>
+
+      <p>
+        <strong>৪.</strong>
+        পেমেন্ট সঠিক হলে Admin সেটি
+        <strong>Approve</strong> করবেন।
+      </p>
+
+      <p>
+        <strong>৫.</strong>
+        Approve হওয়ার পর সেটি সংগঠনের
+        Public Financial হিসাবের মোট আয়ে যুক্ত হবে।
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>🧾 পেমেন্টের তথ্য জমা দিন</h2>
+
+    <form id="paymentForm">
+
+      <label for="name">
+        আপনার নাম
+      </label>
+
+      <input
+        type="text"
+        id="name"
+        placeholder="আপনার নাম লিখুন"
+        required
+      >
+
+
+      <label for="bkash">
+        যে bKash নম্বর থেকে পাঠিয়েছেন
+      </label>
+
+      <input
+        type="tel"
+        id="bkash"
+        placeholder="01XXXXXXXXX"
+        required
+      >
+
+
+      <label for="amount">
+        টাকার পরিমাণ
+      </label>
+
+      <input
+        type="number"
+        id="amount"
+        placeholder="যেমন: 500"
+        min="1"
+        required
+      >
+
+
+      <label for="trx">
+        Transaction ID
+      </label>
+
+      <input
+        type="text"
+        id="trx"
+        placeholder="Transaction ID লিখুন"
+        required
+      >
+
+
+      <button
+        type="submit"
+        class="submit"
+        id="submitBtn"
+      >
+        📩 পেমেন্ট তথ্য জমা দিন
+      </button>
+
+    </form>
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+  </section>
+
+
+  <a
+    class="back"
+    href="index.html"
+  >
+    ← হোম পেজে ফিরে যান
+  </a>
+
+</main>
+
+
+<nav class="bottom">
+
+  <a href="index.html">
+    <span>🏠</span>
+    হোম
+  </a>
+
+  <a href="finance.html">
+    <span>💰</span>
+    হিসাব
+  </a>
+
+  <a class="active" href="donation.html">
+    <span>🤲</span>
+    অনুদান
+  </a>
+
+</nav>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+<script>
+
+const sb = supabase.createClient(
+  window.SUPABASE_URL,
+  window.SUPABASE_ANON_KEY
+);
+
+
+function copyNumber(){
+
+  const number =
+    document.getElementById("bkashNumber").innerText;
+
+  navigator.clipboard.writeText(number);
+
+  alert("bKash নম্বর কপি হয়েছে।");
+
+}
+
+
+const form =
+  document.getElementById("paymentForm");
+
+const message =
+  document.getElementById("message");
+
+const submitBtn =
+  document.getElementById("submitBtn");
+
+
+form.addEventListener("submit", async function(e){
+
+  e.preventDefault();
+
+  message.style.display = "none";
+
+  submitBtn.disabled = true;
+  submitBtn.innerText = "জমা হচ্ছে...";
+
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const bkash =
+    document.getElementById("bkash").value.trim();
+
+  const amount =
+    Number(document.getElementById("amount").value);
+
+  const trx =
+    document.getElementById("trx").value.trim();
+
+
+  if(!name || !bkash || !amount || !trx){
+
+    showError("সব তথ্য পূরণ করুন।");
+
+    submitBtn.disabled = false;
+    submitBtn.innerText = "📩 পেমেন্ট তথ্য জমা দিন";
+
+    return;
+  }
+
+
+  const { error } = await sb
+    .from("payment_requests")
+    .insert([{
+
+      name: name,
+
+      bkash_number: bkash,
+
+      amount: amount,
+
+      transaction_id: trx,
+
+      status: "pending"
+
+    }]);
+
+
+  if(error){
+
+    console.error(error);
+
+    showError(
+      "পেমেন্ট তথ্য জমা হয়নি। আবার চেষ্টা করুন।"
+    );
+
+    submitBtn.disabled = false;
+    submitBtn.innerText = "📩 পেমেন্ট তথ্য জমা দিন";
+
+    return;
+  }
+
+
+  message.className =
+    "message success";
+
+  message.style.display =
+    "block";
+
+  message.innerHTML =
+    "✅ আপনার পেমেন্ট তথ্য সফলভাবে জমা হয়েছে।<br>" +
+    "Admin যাচাই করার পর পেমেন্ট Approve করবেন।";
+
+
+  form.reset();
+
+  submitBtn.disabled = false;
+
+  submitBtn.innerText =
+    "📩 পেমেন্ট তথ্য জমা দিন";
+
+});
+
+
+function showError(text){
+
+  message.className =
+    "message error";
+
+  message.style.display =
+    "block";
+
+  message.innerText = "❌ " + text;
+
+}
+
+</script>
+
+</body>
+</html>
