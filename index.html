@@ -5,7 +5,7 @@
 <meta name="google-site-verification" content="hOvyCnk0XjjpGgpaBiGAtvu61uLk_23GdUyDDQ4kv54">
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>মানবকল্যাণ যুব সংঘ</title>
 
@@ -25,7 +25,7 @@ html,body{
 }
 
 body{
-  padding-bottom:90px;
+  padding-bottom:85px;
 }
 
 a{
@@ -41,111 +41,79 @@ a{
   border-bottom:1px solid #3a3a3a;
   display:flex;
   align-items:center;
-  padding:0 16px;
-  gap:15px;
+  padding:0 15px;
+  gap:12px;
   position:sticky;
   top:0;
   z-index:20;
 }
 
-.menu{
-  font-size:31px;
-  color:#eee;
-  line-height:1;
-}
-
 .logo{
-  width:40px;
-  height:40px;
-  border-radius:7px;
+  width:42px;
+  height:42px;
+  border-radius:9px;
   background:#ddd;
   display:grid;
   place-items:center;
   color:#087443;
   font-weight:900;
-  font-size:12px;
+  font-size:11px;
   text-align:center;
 }
 
 .brand{
-  font-size:24px;
+  font-size:21px;
   font-weight:800;
   color:#4bb7ff;
   white-space:nowrap;
 }
 
-.search{
-  margin-left:auto;
-  background:#2a292d;
-  border-radius:28px;
-  color:#aaa;
-  padding:10px 15px;
-  min-width:145px;
-  font-size:15px;
-}
-
 /* HERO */
 
 .hero{
-  margin:28px 14px 0;
-  border-radius:14px;
+  margin:18px 14px 0;
+  border-radius:16px;
   overflow:hidden;
   background:#1d1d1d;
   box-shadow:0 3px 18px #000;
 }
 
 .cover{
-  height:220px;
+  min-height:245px;
   background:linear-gradient(135deg,#063e2c,#087b52 50%,#123d2c);
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:20px;
+  padding:25px 18px;
 }
 
 .cover h1{
   font-size:29px;
   margin:0;
-  color:#dfece4;
+  color:#e8f5ee;
+  line-height:1.4;
 }
 
 .cover p{
   font-size:15px;
-  margin:8px 0;
+  margin:10px 0;
   color:#b7d6c7;
 }
 
 .profile{
-  padding:0 25px 25px;
-  position:relative;
-}
-
-.avatar{
-  width:126px;
-  height:126px;
-  border-radius:50%;
-  border:8px solid #777;
-  background:#eee;
-  color:#087443;
-  display:grid;
-  place-items:center;
+  padding:20px;
   text-align:center;
-  font-weight:900;
-  font-size:20px;
-  position:relative;
-  margin-top:-62px;
 }
 
 .profile h2{
-  font-size:29px;
-  margin:10px 0 0;
+  font-size:27px;
+  margin:0 0 7px;
 }
 
 .profile p{
   margin:0;
-  color:#ddd;
-  font-size:17px;
+  color:#bbb;
 }
 
 /* CONTENT */
@@ -154,307 +122,92 @@ a{
   padding:20px 14px;
 }
 
-.post{
+.section-title{
+  font-size:22px;
+  margin:8px 3px 14px;
+}
+
+/* WELCOME */
+
+.welcome{
   background:#1b1b1b;
   border-radius:15px;
-  padding:18px;
-  margin-bottom:15px;
+  padding:19px;
+  margin-bottom:18px;
+  line-height:1.8;
 }
 
-.posthead{
-  display:flex;
-  gap:12px;
-  align-items:center;
+.welcome p{
+  margin:7px 0;
+  color:#ddd;
 }
 
-.mini{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  background:#0a7a4b;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-}
+/* MENU GRID */
 
-.posthead b{
-  font-size:16px;
-}
-
-.date{
-  display:block;
-  color:#999;
-  font-size:12px;
-}
-
-.posttext{
-  font-size:18px;
-  margin:18px 0 15px;
-}
-
-.actions{
-  border-top:1px solid #444;
-  padding-top:12px;
-  display:flex;
-  justify-content:space-around;
-  color:#aaa;
-}
-
-/* CARDS */
-
-.cards{
+.menu-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px;
 }
 
-.card{
+.menu-card{
   background:#1b1b1b;
-  padding:18px;
-  border-radius:13px;
+  border:1px solid #303030;
+  border-radius:14px;
+  padding:18px 14px;
+  min-height:135px;
+  transition:.2s;
 }
 
-.card .icon{
-  font-size:30px;
+.menu-card:active{
+  transform:scale(.97);
 }
 
-.card b{
+.menu-icon{
+  font-size:32px;
+  margin-bottom:8px;
+}
+
+.menu-card b{
   display:block;
+  font-size:17px;
   color:#fff;
-  margin-top:5px;
 }
 
-.card small{
-  color:#aaa;
-}
-
-/* SECTION */
-
-.section-title{
-  font-size:22px;
-  margin:10px 3px 14px;
+.menu-card small{
+  display:block;
+  color:#999;
+  margin-top:6px;
+  line-height:1.5;
 }
 
 /* NOTICE */
 
 .notice{
-  background:#252525;
+  background:#1b1b1b;
   border-left:4px solid #54b8ff;
-  padding:14px;
+  padding:15px;
   border-radius:9px;
   margin-bottom:10px;
 }
 
-/* FORM */
-
-form input,
-form select,
-form textarea,
-input,
-select,
-textarea{
-  width:100%;
-  background:#242424;
-  border:1px solid #444;
-  color:#fff;
-  border-radius:8px;
-  padding:11px;
-  margin:5px 0 12px;
-  font:inherit;
-}
-
-select option{
-  background:#242424;
-  color:#fff;
-}
-
-input::placeholder,
-textarea::placeholder{
-  color:#999;
-}
-
-button{
-  width:100%;
-  background:#087b4c;
-  border:0;
-  color:white;
-  padding:12px;
-  border-radius:8px;
-  font-weight:800;
-  font:inherit;
-  cursor:pointer;
-}
-
-button:active{
-  opacity:.8;
-}
-
-.muted{
-  color:#aaa;
-  font-size:14px;
-  line-height:1.6;
-}
-
-/* COMMON BOX */
-
-.info-box{
-  background:#171717;
-  border:1px solid #333;
-  border-radius:13px;
-  padding:16px;
-  margin-top:12px;
-}
-
-/* BKASH */
-
-.bkash-box{
-  background:#171717;
-  border:1px solid #333;
-  border-radius:13px;
-  padding:16px;
-  margin-top:12px;
-}
-
-.bkash-number{
-  font-size:22px;
-  font-weight:900;
-  letter-spacing:.5px;
-}
-
-/* BLOOD DONOR */
-
-.donor-box{
-  background:#171717;
-  border:1px solid #333;
-  border-radius:13px;
-  padding:16px;
-  margin-top:12px;
-}
-
-.donor-box label,
-.volunteer-box label{
-  display:block;
-  margin-top:5px;
-  font-weight:700;
-}
-
-.consent{
-  display:flex;
-  align-items:flex-start;
-  gap:9px;
-  margin:4px 0 14px;
-  color:#ccc;
-  font-size:14px;
-  line-height:1.5;
-}
-
-.consent input{
-  width:18px;
-  height:18px;
-  margin:2px 0 0;
-  flex-shrink:0;
-}
-
-.donor-list{
-  margin-top:20px;
-}
-
-.donor-card{
-  background:#202020;
-  border:1px solid #333;
-  border-radius:11px;
-  padding:14px;
-  margin-bottom:10px;
-}
-
-.donor-card-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.donor-name{
-  font-size:17px;
-  font-weight:800;
-}
-
-.blood-badge{
-  background:#8b1e1e;
-  color:#fff;
-  padding:5px 9px;
-  border-radius:8px;
-  font-weight:900;
-  white-space:nowrap;
-}
-
-.donor-area{
-  color:#bbb;
-  margin-top:7px;
-  font-size:14px;
-}
-
-.donor-status{
-  display:inline-block;
-  margin-top:9px;
-  font-size:12px;
-  background:#164e36;
-  color:#8ff0bb;
-  padding:4px 8px;
-  border-radius:6px;
-}
-
-.donor-empty{
-  text-align:center;
-  color:#999;
-  padding:20px 5px;
-}
-
-.refresh-button{
-  margin-top:10px;
-  background:#333;
-  border:1px solid #555;
-}
-
-/* VOLUNTEER */
-
-.volunteer-box{
-  background:#171717;
-  border:1px solid #333;
-  border-radius:13px;
-  padding:16px;
-  margin-top:12px;
-}
-
-.volunteer-box textarea{
-  min-height:90px;
-  resize:vertical;
-}
-
-/* COMMITTEE */
-
-.committee-title{
-  font-size:18px;
-  font-weight:800;
-  margin:20px 0 12px;
-}
-
-.member-number{
-  color:#54b8ff;
-  font-weight:800;
-}
-
 /* CONTACT */
 
+.contact{
+  background:#1b1b1b;
+  border-radius:15px;
+  padding:18px;
+  line-height:1.8;
+}
+
 .contact-button{
-  display:inline-block;
-  width:100%;
+  display:block;
   text-align:center;
   background:#1877f2;
   padding:12px;
   border-radius:8px;
   font-weight:800;
-  margin-top:8px;
+  margin-top:12px;
 }
 
 /* BOTTOM NAV */
@@ -468,7 +221,7 @@ button:active{
   background:#191919;
   border-top:1px solid #454545;
   display:grid;
-  grid-template-columns:repeat(6,1fr);
+  grid-template-columns:repeat(4,1fr);
   z-index:30;
 }
 
@@ -485,31 +238,8 @@ button:active{
 
 .bottom span{
   display:block;
-  font-size:25px;
-  line-height:31px;
-}
-
-/* FINANCE */
-
-.finance-box{
-  margin:20px auto;
-  max-width:900px;
-  padding:18px;
-  border-radius:18px;
-  background:#171d23;
-  border:1px solid #2b333b;
-  color:#fff;
-  text-align:center;
-}
-
-.finance-button{
-  display:inline-block;
-  padding:11px 18px;
-  border-radius:10px;
-  background:#2563eb;
-  color:#fff;
-  text-decoration:none;
-  font-weight:700;
+  font-size:24px;
+  line-height:30px;
 }
 
 /* DESKTOP */
@@ -528,15 +258,6 @@ button:active{
     margin:auto;
   }
 
-  .hero{
-    margin-top:28px;
-  }
-
-  .content{
-    padding-left:18px;
-    padding-right:18px;
-  }
-
 }
 
 </style>
@@ -549,8 +270,6 @@ button:active{
 
 <header class="topbar">
 
-  <div class="menu">☰</div>
-
   <div class="logo">
     মযুস
   </div>
@@ -559,23 +278,20 @@ button:active{
     মানবকল্যাণ যুব সংঘ
   </div>
 
-  <div class="search">
-    Search... 🔍
-  </div>
-
 </header>
 
 
 <!-- HERO -->
 
-<section class="hero" id="home">
+<section class="hero">
 
   <div class="cover">
 
     <div>
 
       <h1>
-        মানবতার সেবায়, মানুষের পাশে
+        মানবতার সেবায়,<br>
+        মানুষের পাশে
       </h1>
 
       <p>
@@ -590,20 +306,14 @@ button:active{
 
   </div>
 
-
   <div class="profile">
-
-    <div class="avatar">
-      মানব<br>
-      কল্যাণ
-    </div>
 
     <h2>
       মানবকল্যাণ যুব সংঘ
     </h2>
 
     <p>
-      সবার পাশে, মানবতার পথে।
+      সবার পাশে, মানবতার পথে। ❤️
     </p>
 
   </div>
@@ -616,818 +326,163 @@ button:active{
 <main class="content">
 
 
-<!-- সর্বশেষ কার্যক্রম -->
+<!-- WELCOME -->
 
-<h2 class="section-title">
-  📢 সর্বশেষ কার্যক্রম
-</h2>
-
-<article class="post">
-
-  <div class="posthead">
-
-    <div class="mini">
-      ম
-    </div>
-
-    <div>
-
-      <b>
-        মানবকল্যাণ যুব সংঘ
-      </b>
-
-      <span class="date">
-        আজ • সংগঠনের অফিসিয়াল পোস্ট
-      </span>
-
-    </div>
-
-  </div>
-
-
-  <div class="posttext">
-
-    আসসালামু আলাইকুম।
-
-    <br><br>
-
-    মানুষের কল্যাণে আমাদের প্রতিটি উদ্যোগে আপনিও পাশে থাকুন। 🤝
-
-  </div>
-
-
-  <div class="actions">
-
-    <span>👍 Like</span>
-
-    <span>💬 Comment</span>
-
-    <span>🔗 Share</span>
-
-  </div>
-
-</article>
-
-
-<!-- এক নজরে -->
-
-<h2 class="section-title">
-  🌿 এক নজরে
-</h2>
-
-<div class="cards">
-
-  <a class="card" href="#blood">
-
-    <div class="icon">
-      🩸
-    </div>
-
-    <b>
-      রক্তদান
-    </b>
-
-    <small>
-      রক্তদাতা তালিকায় যুক্ত হোন
-    </small>
-
-  </a>
-
-
-  <a class="card" href="#volunteer">
-
-    <div class="icon">
-      👥
-    </div>
-
-    <b>
-      স্বেচ্ছাসেবক
-    </b>
-
-    <small>
-      মানবতার কাজে যুক্ত হোন
-    </small>
-
-  </a>
-
-
-  <a class="card" href="#activities">
-
-    <div class="icon">
-      📅
-    </div>
-
-    <b>
-      কর্মপরিকল্পনা
-    </b>
-
-    <small>
-      ১২ মাসের উদ্যোগ
-    </small>
-
-  </a>
-
-
-  <a class="card" href="#committee">
-
-    <div class="icon">
-      🏢
-    </div>
-
-    <b>
-      কমিটি
-    </b>
-
-    <small>
-      কার্যনির্বাহী সদস্যবৃন্দ
-    </small>
-
-  </a>
-
-
-  <a class="card" href="finance.html">
-
-    <div class="icon">
-      💰
-    </div>
-
-    <b>
-      আয়-ব্যয়
-    </b>
-
-    <small>
-      প্রকাশ্য আর্থিক হিসাব
-    </small>
-
-  </a>
-
-</div>
-
-
-<!-- ১২ মাসের কর্মপরিকল্পনা -->
-
-<h2 class="section-title" id="activities">
-  📅 ১২ মাসের কর্মপরিকল্পনা
-</h2>
-
-<div class="notice">
-  জানুয়ারি — শীতবস্ত্র বিতরণ
-</div>
-
-<div class="notice">
-  ফেব্রুয়ারি — বিনামূল্যে শিক্ষা উপকরণ বিতরণ
-</div>
-
-<div class="notice">
-  মার্চ — বৃক্ষরোপণ ও পরিবেশ সচেতনতা
-</div>
-
-<div class="notice">
-  এপ্রিল — দরিদ্র পরিবারের খাদ্য সহায়তা
-</div>
-
-<div class="notice">
-  মে — স্বাস্থ্য সচেতনতামূলক ক্যাম্প
-</div>
-
-<div class="notice">
-  জুন — রক্তদাতা তালিকা ও রক্তদান সচেতনতা
-</div>
-
-<div class="notice">
-  জুলাই — বন্যা ও দুর্যোগ প্রস্তুতি
-</div>
-
-<div class="notice">
-  আগস্ট — মাদকবিরোধী প্রচারণা
-</div>
-
-<div class="notice">
-  সেপ্টেম্বর — শিক্ষার্থীদের ক্যারিয়ার গাইডলাইন
-</div>
-
-<div class="notice">
-  অক্টোবর — পরিচ্ছন্নতা অভিযান
-</div>
-
-<div class="notice">
-  নভেম্বর — শীতবস্ত্র সংগ্রহ কর্মসূচি
-</div>
-
-<div class="notice">
-  ডিসেম্বর — বার্ষিক মানবকল্যাণ ও স্বেচ্ছাসেবক সম্মাননা অনুষ্ঠান
-</div>
-
-
-<!-- কমিটি -->
-
-<h2 class="section-title" id="committee">
-  🏢 প্রতিষ্ঠাতা ও পরিচালনা কাঠামো
-</h2>
-
-<div class="post">
-
-  <p>
-    <b>প্রতিষ্ঠিত:</b> ২০২০ ইং
-  </p>
-
-  <p>
-    <b>স্থান:</b> হাপানিয়া, ধানীখোলা, ত্রিশাল, ময়মনসিংহ
-  </p>
-
-  <p>
-    <b>প্রস্তাবিত কার্যনির্বাহী কমিটি</b>
-  </p>
-
-
-  <div class="committee-title">
-    পরিচালনা কমিটি
-  </div>
-
-
-  <div class="notice">
-    <span class="member-number">১।</span>
-    <b>প্রতিষ্ঠাতা/প্রধান উপদেষ্টা:</b>
-    রানা আহমেদ ও রাফিউল হাসান শান্ত
-  </div>
-
-  <div class="notice">
-    <span class="member-number">২।</span>
-    <b>সভাপতি:</b>
-    তাকির হোসেন
-  </div>
-
-  <div class="notice">
-    <span class="member-number">৩।</span>
-    <b>সহ-সভাপতি:</b>
-    রাফিউল হাসান শান্ত
-  </div>
-
-  <div class="notice">
-    <span class="member-number">৪।</span>
-    <b>সাধারণ সম্পাদক:</b>
-    রানা আহমেদ
-  </div>
-
-  <div class="notice">
-    <span class="member-number">৫।</span>
-    <b>যুগ্ম সাধারণ সম্পাদক:</b>
-    সাব্বির হোসেন
-  </div>
-
-  <div class="notice">
-    <span class="member-number">৬।</span>
-    <b>সাংগঠনিক সম্পাদক:</b>
-    শাকিল হোসেন
-  </div>
-
-  <div class="notice">
-    <span class="member-number">৭।</span>
-    <b>অর্থ সম্পাদক:</b>
-    আলামিন হোসেন
-  </div>
-
-  <div class="notice">
-    <span class="member-number">৮।</span>
-    <b>দপ্তর সম্পাদক:</b>
-    তোফায়েল আহম্মেদ
-  </div>
-
-  <div class="notice">
-    <span class="member-number">৯।</span>
-    <b>প্রচার ও প্রকাশনা সম্পাদক:</b>
-    অমিত হাসান
-  </div>
-
-  <div class="notice">
-    <span class="member-number">১০।</span>
-    <b>সমাজকল্যাণ সম্পাদক:</b>
-    রাইসুল ইসলাম রাসেল
-  </div>
-
-  <div class="notice">
-    <span class="member-number">১১।</span>
-    <b>তথ্য ও প্রযুক্তি বিষয়ক সম্পাদক:</b>
-    সাঈদ খান
-  </div>
-
-  <div class="notice">
-    <span class="member-number">১২।</span>
-    <b>শিক্ষা ও সাংস্কৃতিক সম্পাদক:</b>
-    মতিউর রহমান নাঈম
-  </div>
-
-  <div class="notice">
-    <span class="member-number">১৩।</span>
-    <b>পরিবেশ বিষয়ক সম্পাদক:</b>
-    মো. সালাউদ্দিন
-  </div>
-
-  <div class="notice">
-    <span class="member-number">১৪।</span>
-    <b>ত্রাণ ও দুর্যোগ ব্যবস্থাপনা সম্পাদক:</b>
-    ইলিয়াস হোসেন
-  </div>
-
-  <div class="notice">
-    <span class="member-number">১৫।</span>
-    <b>ক্রীড়া সম্পাদক:</b>
-    তাইমুর ইসলাম রিজন
-  </div>
-
-  <div class="notice">
-    <span class="member-number">১৬।</span>
-    <b>যুব উন্নয়ন ও প্রশিক্ষণ বিষয়ক সম্পাদক:</b>
-    সিয়াম মিয়া
-  </div>
-
-  <div class="notice">
-    <span class="member-number">১৭।</span>
-    <b>সদস্য বিষয়ক সম্পাদক:</b>
-    অনন্ত সরকার
-  </div>
-
-
-  <div class="committee-title">
-    কার্যকরী সদস্যবৃন্দ
-  </div>
-
-
-  <div class="notice">
-    ১। সজীব হোসেন
-  </div>
-
-  <div class="notice">
-    ২। রিফাত মিয়া
-  </div>
-
-  <div class="notice">
-    ৩। শান্ত ইসলাম
-  </div>
-
-  <div class="notice">
-    ৪। শ্রাবন আহম্মেদ
-  </div>
-
-  <div class="notice">
-    ৫। মাফুজ মিয়া
-  </div>
-
-  <div class="notice">
-    ৬। হাবিবুর রহমান
-  </div>
-
-  <div class="notice">
-    ৭। সাইম মিয়া
-  </div>
-
-  <div class="notice">
-    ৮। বলাই সূত্রধর
-  </div>
-
-  <div class="notice">
-    ৯। রাতুল হাসান
-  </div>
-
-  <div class="notice">
-    ১০। হুমায়ন আহম্মেদ
-  </div>
-
-
-  <div class="notice">
-    📅 <b>কমিটির মেয়াদ:</b>
-    ০১/০৯/২০২৬ — ০১/০৯/২০২৭
-  </div>
-
-</div>
-
-
-<!-- BLOOD -->
-
-<h2 class="section-title" id="blood">
-  🩸 রক্তদাতা
-</h2>
-
-<section class="post">
-
-  <p>
-    রক্তদানে এগিয়ে আসুন। ❤️
-    আপনার এক ব্যাগ রক্ত কারও জন্য আশার আলো হতে পারে।
-  </p>
-
-
-  <div class="donor-box">
-
-    <h3>
-      🩸 রক্তদাতা হিসেবে নিবন্ধন করুন
-    </h3>
-
-    <p class="muted">
-      আপনার তথ্য দিয়ে নিবন্ধন করুন।
-      মোবাইল নম্বর পাবলিক তালিকায় প্রদর্শিত হবে না।
-    </p>
-
-
-    <label for="donorName">
-      আপনার নাম *
-    </label>
-
-    <input
-      id="donorName"
-      type="text"
-      placeholder="আপনার পূর্ণ নাম"
-      autocomplete="name"
-    >
-
-
-    <label for="donorBlood">
-      রক্তের গ্রুপ *
-    </label>
-
-    <select id="donorBlood">
-
-      <option value="">
-        রক্তের গ্রুপ নির্বাচন করুন
-      </option>
-
-      <option value="A+">A+</option>
-      <option value="A-">A-</option>
-      <option value="B+">B+</option>
-      <option value="B-">B-</option>
-      <option value="AB+">AB+</option>
-      <option value="AB-">AB-</option>
-      <option value="O+">O+</option>
-      <option value="O-">O-</option>
-
-    </select>
-
-
-    <label for="donorArea">
-      এলাকা
-    </label>
-
-    <input
-      id="donorArea"
-      type="text"
-      placeholder="যেমন: ত্রিশাল, ময়মনসিংহ"
-    >
-
-
-    <label for="donorPhone">
-      মোবাইল নম্বর *
-    </label>
-
-    <input
-      id="donorPhone"
-      type="tel"
-      placeholder="01XXXXXXXXX"
-      autocomplete="tel"
-    >
-
-
-    <label class="consent">
-
-      <input
-        id="donorConsent"
-        type="checkbox"
-      >
-
-      <span>
-        আমি সম্মতি দিচ্ছি যে, আমার দেওয়া তথ্য
-        মানবকল্যাণ যুব সংঘের রক্তদাতা কার্যক্রমে
-        ব্যবহৃত হবে। আমার মোবাইল নম্বর পাবলিক তালিকায়
-        প্রকাশ করা হবে না।
-      </span>
-
-    </label>
-
-
-    <button
-      type="button"
-      onclick="registerDonor()"
-    >
-      🩸 রক্তদাতা হিসেবে নিবন্ধন করুন
-    </button>
-
-
-    <p
-      id="donorMsg"
-      class="muted"
-      aria-live="polite"
-    ></p>
-
-  </div>
-
-
-  <!-- DONOR LIST -->
-
-  <div class="donor-list">
-
-    <h3>
-      📋 বর্তমান রক্তদাতা তালিকা
-    </h3>
-
-    <p class="muted">
-      নিবন্ধিত রক্তদাতাদের তালিকা।
-    </p>
-
-    <div id="donorList">
-      <div class="donor-empty">
-        ⏳ রক্তদাতা তালিকা লোড হচ্ছে...
-      </div>
-    </div>
-
-    <button
-      type="button"
-      class="refresh-button"
-      onclick="loadDonors()"
-    >
-      🔄 তালিকা রিফ্রেশ করুন
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- VOLUNTEER -->
-
-<h2 class="section-title" id="volunteer">
-  🤝 স্বেচ্ছাসেবক
-</h2>
-
-<section class="post">
-
-  <p>
-    মানবতার কাজে যুক্ত হতে আগ্রহী?
-    আমাদের স্বেচ্ছাসেবক দলে যোগ দিন। ❤️
-  </p>
-
-
-  <div class="volunteer-box">
-
-    <h3>
-      🤝 স্বেচ্ছাসেবক হিসেবে যুক্ত হোন
-    </h3>
-
-    <p class="muted">
-      নিচের ফর্মটি পূরণ করে আপনার আগ্রহের কথা জানান।
-      আপনার তথ্য সংগঠনের কার্যক্রম পরিচালনায় ব্যবহৃত হবে।
-    </p>
-
-
-    <label for="volunteerName">
-      আপনার নাম *
-    </label>
-
-    <input
-      id="volunteerName"
-      type="text"
-      placeholder="আপনার পূর্ণ নাম"
-      autocomplete="name"
-    >
-
-
-    <label for="volunteerPhone">
-      মোবাইল নম্বর *
-    </label>
-
-    <input
-      id="volunteerPhone"
-      type="tel"
-      placeholder="01XXXXXXXXX"
-      autocomplete="tel"
-    >
-
-
-    <label for="volunteerArea">
-      আপনার এলাকা
-    </label>
-
-    <input
-      id="volunteerArea"
-      type="text"
-      placeholder="যেমন: হাপানিয়া, ত্রিশাল"
-    >
-
-
-    <label for="volunteerAge">
-      বয়স
-    </label>
-
-    <input
-      id="volunteerAge"
-      type="number"
-      min="10"
-      max="100"
-      placeholder="আপনার বয়স"
-    >
-
-
-    <label for="volunteerInterest">
-      কোন কাজে আগ্রহী?
-    </label>
-
-    <select id="volunteerInterest">
-
-      <option value="">
-        কাজ নির্বাচন করুন
-      </option>
-
-      <option value="রক্তদান ও রক্তদাতা কার্যক্রম">
-        🩸 রক্তদান ও রক্তদাতা কার্যক্রম
-      </option>
-
-      <option value="ত্রাণ ও মানবিক সহায়তা">
-        🤲 ত্রাণ ও মানবিক সহায়তা
-      </option>
-
-      <option value="শিক্ষা কার্যক্রম">
-        📚 শিক্ষা কার্যক্রম
-      </option>
-
-      <option value="পরিবেশ ও বৃক্ষরোপণ">
-        🌱 পরিবেশ ও বৃক্ষরোপণ
-      </option>
-
-      <option value="স্বাস্থ্য সচেতনতা">
-        🏥 স্বাস্থ্য সচেতনতা
-      </option>
-
-      <option value="সামাজিক ও সাংস্কৃতিক কার্যক্রম">
-        🎭 সামাজিক ও সাংস্কৃতিক কার্যক্রম
-      </option>
-
-      <option value="অন্যান্য">
-        ✨ অন্যান্য
-      </option>
-
-    </select>
-
-
-    <label for="volunteerMessage">
-      অতিরিক্ত কিছু জানাতে চাইলে
-    </label>
-
-    <textarea
-      id="volunteerMessage"
-      placeholder="আপনার কথা লিখুন..."
-    ></textarea>
-
-
-    <label class="consent">
-
-      <input
-        id="volunteerConsent"
-        type="checkbox"
-      >
-
-      <span>
-        আমি সম্মতি দিচ্ছি যে, আমার দেওয়া তথ্য
-        মানবকল্যাণ যুব সংঘের স্বেচ্ছাসেবক কার্যক্রমে
-        ব্যবহৃত হবে।
-      </span>
-
-    </label>
-
-
-    <button
-      type="button"
-      onclick="registerVolunteer()"
-    >
-      🤝 স্বেচ্ছাসেবক হিসেবে যুক্ত হোন
-    </button>
-
-
-    <p
-      id="volunteerMsg"
-      class="muted"
-      aria-live="polite"
-    ></p>
-
-  </div>
-
-</section>
-
-
-<!-- BKASH PAYMENT -->
-
-<section class="post" id="bkash">
+<section class="welcome">
 
   <h2>
-    💳 সদস্য চাঁদা
+    🌿 স্বাগতম
   </h2>
 
   <p>
-    মানবকল্যাণ যুব সংঘের কার্যক্রম পরিচালনায়
-    মাসিক চাঁদা প্রদান করুন।
+    মানবকল্যাণ যুব সংঘ একটি স্বেচ্ছাসেবী
+    মানবকল্যাণমূলক সংগঠন।
   </p>
 
-
-  <div class="bkash-box">
-
-    <h3>
-      📱 bKash-এ টাকা পাঠান
-    </h3>
-
-
-    <p>
-      bKash নম্বর:
-      <strong class="bkash-number">
-        +8801318425093
-      </strong>
-    </p>
-
-
-    <p class="muted">
-
-      উক্ত bKash নম্বরে টাকা পাঠানোর পর
-      নিচের ফর্মে আপনার পেমেন্টের তথ্য জমা দিন।
-
-      <br>
-
-      প্রশাসক তথ্য যাচাই করে অনুমোদন করবেন।
-
-    </p>
-
-
-    <label>
-      আপনার নাম
-    </label>
-
-    <input
-      id="paymentName"
-      type="text"
-      placeholder="আপনার নাম"
-      autocomplete="name"
-    >
-
-
-    <label>
-      যে bKash নম্বর থেকে পাঠিয়েছেন
-    </label>
-
-    <input
-      id="paymentBkash"
-      type="tel"
-      placeholder="01XXXXXXXXX"
-      autocomplete="tel"
-    >
-
-
-    <label>
-      টাকার পরিমাণ
-    </label>
-
-    <input
-      id="paymentAmount"
-      type="number"
-      min="1"
-      placeholder="টাকার পরিমাণ"
-    >
-
-
-    <label>
-      bKash Transaction ID
-    </label>
-
-    <input
-      id="paymentTrx"
-      type="text"
-      placeholder="Transaction ID"
-      autocomplete="off"
-    >
-
-
-    <button
-      type="button"
-      onclick="submitPayment()"
-    >
-      🧾 পেমেন্ট জমা দিন
-    </button>
-
-
-    <p
-      id="paymentMsg"
-      class="muted"
-      aria-live="polite"
-    ></p>
-
-  </div>
+  <p>
+    মানুষের পাশে দাঁড়ানো, অসহায়দের সহযোগিতা,
+    রক্তদান, শিক্ষা, পরিবেশ ও সামাজিক
+    উন্নয়নে কাজ করাই আমাদের লক্ষ্য।
+  </p>
 
 </section>
 
 
-<!-- CONTACT -->
+<!-- MENU -->
 
-<h2 class="section-title" id="contact">
+<h2 class="section-title">
+  📌 আমাদের কার্যক্রম
+</h2>
+
+<div class="menu-grid">
+
+
+  <a class="menu-card" href="organization.html">
+
+    <div class="menu-icon">🏢</div>
+
+    <b>আমাদের সংগঠন</b>
+
+    <small>
+      পরিচিতি ও পরিচালনা কাঠামো
+    </small>
+
+  </a>
+
+
+  <a class="menu-card" href="blood.html">
+
+    <div class="menu-icon">🩸</div>
+
+    <b>রক্তদান</b>
+
+    <small>
+      রক্তদাতা নিবন্ধন ও তালিকা
+    </small>
+
+  </a>
+
+
+  <a class="menu-card" href="volunteer.html">
+
+    <div class="menu-icon">🤝</div>
+
+    <b>স্বেচ্ছাসেবক</b>
+
+    <small>
+      স্বেচ্ছাসেবক হিসেবে যুক্ত হোন
+    </small>
+
+  </a>
+
+
+  <a class="menu-card" href="members.html">
+
+    <div class="menu-icon">👥</div>
+
+    <b>সদস্য</b>
+
+    <small>
+      সদস্যদের তালিকা ও নিবন্ধন
+    </small>
+
+  </a>
+
+
+  <a class="menu-card" href="activities.html">
+
+    <div class="menu-icon">📅</div>
+
+    <b>কর্মপরিকল্পনা</b>
+
+    <small>
+      ১২ মাসের মানবকল্যাণ কর্মসূচি
+    </small>
+
+  </a>
+
+
+  <a class="menu-card" href="finance.html">
+
+    <div class="menu-icon">💰</div>
+
+    <b>আর্থিক হিসাব</b>
+
+    <small>
+      সংগঠনের আয়-ব্যয়ের প্রকাশ্য হিসাব
+    </small>
+
+  </a>
+
+
+  <a class="menu-card" href="contact.html">
+
+    <div class="menu-icon">📞</div>
+
+    <b>যোগাযোগ</b>
+
+    <small>
+      ফোন, Facebook ও ঠিকানা
+    </small>
+
+  </a>
+
+
+</div>
+
+
+<!-- SHORT NOTICE -->
+
+<h2 class="section-title">
+  📢 সর্বশেষ
+</h2>
+
+<div class="notice">
+
+  মানুষের কল্যাণে আমাদের প্রতিটি উদ্যোগে
+  আপনিও পাশে থাকুন। 🤝
+
+</div>
+
+
+<div class="notice">
+
+  🩸 রক্তদানে এগিয়ে আসুন,
+  মানুষের জীবন বাঁচাতে সহযোগিতা করুন।
+
+</div>
+
+
+<!-- CONTACT PREVIEW -->
+
+<h2 class="section-title">
   📞 যোগাযোগ
 </h2>
 
-<div class="post">
+<section class="contact">
 
   <p>
-    <b>ঠিকানা:</b>
+    <b>ঠিকানা:</b><br>
     হাপানিয়া, ধানীখোলা, ত্রিশাল, ময়মনসিংহ
   </p>
 
@@ -1436,22 +491,14 @@ button:active{
     রানা আহমেদ
   </p>
 
-  <p>
-    <b>📱 ফোন:</b>
-    +8801642063465
-  </p>
-
-
   <a
     class="contact-button"
-    href="https://www.facebook.com/profile.php?id=100057280149131"
-    target="_blank"
-    rel="noopener"
+    href="contact.html"
   >
-    📘 Facebook-এ যোগাযোগ করুন
+    বিস্তারিত যোগাযোগ
   </a>
 
-</div>
+</section>
 
 
 </main>
@@ -1461,552 +508,27 @@ button:active{
 
 <nav class="bottom">
 
-  <a class="active" href="#home">
+  <a class="active" href="index.html">
     <span>🏠</span>
     হোম
   </a>
 
-  <a href="#blood">
+  <a href="blood.html">
     <span>🩸</span>
     রক্ত
   </a>
 
-  <a href="#volunteer">
-    <span>👥</span>
-    ভলান্টিয়ার
+  <a href="volunteer.html">
+    <span>🤝</span>
+    স্বেচ্ছাসেবক
   </a>
 
-  <a href="finance.html">
-    <span>💰</span>
-    হিসাব
-  </a>
-
-  <a href="#activities">
-    <span>🔔</span>
-    কাজ
-  </a>
-
-  <a href="#contact">
-    <span>👤</span>
-    যোগাযোগ
+  <a href="organization.html">
+    <span>🏢</span>
+    সংগঠন
   </a>
 
 </nav>
-
-
-<!-- FINANCE -->
-
-<section class="finance-box">
-
-  <h2>
-    💰 সংগঠনের আয়-ব্যয়
-  </h2>
-
-  <p>
-    সংগঠনের আর্থিক হিসাব সবার জন্য উন্মুক্ত।
-  </p>
-
-  <a
-    href="finance.html"
-    class="finance-button"
-  >
-    আয়-ব্যয়ের হিসাব দেখুন
-  </a>
-
-</section>
-
-
-<!-- SUPABASE -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="config.js"></script>
-
-<script>
-
-const sb = supabase.createClient(
-  window.SUPABASE_URL,
-  window.SUPABASE_ANON_KEY
-);
-
-
-/* ==================================================
-   BLOOD DONOR REGISTRATION
-================================================== */
-
-async function registerDonor(){
-
-  const name =
-    document.getElementById("donorName").value.trim();
-
-  const blood =
-    document.getElementById("donorBlood").value;
-
-  const area =
-    document.getElementById("donorArea").value.trim();
-
-  const phone =
-    document.getElementById("donorPhone").value.trim();
-
-  const consent =
-    document.getElementById("donorConsent").checked;
-
-  const msg =
-    document.getElementById("donorMsg");
-
-
-  if(!name || !blood || !phone){
-
-    msg.textContent =
-      "⚠️ অনুগ্রহ করে নাম, রক্তের গ্রুপ ও মোবাইল নম্বর দিন।";
-
-    return;
-  }
-
-
-  if(name.length < 2){
-
-    msg.textContent =
-      "⚠️ সঠিক নাম লিখুন।";
-
-    return;
-  }
-
-
-  if(phone.length < 10 || phone.length > 20){
-
-    msg.textContent =
-      "⚠️ সঠিক মোবাইল নম্বর লিখুন।";
-
-    return;
-  }
-
-
-  if(!consent){
-
-    msg.textContent =
-      "⚠️ নিবন্ধনের আগে সম্মতিতে টিক দিন।";
-
-    return;
-  }
-
-
-  msg.textContent =
-    "⏳ রক্তদাতা হিসেবে নিবন্ধন হচ্ছে...";
-
-
-  try{
-
-    const { error } = await sb
-      .from("blood_donors")
-      .insert([
-
-        {
-          name:name,
-          blood_group:blood,
-          area:area || null,
-          phone:phone,
-          status:"available"
-        }
-
-      ]);
-
-
-    if(error){
-
-      console.error(error);
-
-      msg.textContent =
-        "❌ নিবন্ধন করা যায়নি। কিছুক্ষণ পর আবার চেষ্টা করুন।";
-
-      return;
-    }
-
-
-    msg.textContent =
-      "✅ সফলভাবে রক্তদাতা হিসেবে নিবন্ধিত হয়েছেন।";
-
-
-    document.getElementById("donorName").value = "";
-    document.getElementById("donorBlood").value = "";
-    document.getElementById("donorArea").value = "";
-    document.getElementById("donorPhone").value = "";
-    document.getElementById("donorConsent").checked = false;
-
-
-    loadDonors();
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    msg.textContent =
-      "❌ একটি সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।";
-
-  }
-
-}
-
-
-/* ==================================================
-   PUBLIC BLOOD DONOR LIST
-================================================== */
-
-async function loadDonors(){
-
-  const list =
-    document.getElementById("donorList");
-
-
-  list.innerHTML =
-    '<div class="donor-empty">⏳ তালিকা লোড হচ্ছে...</div>';
-
-
-  try{
-
-    const { data, error } = await sb
-      .rpc("get_public_blood_donors");
-
-
-    if(error){
-
-      console.error(error);
-
-      list.innerHTML =
-        '<div class="donor-empty">❌ তালিকা লোড করা যায়নি।</div>';
-
-      return;
-    }
-
-
-    if(!data || data.length === 0){
-
-      list.innerHTML =
-        '<div class="donor-empty">বর্তমানে কোনো রক্তদাতা তালিকাভুক্ত নেই।</div>';
-
-      return;
-    }
-
-
-    list.innerHTML = data.map(function(donor){
-
-      const donorName =
-        escapeHTML(donor.name || "নাম দেওয়া হয়নি");
-
-      const donorBlood =
-        escapeHTML(donor.blood_group || "");
-
-      const donorArea =
-        escapeHTML(donor.area || "এলাকা উল্লেখ নেই");
-
-
-      return `
-
-        <div class="donor-card">
-
-          <div class="donor-card-top">
-
-            <div class="donor-name">
-              ${donorName}
-            </div>
-
-            <div class="blood-badge">
-              🩸 ${donorBlood}
-            </div>
-
-          </div>
-
-          <div class="donor-area">
-            📍 ${donorArea}
-          </div>
-
-          <span class="donor-status">
-            ● রক্তদানে আগ্রহী
-          </span>
-
-        </div>
-
-      `;
-
-    }).join("");
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    list.innerHTML =
-      '<div class="donor-empty">❌ একটি সমস্যা হয়েছে।</div>';
-
-  }
-
-}
-
-
-/* ==================================================
-   VOLUNTEER REGISTRATION
-================================================== */
-
-async function registerVolunteer(){
-
-  const name =
-    document.getElementById("volunteerName").value.trim();
-
-  const phone =
-    document.getElementById("volunteerPhone").value.trim();
-
-  const area =
-    document.getElementById("volunteerArea").value.trim();
-
-  const age =
-    document.getElementById("volunteerAge").value.trim();
-
-  const interest =
-    document.getElementById("volunteerInterest").value;
-
-  const message =
-    document.getElementById("volunteerMessage").value.trim();
-
-  const consent =
-    document.getElementById("volunteerConsent").checked;
-
-  const msg =
-    document.getElementById("volunteerMsg");
-
-
-  if(!name || !phone){
-
-    msg.textContent =
-      "⚠️ অনুগ্রহ করে নাম ও মোবাইল নম্বর দিন।";
-
-    return;
-  }
-
-
-  if(name.length < 2){
-
-    msg.textContent =
-      "⚠️ সঠিক নাম লিখুন।";
-
-    return;
-  }
-
-
-  if(phone.length < 10 || phone.length > 20){
-
-    msg.textContent =
-      "⚠️ সঠিক মোবাইল নম্বর লিখুন।";
-
-    return;
-  }
-
-
-  if(!consent){
-
-    msg.textContent =
-      "⚠️ নিবন্ধনের আগে সম্মতিতে টিক দিন।";
-
-    return;
-  }
-
-
-  msg.textContent =
-    "⏳ স্বেচ্ছাসেবক হিসেবে নিবন্ধন হচ্ছে...";
-
-
-  try{
-
-    const { error } = await sb
-      .from("volunteers")
-      .insert([
-
-        {
-          name:name,
-          phone:phone,
-          area:area || null,
-          age:age || null,
-          interest:interest || null
-        }
-
-      ]);
-
-
-    if(error){
-
-      console.error(error);
-
-      msg.textContent =
-        "❌ নিবন্ধন করা যায়নি। আবার চেষ্টা করুন।";
-
-      return;
-    }
-
-
-    msg.textContent =
-      "✅ সফলভাবে স্বেচ্ছাসেবক হিসেবে নিবন্ধিত হয়েছেন।";
-
-
-    document.getElementById("volunteerName").value = "";
-    document.getElementById("volunteerPhone").value = "";
-    document.getElementById("volunteerArea").value = "";
-    document.getElementById("volunteerAge").value = "";
-    document.getElementById("volunteerInterest").value = "";
-    document.getElementById("volunteerMessage").value = "";
-    document.getElementById("volunteerConsent").checked = false;
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    msg.textContent =
-      "❌ একটি সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।";
-
-  }
-
-}
-
-
-/* ==================================================
-   SAFE HTML
-================================================== */
-
-function escapeHTML(value){
-
-  return String(value)
-
-    .replace(/&/g, "&amp;")
-
-    .replace(/</g, "&lt;")
-
-    .replace(/>/g, "&gt;")
-
-    .replace(/"/g, "&quot;")
-
-    .replace(/'/g, "&#039;");
-
-}
-
-
-/* ==================================================
-   PAYMENT SUBMISSION
-================================================== */
-
-async function submitPayment(){
-
-  const name =
-    document.getElementById("paymentName").value.trim();
-
-  const bkash =
-    document.getElementById("paymentBkash").value.trim();
-
-  const amount =
-    document.getElementById("paymentAmount").value;
-
-  const trx =
-    document.getElementById("paymentTrx").value.trim();
-
-  const msg =
-    document.getElementById("paymentMsg");
-
-
-  if(!name || !bkash || !amount || !trx){
-
-    msg.textContent =
-      "⚠️ অনুগ্রহ করে সব তথ্য পূরণ করুন।";
-
-    return;
-  }
-
-
-  if(Number(amount) <= 0){
-
-    msg.textContent =
-      "⚠️ সঠিক টাকার পরিমাণ লিখুন।";
-
-    return;
-  }
-
-
-  if(trx.length < 3){
-
-    msg.textContent =
-      "⚠️ সঠিক Transaction ID লিখুন।";
-
-    return;
-  }
-
-
-  msg.textContent =
-    "⏳ পেমেন্ট তথ্য জমা হচ্ছে...";
-
-
-  try{
-
-    const { error } = await sb
-      .from("payment_requests")
-      .insert([
-
-        {
-          name:name,
-          bkash_number:bkash,
-          amount:Number(amount),
-          transaction_id:trx,
-          status:"pending"
-        }
-
-      ]);
-
-
-    if(error){
-
-      console.error(error);
-
-      msg.textContent =
-        "❌ পেমেন্ট জমা দেওয়া যায়নি। আবার চেষ্টা করুন।";
-
-      return;
-    }
-
-
-    msg.textContent =
-      "✅ পেমেন্ট তথ্য সফলভাবে জমা হয়েছে। যাচাই শেষে অনুমোদন করা হবে।";
-
-
-    document.getElementById("paymentName").value = "";
-    document.getElementById("paymentBkash").value = "";
-    document.getElementById("paymentAmount").value = "";
-    document.getElementById("paymentTrx").value = "";
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    msg.textContent =
-      "❌ একটি সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।";
-
-  }
-
-}
-
-
-/* ==================================================
-   PAGE LOAD
-================================================== */
-
-document.addEventListener("DOMContentLoaded", function(){
-
-  loadDonors();
-
-});
-
-</script>
 
 </body>
 </html>
