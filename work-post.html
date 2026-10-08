@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>কাজ পোস্ট করুন - মানবকল্যাণ যুব সংঘ</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#0f172a;
+  color:#fff;
+}
+
+.header{
+  text-align:center;
+  padding:30px 15px;
+  background:#111827;
+  border-bottom:1px solid #334155;
+}
+
+.header h1{
+  margin:0 0 8px;
+  font-size:27px;
+}
+
+.header p{
+  margin:0;
+  color:#94a3b8;
+  font-size:14px;
+}
+
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:25px 15px;
+}
+
+.box{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:20px;
+}
+
+.box h2{
+  margin-top:0;
+  font-size:21px;
+}
+
+.info{
+  background:#1e293b;
+  border-left:4px solid #22c55e;
+  padding:12px;
+  border-radius:8px;
+  color:#cbd5e1;
+  font-size:13px;
+  line-height:1.8;
+  margin-bottom:20px;
+}
+
+label{
+  display:block;
+  margin-top:15px;
+  margin-bottom:7px;
+  color:#cbd5e1;
+  font-size:14px;
+}
+
+input,
+textarea{
+
+  width:100%;
+
+  padding:13px;
+
+  border-radius:9px;
+
+  border:1px solid #475569;
+
+  background:#1e293b;
+
+  color:#fff;
+
+  font-size:14px;
+
+}
+
+input:focus,
+textarea:focus{
+
+  outline:none;
+
+  border-color:#22c55e;
+
+}
+
+textarea{
+
+  min-height:130px;
+
+  resize:vertical;
+
+}
+
+input[type="file"]{
+
+  padding:10px;
+
+}
+
+.preview{
+
+  display:none;
+
+  margin-top:12px;
+
+  border-radius:10px;
+
+  overflow:hidden;
+
+  border:1px solid #334155;
+
+}
+
+.preview img{
+
+  width:100%;
+
+  max-height:350px;
+
+  object-fit:cover;
+
+  display:block;
+
+}
+
+button{
+
+  width:100%;
+
+  padding:14px;
+
+  margin-top:20px;
+
+  border:0;
+
+  border-radius:9px;
+
+  background:#16a34a;
+
+  color:#fff;
+
+  font-weight:bold;
+
+  font-size:15px;
+
+  cursor:pointer;
+
+}
+
+button:hover{
+  opacity:.9;
+}
+
+button:disabled{
+
+  opacity:.6;
+
+  cursor:not-allowed;
+
+}
+
+.msg{
+
+  text-align:center;
+
+  margin-top:14px;
+
+  line-height:1.7;
+
+  font-size:14px;
+
+}
+
+.success{
+  color:#86efac;
+}
+
+.error{
+  color:#fca5a5;
+}
+
+.pending{
+
+  background:#422006;
+
+  color:#fde68a;
+
+  border:1px solid #92400e;
+
+  padding:12px;
+
+  border-radius:9px;
+
+  margin-top:15px;
+
+  text-align:center;
+
+  font-size:13px;
+
+  line-height:1.7;
+
+}
+
+.footer{
+
+  text-align:center;
+
+  color:#64748b;
+
+  font-size:12px;
+
+  padding:25px 10px;
+
+}
+
+@media(max-width:500px){
+
+  .container{
+    padding:15px 10px;
+  }
+
+  .box{
+    padding:17px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<div class="header">
+
+  <h1>📸 আমাদের করা কাজ</h1>
+
+  <p>
+    মানবকল্যাণ যুব সংঘ
+  </p>
+
+</div>
+
+
+
+<div class="container">
+
+
+<!-- =========================
+     FORM
+========================= -->
+
+<div class="box">
+
+  <h2>
+    ➕ আমাদের করা কাজের তথ্য দিন
+  </h2>
+
+
+  <div class="info">
+
+    আপনি মানবকল্যাণ যুব সংঘের কোনো
+    মানবকল্যাণমূলক কাজের ছবি ও তথ্য
+    এখানে জমা দিতে পারেন।
+
+    <br><br>
+
+    🟡 পোস্ট করার পর Admin যাচাই করবেন।
+    Admin অনুমোদন করলে পোস্টটি
+    ওয়েবসাইটে সবার জন্য প্রকাশিত হবে।
+
+  </div>
+
+
+  <!-- কাজের নাম -->
+
+  <label>
+    কাজের নাম *
+  </label>
+
+  <input
+    type="text"
+    id="title"
+    placeholder="যেমন: শীতবস্ত্র বিতরণ কর্মসূচি"
+  >
+
+
+  <!-- তারিখ -->
+
+  <label>
+    কাজের তারিখ *
+  </label>
+
+  <input
+    type="date"
+    id="workDate"
+  >
+
+
+  <!-- স্থান -->
+
+  <label>
+    কাজের স্থান *
+  </label>
+
+  <input
+    type="text"
+    id="location"
+    placeholder="যেমন: হাপানিয়া, ত্রিশাল, ময়মনসিংহ"
+  >
+
+
+  <!-- বিবরণ -->
+
+  <label>
+    কাজের বিস্তারিত *
+  </label>
+
+  <textarea
+    id="description"
+    placeholder="কাজটি সম্পর্কে সংক্ষেপে লিখুন..."
+  ></textarea>
+
+
+  <!-- ছবি -->
+
+  <label>
+    কাজের ছবি *
+  </label>
+
+  <input
+    type="file"
+    id="image"
+    accept="image/*"
+  >
+
+
+  <!-- IMAGE PREVIEW -->
+
+  <div
+    id="preview"
+    class="preview"
+  >
+
+    <img
+      id="previewImage"
+      alt="ছবির প্রিভিউ"
+    >
+
+  </div>
+
+
+  <!-- SUBMIT -->
+
+  <button
+    id="submitBtn"
+    onclick="submitWork()"
+  >
+
+    📤 কাজের তথ্য জমা দিন
+
+  </button>
+
+
+  <!-- MESSAGE -->
+
+  <div
+    id="msg"
+    class="msg"
+  ></div>
+
+</div>
+
+
+<!-- =========================
+     NOTICE
+========================= -->
+
+<div class="box">
+
+  <h2>
+    📌 গুরুত্বপূর্ণ তথ্য
+  </h2>
+
+  <div class="info">
+
+    আপনার জমা দেওয়া পোস্ট প্রথমে
+    <b>Pending</b> অবস্থায় থাকবে।
+
+    <br><br>
+
+    Admin যাচাই করার পর:
+
+    <br>
+
+    ✅ Accept → ওয়েবসাইটে প্রকাশিত হবে
+
+    <br>
+
+    ❌ Reject → প্রকাশিত হবে না
+
+  </div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+  © মানবকল্যাণ যুব সংঘ
+
+</div>
+
+
+
+<!-- =========================
+     SUPABASE
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+<script>
+
+/* =========================
+   SUPABASE CLIENT
+========================= */
+
+const sb = supabase.createClient(
+
+  window.SUPABASE_URL,
+
+  window.SUPABASE_ANON_KEY
+
+);
+
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+document
+  .getElementById("image")
+  .addEventListener(
+    "change",
+    function(){
+
+      const file =
+        this.files[0];
+
+      const preview =
+        document.getElementById(
+          "preview"
+        );
+
+      const previewImage =
+        document.getElementById(
+          "previewImage"
+        );
+
+
+      if(!file){
+
+        preview.style.display =
+          "none";
+
+        previewImage.src =
+          "";
+
+        return;
+
+      }
+
+
+      /* শুধু ছবি */
+
+      if(
+        !file.type.startsWith(
+          "image/"
+        )
+      ){
+
+        alert(
+          "⚠️ শুধুমাত্র ছবি নির্বাচন করুন।"
+        );
+
+        this.value = "";
+
+        preview.style.display =
+          "none";
+
+        return;
+
+      }
+
+
+      /* 5 MB LIMIT */
+
+      if(
+        file.size >
+        5 * 1024 * 1024
+      ){
+
+        alert(
+          "⚠️ ছবির সাইজ সর্বোচ্চ 5 MB হতে হবে।"
+        );
+
+        this.value = "";
+
+        preview.style.display =
+          "none";
+
+        return;
+
+      }
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function(e){
+
+          previewImage.src =
+            e.target.result;
+
+          preview.style.display =
+            "block";
+
+        };
+
+
+      reader.readAsDataURL(
+        file
+      );
+
+    }
+  );
+
+
+/* =========================
+   SUBMIT WORK
+========================= */
+
+async function submitWork(){
+
+  const title =
+    document
+      .getElementById("title")
+      .value
+      .trim();
+
+
+  const workDate =
+    document
+      .getElementById("workDate")
+      .value;
+
+
+  const location =
+    document
+      .getElementById("location")
+      .value
+      .trim();
+
+
+  const description =
+    document
+      .getElementById("description")
+      .value
+      .trim();
+
+
+  const imageInput =
+    document
+      .getElementById("image");
+
+
+  const file =
+    imageInput.files[0];
+
+
+  const msg =
+    document
+      .getElementById("msg");
+
+
+  const button =
+    document
+      .getElementById("submitBtn");
+
+
+  /* =========================
+     VALIDATION
+  ========================= */
+
+  if(!title){
+
+    msg.className =
+      "msg error";
+
+    msg.textContent =
+      "⚠️ কাজের নাম লিখুন।";
+
+    return;
+
+  }
+
+
+  if(!workDate){
+
+    msg.className =
+      "msg error";
+
+    msg.textContent =
+      "⚠️ কাজের তারিখ নির্বাচন করুন।";
+
+    return;
+
+  }
+
+
+  if(!location){
+
+    msg.className =
+      "msg error";
+
+    msg.textContent =
+      "⚠️ কাজের স্থান লিখুন।";
+
+    return;
+
+  }
+
+
+  if(!description){
+
+    msg.className =
+      "msg error";
+
+    msg.textContent =
+      "⚠️ কাজের বিস্তারিত লিখুন।";
+
+    return;
+
+  }
+
+
+  if(!file){
+
+    msg.className =
+      "msg error";
+
+    msg.textContent =
+      "⚠️ কাজের একটি ছবি নির্বাচন করুন।";
+
+    return;
+
+  }
+
+
+  if(
+    !file.type.startsWith(
+      "image/"
+    )
+  ){
+
+    msg.className =
+      "msg error";
+
+    msg.textContent =
+      "⚠️ শুধুমাত্র ছবি আপলোড করা যাবে।";
+
+    return;
+
+  }
+
+
+  if(
+    file.size >
+    5 * 1024 * 1024
+  ){
+
+    msg.className =
+      "msg error";
+
+    msg.textContent =
+      "⚠️ ছবির সাইজ 5 MB-এর বেশি হতে পারবে না।";
+
+    return;
+
+  }
+
+
+  /* =========================
+     START
+  ========================= */
+
+  button.disabled =
+    true;
+
+
+  msg.className =
+    "msg";
+
+  msg.textContent =
+    "⏳ ছবি আপলোড হচ্ছে...";
+
+
+  try{
+
+    /* =========================
+       UNIQUE FILE NAME
+    ========================= */
+
+    const fileExt =
+      file.name
+        .split(".")
+        .pop()
+        .toLowerCase();
+
+
+    const fileName =
+
+      Date.now() +
+      "_" +
+      Math.random()
+        .toString(36)
+        .substring(2,10) +
+      "." +
+      fileExt;
+
+
+    const filePath =
+      fileName;
+
+
+    /* =========================
+       UPLOAD IMAGE
+    ========================= */
+
+    const {
+      data:uploadData,
+      error:uploadError
+    } =
+
+      await sb.storage
+        .from("work-images")
+        .upload(
+          filePath,
+          file,
+          {
+            cacheControl:"3600",
+            upsert:false
+          }
+        );
+
+
+    if(uploadError){
+
+      console.error(
+        "IMAGE UPLOAD ERROR:",
+        uploadError
+      );
+
+      msg.className =
+        "msg error";
+
+      msg.innerHTML =
+        "❌ ছবি আপলোড হয়নি।<br>" +
+        "<small>" +
+        escapeHTML(
+          uploadError.message
+        ) +
+        "</small>";
+
+      button.disabled =
+        false;
+
+      return;
+
+    }
+
+
+    /* =========================
+       GET PUBLIC IMAGE URL
+    ========================= */
+
+    const {
+      data:publicData
+    } =
+
+      sb.storage
+        .from("work-images")
+        .getPublicUrl(
+          filePath
+        );
+
+
+    const imageUrl =
+      publicData.publicUrl;
+
+
+    if(!imageUrl){
+
+      msg.className =
+        "msg error";
+
+      msg.textContent =
+        "❌ ছবির URL পাওয়া যায়নি।";
+
+      button.disabled =
+        false;
+
+      return;
+
+    }
+
+
+    /* =========================
+       SAVE POST
+    ========================= */
+
+    msg.className =
+      "msg";
+
+    msg.textContent =
+      "⏳ কাজের তথ্য সংরক্ষণ হচ্ছে...";
+
+
+    const {
+      data,
+      error
+    } =
+
+      await sb
+        .from("work_posts")
+        .insert({
+
+          title:title,
+
+          work_date:workDate,
+
+          location:location,
+
+          description:description,
+
+          image_url:imageUrl,
+
+          status:"pending"
+
+        })
+        .select();
+
+
+    /* =========================
+       DATABASE ERROR
+    ========================= */
+
+    if(error){
+
+      console.error(
+        "DATABASE ERROR:",
+        error
+      );
+
+
+      /*
+       যদি Database-এ Save না হয়,
+       তাহলে Upload করা ছবিটিও
+       মুছে দেওয়ার চেষ্টা করা হবে।
+      */
+
+      await sb.storage
+        .from("work-images")
+        .remove([
+          filePath
+        ]);
+
+
+      msg.className =
+        "msg error";
+
+      msg.innerHTML =
+        "❌ তথ্য সংরক্ষণ হয়নি।<br>" +
+        "<small>" +
+        escapeHTML(
+          error.message
+        ) +
+        "</small>";
+
+      button.disabled =
+        false;
+
+      return;
+
+    }
+
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    msg.className =
+      "msg success";
+
+    msg.textContent =
+      "✅ আপনার কাজের তথ্য সফলভাবে জমা হয়েছে।";
+
+
+    /* =========================
+       PENDING MESSAGE
+    ========================= */
+
+    const pending =
+      document.createElement(
+        "div"
+      );
+
+    pending.className =
+      "pending";
+
+    pending.innerHTML =
+      "🟡 আপনার পোস্টটি এখন <b>Pending</b> অবস্থায় আছে।<br>" +
+      "Admin যাচাই করে Accept করলে এটি ওয়েবসাইটে প্রকাশিত হবে।";
+
+
+    msg.appendChild(
+      pending
+    );
+
+
+    /* =========================
+       CLEAR FORM
+    ========================= */
+
+    document
+      .getElementById("title")
+      .value = "";
+
+
+    document
+      .getElementById("workDate")
+      .value = "";
+
+
+    document
+      .getElementById("location")
+      .value = "";
+
+
+    document
+      .getElementById("description")
+      .value = "";
+
+
+    document
+      .getElementById("image")
+      .value = "";
+
+
+    document
+      .getElementById("preview")
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById("previewImage")
+      .src =
+        "";
+
+
+  }catch(error){
+
+    console.error(
+      "SYSTEM ERROR:",
+      error
+    );
+
+
+    msg.className =
+      "msg error";
+
+    msg.innerHTML =
+      "❌ সমস্যা হয়েছে।<br>" +
+      "<small>" +
+      escapeHTML(
+        error.message ||
+        String(error)
+      ) +
+      "</small>";
+
+  }
+
+
+  button.disabled =
+    false;
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+</script>
+
+</body>
+
+</html>
