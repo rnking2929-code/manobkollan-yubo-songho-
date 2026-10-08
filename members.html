@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>সদস্য — মানবকল্যাণ যুব সংঘ</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      font-family:Arial,"Noto Sans Bengali",sans-serif;
+      background:#07111f;
+      color:#fff;
+      padding-bottom:80px;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .topbar{
+      background:#0d1b2a;
+      padding:16px 18px;
+      text-align:center;
+      border-bottom:1px solid #24364a;
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+
+    .topbar h1{
+      font-size:20px;
+      margin-bottom:5px;
+    }
+
+    .topbar p{
+      color:#aebdca;
+      font-size:13px;
+    }
+
+    .container{
+      max-width:900px;
+      margin:auto;
+      padding:20px 15px;
+    }
+
+    .hero{
+      text-align:center;
+      padding:25px 10px;
+    }
+
+    .hero .icon{
+      font-size:55px;
+      margin-bottom:10px;
+    }
+
+    .hero h2{
+      font-size:28px;
+      margin-bottom:8px;
+    }
+
+    .hero p{
+      color:#b8c5d1;
+      line-height:1.7;
+    }
+
+    .card{
+      background:#0d1b2a;
+      border:1px solid #24364a;
+      border-radius:16px;
+      padding:20px;
+      margin-bottom:18px;
+      box-shadow:0 8px 25px rgba(0,0,0,.18);
+    }
+
+    .card h3{
+      margin-bottom:15px;
+      font-size:20px;
+    }
+
+    .count{
+      text-align:center;
+      font-size:32px;
+      font-weight:bold;
+      margin:10px 0 5px;
+    }
+
+    .count-label{
+      text-align:center;
+      color:#aebdca;
+      font-size:14px;
+    }
+
+    .member-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .member{
+      background:#081522;
+      border:1px solid #26394d;
+      border-radius:12px;
+      padding:15px;
+    }
+
+    .member-name{
+      font-size:18px;
+      font-weight:bold;
+      margin-bottom:8px;
+    }
+
+    .member-info{
+      color:#b9c7d3;
+      font-size:14px;
+      line-height:1.8;
+    }
+
+    .role{
+      display:inline-block;
+      background:#163451;
+      padding:5px 9px;
+      border-radius:7px;
+      margin-right:6px;
+    }
+
+    .empty{
+      text-align:center;
+      color:#9eacb8;
+      padding:20px;
+    }
+
+    .links{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:15px;
+    }
+
+    .link-box{
+      background:#132438;
+      border:1px solid #263b51;
+      padding:13px;
+      border-radius:10px;
+      text-align:center;
+      font-size:14px;
+    }
+
+    .bottom-nav{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      height:65px;
+      background:#0d1b2a;
+      border-top:1px solid #24364a;
+      display:flex;
+      justify-content:space-around;
+      align-items:center;
+      z-index:20;
+    }
+
+    .bottom-nav a{
+      text-align:center;
+      font-size:12px;
+      color:#b9c7d3;
+    }
+
+    .bottom-nav span{
+      display:block;
+      font-size:20px;
+      margin-bottom:3px;
+    }
+
+    @media(max-width:600px){
+      .hero h2{
+        font-size:24px;
+      }
+
+      .links{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <h1>👥 মানবকল্যাণ যুব সংঘ</h1>
+    <p>ঐক্য • মানবতা • স্বেচ্ছাসেবা</p>
+  </header>
+
+  <main class="container">
+
+    <section class="hero">
+      <div class="icon">👥</div>
+
+      <h2>আমাদের সদস্যবৃন্দ</h2>
+
+      <p>
+        মানবকল্যাণ যুব সংঘের সদস্যদের তালিকা।
+        সংগঠনের কার্যক্রমে সদস্যদের অংশগ্রহণ ও সহযোগিতাই
+        আমাদের এগিয়ে যাওয়ার শক্তি।
+      </p>
+
+      <a
+        href="index.html"
+        style="display:inline-block;margin-top:12px;color:#b9c7d3;font-size:14px;"
+      >
+        ← হোম পেজে ফিরে যান
+      </a>
+    </section>
+
+
+    <!-- Member Count -->
+    <section class="card">
+
+      <h3>📊 সদস্য সংখ্যা</h3>
+
+      <div id="memberCount" class="count">
+        —
+      </div>
+
+      <div class="count-label">
+        নিবন্ধিত সদস্য
+      </div>
+
+    </section>
+
+
+    <!-- Member List -->
+    <section class="card">
+
+      <h3>👥 সদস্যদের তালিকা</h3>
+
+      <p style="color:#9eacb8;font-size:13px;margin-bottom:15px;">
+        সংগঠনের সদস্যদের প্রকাশ্য তথ্য এখানে দেখা যাবে।
+        ব্যক্তিগত মোবাইল নম্বর প্রকাশ করা হবে না।
+      </p>
+
+      <div id="memberList" class="member-list">
+
+        <div class="empty">
+          সদস্যদের তালিকা লোড হচ্ছে...
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Other Pages -->
+    <section class="card">
+
+      <h3>আরও দেখুন</h3>
+
+      <div class="links">
+
+        <a class="link-box" href="blood.html">
+          🩸 রক্তদান
+        </a>
+
+        <a class="link-box" href="volunteer.html">
+          🤝 স্বেচ্ছাসেবক
+        </a>
+
+        <a class="link-box" href="activities.html">
+          📅 কর্মপরিকল্পনা
+        </a>
+
+        <a class="link-box" href="finance.html">
+          💰 প্রকাশ্য হিসাব
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+
+    <a href="index.html">
+      <span>🏠</span>
+      হোম
+    </a>
+
+    <a href="organization.html">
+      <span>🏢</span>
+      সংগঠন
+    </a>
+
+    <a href="blood.html">
+      <span>🩸</span>
+      রক্ত
+    </a>
+
+    <a href="volunteer.html">
+      <span>🤝</span>
+      স্বেচ্ছাসেবক
+    </a>
+
+    <a href="contact.html">
+      <span>📞</span>
+      যোগাযোগ
+    </a>
+
+  </nav>
+
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+
+  <script>
+
+    const sb = supabase.createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_ANON_KEY
+    );
+
+
+    function escapeHTML(value){
+
+      return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+    }
+
+
+    async function loadMembers(){
+
+      const list =
+        document.getElementById("memberList");
+
+      const count =
+        document.getElementById("memberCount");
+
+
+      list.innerHTML =
+        '<div class="empty">তালিকা লোড হচ্ছে...</div>';
+
+
+      /*
+        members টেবিল তৈরি না হওয়া পর্যন্ত
+        এখানে error দেখাতে পারে।
+      */
+
+      const { data, error } = await sb
+        .from("members")
+        .select("id,name,role,area,status,joined_at")
+        .eq("status","active")
+        .order("joined_at",{ascending:false});
+
+
+      if(error){
+
+        console.error(error);
+
+        count.textContent = "—";
+
+        list.innerHTML = `
+          <div class="empty">
+            সদস্যদের তালিকা এখনো প্রস্তুত করা হয়নি।
+          </div>
+        `;
+
+        return;
+      }
+
+
+      count.textContent =
+        data ? data.length : 0;
+
+
+      if(!data || data.length === 0){
+
+        list.innerHTML = `
+          <div class="empty">
+            এখনো কোনো সক্রিয় সদস্যের তথ্য যোগ করা হয়নি।
+          </div>
+        `;
+
+        return;
+      }
+
+
+      list.innerHTML = data.map(member => {
+
+        const name =
+          escapeHTML(member.name);
+
+        const role =
+          escapeHTML(member.role || "সদস্য");
+
+        const area =
+          escapeHTML(member.area || "এলাকা উল্লেখ নেই");
+
+
+        return `
+          <div class="member">
+
+            <div class="member-name">
+              ${name}
+            </div>
+
+            <div class="member-info">
+
+              <span class="role">
+                ${role}
+              </span>
+
+              📍 ${area}
+
+            </div>
+
+          </div>
+        `;
+
+      }).join("");
+
+    }
+
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      loadMembers
+    );
+
+  </script>
+
+</body>
+</html>
