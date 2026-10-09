@@ -1,1082 +1,423 @@
+
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>কাজ পোস্ট করুন - মানবকল্যাণ যুব সংঘ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111827">
+<title>আমাদের করা কাজ - মানবকল্যাণ যুব সংঘ</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
-  background:#0f172a;
-  color:#fff;
+  background:#020617;
+  color:#f8fafc;
+  font-family:Arial,"Noto Sans Bengali","SolaimanLipi",sans-serif;
 }
-
-.header{
+a{color:inherit;text-decoration:none}
+header{
+  padding:25px 16px;
   text-align:center;
-  padding:30px 15px;
-  background:#111827;
   border-bottom:1px solid #334155;
+  background:#0f172a;
 }
-
-.header h1{
-  margin:0 0 8px;
-  font-size:27px;
-}
-
-.header p{
-  margin:0;
-  color:#94a3b8;
-  font-size:14px;
-}
-
-.container{
-  max-width:700px;
-  margin:auto;
-  padding:25px 15px;
-}
-
-.box{
-  background:#111827;
-  border:1px solid #334155;
-  border-radius:16px;
-  padding:22px;
-  margin-bottom:20px;
-}
-
-.box h2{
-  margin-top:0;
-  font-size:21px;
-}
-
-.info{
-  background:#1e293b;
-  border-left:4px solid #22c55e;
-  padding:12px;
-  border-radius:8px;
-  color:#cbd5e1;
-  font-size:13px;
-  line-height:1.8;
-  margin-bottom:20px;
-}
-
-label{
-  display:block;
-  margin-top:15px;
-  margin-bottom:7px;
-  color:#cbd5e1;
-  font-size:14px;
-}
-
-input,
-textarea{
-
-  width:100%;
-
-  padding:13px;
-
-  border-radius:9px;
-
-  border:1px solid #475569;
-
-  background:#1e293b;
-
-  color:#fff;
-
-  font-size:14px;
-
-}
-
-input:focus,
-textarea:focus{
-
-  outline:none;
-
-  border-color:#22c55e;
-
-}
-
-textarea{
-
-  min-height:130px;
-
-  resize:vertical;
-
-}
-
-input[type="file"]{
-
-  padding:10px;
-
-}
-
-.preview{
-
+header h1{font-size:27px;margin:5px 0 10px}
+header p{color:#94a3b8;margin:0}
+.container{max-width:760px;margin:auto;padding:20px 16px}
+.section-title{font-size:23px;margin:12px 0 18px}
+.message{
   display:none;
-
-  margin-top:12px;
-
+  padding:13px;
   border-radius:10px;
-
-  overflow:hidden;
-
+  margin-bottom:15px;
+  line-height:1.7;
+  overflow-wrap:anywhere;
+}
+.success{background:#052e16;color:#bbf7d0}
+.error{background:#450a0a;color:#fecaca}
+.work-list{display:grid;gap:18px}
+.work-card{
   border:1px solid #334155;
-
+  background:#0f172a;
+  border-radius:17px;
+  padding:16px;
+  overflow:hidden;
 }
-
-.preview img{
-
+.work-image{
   width:100%;
-
-  max-height:350px;
-
-  object-fit:cover;
-
+  max-height:420px;
+  object-fit:contain;
+  background:#020617;
+  border-radius:12px;
   display:block;
-
 }
-
-button{
-
-  width:100%;
-
-  padding:14px;
-
-  margin-top:20px;
-
-  border:0;
-
-  border-radius:9px;
-
-  background:#16a34a;
-
-  color:#fff;
-
-  font-weight:bold;
-
-  font-size:15px;
-
-  cursor:pointer;
-
+.work-card h3{font-size:22px;margin:16px 0 12px}
+.work-meta{color:#cbd5e1;line-height:1.9;font-size:15px}
+.work-description{
+  white-space:pre-wrap;
+  line-height:1.8;
+  color:#e2e8f0;
+  overflow-wrap:anywhere;
+  margin-top:12px;
 }
-
-button:hover{
-  opacity:.9;
-}
-
-button:disabled{
-
-  opacity:.6;
-
-  cursor:not-allowed;
-
-}
-
-.msg{
-
+.empty{
   text-align:center;
-
-  margin-top:14px;
-
-  line-height:1.7;
-
-  font-size:14px;
-
+  padding:25px 15px;
+  background:#0f172a;
+  border:1px solid #334155;
+  border-radius:14px;
+  color:#cbd5e1;
+  line-height:1.8;
 }
-
-.success{
-  color:#86efac;
+.form-box{
+  margin-top:28px;
+  border:1px solid #334155;
+  background:#0f172a;
+  border-radius:17px;
+  padding:18px;
 }
-
-.error{
-  color:#fca5a5;
-}
-
-.pending{
-
-  background:#422006;
-
-  color:#fde68a;
-
-  border:1px solid #92400e;
-
+.notice{
+  border-left:4px solid #16a34a;
   padding:12px;
-
-  border-radius:9px;
-
-  margin-top:15px;
-
+  color:#cbd5e1;
+  background:#020617;
+  line-height:1.8;
+  margin:15px 0 20px;
+}
+label{display:block;margin:16px 0 8px;color:#cbd5e1}
+input,textarea{
+  width:100%;
+  padding:14px;
+  border:1px solid #475569;
+  border-radius:10px;
+  background:#1e293b;
+  color:white;
+  font:inherit;
+  font-size:16px;
+}
+textarea{min-height:130px;resize:vertical}
+input[type=file]{font-size:14px}
+button{
+  width:100%;
+  padding:14px;
+  margin-top:18px;
+  border:0;
+  border-radius:10px;
+  background:#15803d;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:disabled{opacity:.6;cursor:wait}
+.preview{
+  display:none;
+  width:100%;
+  max-height:300px;
+  object-fit:contain;
+  margin-top:12px;
+  border-radius:10px;
+  background:#020617;
+}
+.back{
+  display:inline-block;
+  margin-top:18px;
+  color:#7dd3fc;
+}
+footer{
   text-align:center;
-
-  font-size:13px;
-
-  line-height:1.7;
-
+  padding:24px 12px;
+  color:#94a3b8;
+  border-top:1px solid #334155;
+  margin-top:25px;
 }
-
-.footer{
-
-  text-align:center;
-
-  color:#64748b;
-
-  font-size:12px;
-
-  padding:25px 10px;
-
-}
-
-@media(max-width:500px){
-
-  .container{
-    padding:15px 10px;
-  }
-
-  .box{
-    padding:17px;
-  }
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
-
-<div class="header">
-
+<header>
   <h1>📸 আমাদের করা কাজ</h1>
+  <p>মানবকল্যাণ যুব সংঘ</p>
+</header>
 
-  <p>
-    মানবকল্যাণ যুব সংঘ
-  </p>
+<main class="container">
 
-</div>
+  <h2 class="section-title">🌿 আমাদের সম্পন্ন কার্যক্রম</h2>
 
-
-
-<div class="container">
-
-
-<!-- =========================
-     FORM
-========================= -->
-
-<div class="box">
-
-  <h2>
-    ➕ আমাদের করা কাজের তথ্য দিন
-  </h2>
-
-
-  <div class="info">
-
-    আপনি মানবকল্যাণ যুব সংঘের কোনো
-    মানবকল্যাণমূলক কাজের ছবি ও তথ্য
-    এখানে জমা দিতে পারেন।
-
-    <br><br>
-
-    🟡 পোস্ট করার পর Admin যাচাই করবেন।
-    Admin অনুমোদন করলে পোস্টটি
-    ওয়েবসাইটে সবার জন্য প্রকাশিত হবে।
-
+  <div id="listMessage" class="message error"></div>
+  <div id="workList" class="work-list">
+    <div class="empty">⏳ অনুমোদিত কাজগুলো লোড হচ্ছে...</div>
   </div>
 
+  <section class="form-box">
+    <h2 class="section-title">➕ আমাদের করা কাজের তথ্য দিন</h2>
 
-  <!-- কাজের নাম -->
+    <div class="notice">
+      আপনি মানবকল্যাণ যুব সংঘের কোনো মানবকল্যাণমূলক কাজের ছবি ও তথ্য এখানে জমা দিতে পারবেন।
+      <br><br>
+      🟡 জমা দেওয়ার পর Admin যাচাই করবেন। অনুমোদিত হলে কাজটি সবার জন্য প্রকাশিত হবে।
+    </div>
 
-  <label>
-    কাজের নাম *
-  </label>
+    <div id="formMessage" class="message"></div>
 
-  <input
-    type="text"
-    id="title"
-    placeholder="যেমন: শীতবস্ত্র বিতরণ কর্মসূচি"
-  >
+    <form id="workForm">
+      <label for="title">কাজের নাম *</label>
+      <input id="title" type="text" maxlength="150"
+        placeholder="যেমন: শীতবস্ত্র বিতরণ কর্মসূচি" required>
 
+      <label for="workDate">কাজের তারিখ *</label>
+      <input id="workDate" type="date" required>
 
-  <!-- তারিখ -->
+      <label for="location">কাজের স্থান *</label>
+      <input id="location" type="text" maxlength="200"
+        placeholder="যেমন: হাপানিয়া, ত্রিশাল, ময়মনসিংহ" required>
 
-  <label>
-    কাজের তারিখ *
-  </label>
+      <label for="description">কাজের বিস্তারিত *</label>
+      <textarea id="description" maxlength="5000"
+        placeholder="কাজটি সম্পর্কে বিস্তারিত লিখুন..." required></textarea>
 
-  <input
-    type="date"
-    id="workDate"
-  >
+      <label for="image">কাজের ছবি * (সর্বোচ্চ ৫ MB)</label>
+      <input id="image" type="file" accept="image/*" required>
+      <img id="preview" class="preview" alt="ছবির প্রিভিউ">
 
+      <button id="submitBtn" type="submit">📤 কাজ জমা দিন</button>
+    </form>
+  </section>
 
-  <!-- স্থান -->
+  <a class="back" href="index.html">← হোম পেজে ফিরে যান</a>
 
-  <label>
-    কাজের স্থান *
-  </label>
+</main>
 
-  <input
-    type="text"
-    id="location"
-    placeholder="যেমন: হাপানিয়া, ত্রিশাল, ময়মনসিংহ"
-  >
-
-
-  <!-- বিবরণ -->
-
-  <label>
-    কাজের বিস্তারিত *
-  </label>
-
-  <textarea
-    id="description"
-    placeholder="কাজটি সম্পর্কে সংক্ষেপে লিখুন..."
-  ></textarea>
-
-
-  <!-- ছবি -->
-
-  <label>
-    কাজের ছবি *
-  </label>
-
-  <input
-    type="file"
-    id="image"
-    accept="image/*"
-  >
-
-
-  <!-- IMAGE PREVIEW -->
-
-  <div
-    id="preview"
-    class="preview"
-  >
-
-    <img
-      id="previewImage"
-      alt="ছবির প্রিভিউ"
-    >
-
-  </div>
-
-
-  <!-- SUBMIT -->
-
-  <button
-    id="submitBtn"
-    onclick="submitWork()"
-  >
-
-    📤 কাজের তথ্য জমা দিন
-
-  </button>
-
-
-  <!-- MESSAGE -->
-
-  <div
-    id="msg"
-    class="msg"
-  ></div>
-
-</div>
-
-
-<!-- =========================
-     NOTICE
-========================= -->
-
-<div class="box">
-
-  <h2>
-    📌 গুরুত্বপূর্ণ তথ্য
-  </h2>
-
-  <div class="info">
-
-    আপনার জমা দেওয়া পোস্ট প্রথমে
-    <b>Pending</b> অবস্থায় থাকবে।
-
-    <br><br>
-
-    Admin যাচাই করার পর:
-
-    <br>
-
-    ✅ Accept → ওয়েবসাইটে প্রকাশিত হবে
-
-    <br>
-
-    ❌ Reject → প্রকাশিত হবে না
-
-  </div>
-
-</div>
-
-
-</div>
-
-
-
-<!-- FOOTER -->
-
-<div class="footer">
-
-  © মানবকল্যাণ যুব সংঘ
-
-</div>
-
-
-
-<!-- =========================
-     SUPABASE
-========================= -->
+<footer>
+  মানবকল্যাণ যুব সংঘ<br>
+  ঐক্য • সহযোগিতা • মানবতা
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script src="config.js"></script>
 
-
 <script>
-
-/* =========================
-   SUPABASE CLIENT
-========================= */
-
 const sb = supabase.createClient(
-
   window.SUPABASE_URL,
-
   window.SUPABASE_ANON_KEY
-
 );
 
-
-/* =========================
-   IMAGE PREVIEW
-========================= */
-
-document
-  .getElementById("image")
-  .addEventListener(
-    "change",
-    function(){
-
-      const file =
-        this.files[0];
-
-      const preview =
-        document.getElementById(
-          "preview"
-        );
-
-      const previewImage =
-        document.getElementById(
-          "previewImage"
-        );
-
-
-      if(!file){
-
-        preview.style.display =
-          "none";
-
-        previewImage.src =
-          "";
-
-        return;
-
-      }
-
-
-      /* শুধু ছবি */
-
-      if(
-        !file.type.startsWith(
-          "image/"
-        )
-      ){
-
-        alert(
-          "⚠️ শুধুমাত্র ছবি নির্বাচন করুন।"
-        );
-
-        this.value = "";
-
-        preview.style.display =
-          "none";
-
-        return;
-
-      }
-
-
-      /* 5 MB LIMIT */
-
-      if(
-        file.size >
-        5 * 1024 * 1024
-      ){
-
-        alert(
-          "⚠️ ছবির সাইজ সর্বোচ্চ 5 MB হতে হবে।"
-        );
-
-        this.value = "";
-
-        preview.style.display =
-          "none";
-
-        return;
-
-      }
-
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        function(e){
-
-          previewImage.src =
-            e.target.result;
-
-          preview.style.display =
-            "block";
-
-        };
-
-
-      reader.readAsDataURL(
-        file
-      );
-
-    }
-  );
-
-
-/* =========================
-   SUBMIT WORK
-========================= */
-
-async function submitWork(){
-
-  const title =
-    document
-      .getElementById("title")
-      .value
-      .trim();
-
-
-  const workDate =
-    document
-      .getElementById("workDate")
-      .value;
-
-
-  const location =
-    document
-      .getElementById("location")
-      .value
-      .trim();
-
-
-  const description =
-    document
-      .getElementById("description")
-      .value
-      .trim();
-
-
-  const imageInput =
-    document
-      .getElementById("image");
-
-
-  const file =
-    imageInput.files[0];
-
-
-  const msg =
-    document
-      .getElementById("msg");
-
-
-  const button =
-    document
-      .getElementById("submitBtn");
-
-
-  /* =========================
-     VALIDATION
-  ========================= */
-
-  if(!title){
-
-    msg.className =
-      "msg error";
-
-    msg.textContent =
-      "⚠️ কাজের নাম লিখুন।";
-
-    return;
-
-  }
-
-
-  if(!workDate){
-
-    msg.className =
-      "msg error";
-
-    msg.textContent =
-      "⚠️ কাজের তারিখ নির্বাচন করুন।";
-
-    return;
-
-  }
-
-
-  if(!location){
-
-    msg.className =
-      "msg error";
-
-    msg.textContent =
-      "⚠️ কাজের স্থান লিখুন।";
-
-    return;
-
-  }
-
-
-  if(!description){
-
-    msg.className =
-      "msg error";
-
-    msg.textContent =
-      "⚠️ কাজের বিস্তারিত লিখুন।";
-
-    return;
-
-  }
-
-
-  if(!file){
-
-    msg.className =
-      "msg error";
-
-    msg.textContent =
-      "⚠️ কাজের একটি ছবি নির্বাচন করুন।";
-
-    return;
-
-  }
-
-
-  if(
-    !file.type.startsWith(
-      "image/"
-    )
-  ){
-
-    msg.className =
-      "msg error";
-
-    msg.textContent =
-      "⚠️ শুধুমাত্র ছবি আপলোড করা যাবে।";
-
-    return;
-
-  }
-
-
-  if(
-    file.size >
-    5 * 1024 * 1024
-  ){
-
-    msg.className =
-      "msg error";
-
-    msg.textContent =
-      "⚠️ ছবির সাইজ 5 MB-এর বেশি হতে পারবে না।";
-
-    return;
-
-  }
-
-
-  /* =========================
-     START
-  ========================= */
-
-  button.disabled =
-    true;
-
-
-  msg.className =
-    "msg";
-
-  msg.textContent =
-    "⏳ ছবি আপলোড হচ্ছে...";
-
-
-  try{
-
-    /* =========================
-       UNIQUE FILE NAME
-    ========================= */
-
-    const fileExt =
-      file.name
-        .split(".")
-        .pop()
-        .toLowerCase();
-
-
-    const fileName =
-
-      Date.now() +
-      "_" +
-      Math.random()
-        .toString(36)
-        .substring(2,10) +
-      "." +
-      fileExt;
-
-
-    const filePath =
-      fileName;
-
-
-    /* =========================
-       UPLOAD IMAGE
-    ========================= */
-
-    const {
-      data:uploadData,
-      error:uploadError
-    } =
-
-      await sb.storage
-        .from("work-images")
-        .upload(
-          filePath,
-          file,
-          {
-            cacheControl:"3600",
-            upsert:false
-          }
-        );
-
-
-    if(uploadError){
-
-      console.error(
-        "IMAGE UPLOAD ERROR:",
-        uploadError
-      );
-
-      msg.className =
-        "msg error";
-
-      msg.innerHTML =
-        "❌ ছবি আপলোড হয়নি।<br>" +
-        "<small>" +
-        escapeHTML(
-          uploadError.message
-        ) +
-        "</small>";
-
-      button.disabled =
-        false;
-
-      return;
-
-    }
-
-
-    /* =========================
-       GET PUBLIC IMAGE URL
-    ========================= */
-
-    const {
-      data:publicData
-    } =
-
-      sb.storage
-        .from("work-images")
-        .getPublicUrl(
-          filePath
-        );
-
-
-    const imageUrl =
-      publicData.publicUrl;
-
-
-    if(!imageUrl){
-
-      msg.className =
-        "msg error";
-
-      msg.textContent =
-        "❌ ছবির URL পাওয়া যায়নি।";
-
-      button.disabled =
-        false;
-
-      return;
-
-    }
-
-
-    /* =========================
-       SAVE POST
-    ========================= */
-
-    msg.className =
-      "msg";
-
-    msg.textContent =
-      "⏳ কাজের তথ্য সংরক্ষণ হচ্ছে...";
-
-
-    const {
-      data,
-      error
-    } =
-
-      await sb
-        .from("work_posts")
-        .insert({
-
-          title:title,
-
-          work_date:workDate,
-
-          location:location,
-
-          description:description,
-
-          image_url:imageUrl,
-
-          status:"pending"
-
-        })
-        .select();
-
-
-    /* =========================
-       DATABASE ERROR
-    ========================= */
-
-    if(error){
-
-      console.error(
-        "DATABASE ERROR:",
-        error
-      );
-
-
-      /*
-       যদি Database-এ Save না হয়,
-       তাহলে Upload করা ছবিটিও
-       মুছে দেওয়ার চেষ্টা করা হবে।
-      */
-
-      await sb.storage
-        .from("work-images")
-        .remove([
-          filePath
-        ]);
-
-
-      msg.className =
-        "msg error";
-
-      msg.innerHTML =
-        "❌ তথ্য সংরক্ষণ হয়নি।<br>" +
-        "<small>" +
-        escapeHTML(
-          error.message
-        ) +
-        "</small>";
-
-      button.disabled =
-        false;
-
-      return;
-
-    }
-
-
-    /* =========================
-       SUCCESS
-    ========================= */
-
-    msg.className =
-      "msg success";
-
-    msg.textContent =
-      "✅ আপনার কাজের তথ্য সফলভাবে জমা হয়েছে।";
-
-
-    /* =========================
-       PENDING MESSAGE
-    ========================= */
-
-    const pending =
-      document.createElement(
-        "div"
-      );
-
-    pending.className =
-      "pending";
-
-    pending.innerHTML =
-      "🟡 আপনার পোস্টটি এখন <b>Pending</b> অবস্থায় আছে।<br>" +
-      "Admin যাচাই করে Accept করলে এটি ওয়েবসাইটে প্রকাশিত হবে।";
-
-
-    msg.appendChild(
-      pending
-    );
-
-
-    /* =========================
-       CLEAR FORM
-    ========================= */
-
-    document
-      .getElementById("title")
-      .value = "";
-
-
-    document
-      .getElementById("workDate")
-      .value = "";
-
-
-    document
-      .getElementById("location")
-      .value = "";
-
-
-    document
-      .getElementById("description")
-      .value = "";
-
-
-    document
-      .getElementById("image")
-      .value = "";
-
-
-    document
-      .getElementById("preview")
-      .style.display =
-        "none";
-
-
-    document
-      .getElementById("previewImage")
-      .src =
-        "";
-
-
-  }catch(error){
-
-    console.error(
-      "SYSTEM ERROR:",
-      error
-    );
-
-
-    msg.className =
-      "msg error";
-
-    msg.innerHTML =
-      "❌ সমস্যা হয়েছে।<br>" +
-      "<small>" +
-      escapeHTML(
-        error.message ||
-        String(error)
-      ) +
-      "</small>";
-
-  }
-
-
-  button.disabled =
-    false;
-
-}
-
-
-/* =========================
-   ESCAPE HTML
-========================= */
+const workList = document.getElementById("workList");
+const listMessage = document.getElementById("listMessage");
+const formMessage = document.getElementById("formMessage");
+const form = document.getElementById("workForm");
+const submitBtn = document.getElementById("submitBtn");
+const imageInput = document.getElementById("image");
+const preview = document.getElementById("preview");
 
 function escapeHTML(value){
-
-  return String(
-    value ?? ""
-  )
-
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-
-  .replace(
-    /</g,
-    "&lt;"
-  )
-
-  .replace(
-    />/g,
-    "&gt;"
-  )
-
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-
-  .replace(
-    /'/g,
-    "&#039;"
-  );
-
+  return String(value ?? "").replace(/[&<>"']/g, function(char){
+    return {
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+    }[char];
+  });
 }
 
+function showMessage(element, message, type){
+  element.textContent = message;
+  element.className = "message " + type;
+  element.style.display = "block";
+}
+
+function formatDate(value){
+  if(!value) return "তারিখ দেওয়া নেই";
+  const parts = value.slice(0,10).split("-");
+  if(parts.length !== 3) return escapeHTML(value);
+  return parts[2] + "/" + parts[1] + "/" + parts[0];
+}
+
+async function loadApprovedWorks(){
+  workList.innerHTML =
+    '<div class="empty">⏳ কাজের তালিকা লোড হচ্ছে...</div>';
+  listMessage.style.display = "none";
+
+  const {data, error} = await sb
+    .from("work_posts")
+    .select("id,title,work_date,location,description,image_url,created_at")
+    .eq("status", "approved")
+    .order("work_date", {ascending:false});
+
+  if(error){
+    console.error("Work list error:", error);
+    workList.innerHTML =
+      '<div class="empty">কাজের তালিকা লোড করা যায়নি।</div>';
+    showMessage(
+      listMessage,
+      "Supabase থেকে তথ্য আনা যায়নি। config.js, ইন্টারনেট এবং work_posts টেবিলের SELECT policy পরীক্ষা করুন।",
+      "error"
+    );
+    return;
+  }
+
+  if(!data || data.length === 0){
+    workList.innerHTML =
+      '<div class="empty">📭 এখনো কোনো অনুমোদিত কাজ প্রকাশিত হয়নি।<br>Admin অনুমোদন করলে এখানে দেখা যাবে।</div>';
+    return;
+  }
+
+  workList.innerHTML = data.map(function(work){
+    return `
+      <article class="work-card">
+        <img
+          class="work-image"
+          src="${escapeHTML(work.image_url)}"
+          alt="${escapeHTML(work.title)}"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >
+
+        <h3>${escapeHTML(work.title)}</h3>
+
+        <div class="work-meta">
+          📅 <strong>কাজের তারিখ:</strong>
+          ${formatDate(work.work_date)}
+          <br>
+          📍 <strong>স্থান:</strong>
+          ${escapeHTML(work.location)}
+        </div>
+
+        <div class="work-description">${escapeHTML(work.description)}</div>
+      </article>
+    `;
+  }).join("");
+}
+
+imageInput.addEventListener("change", function(){
+  const file = imageInput.files[0];
+
+  preview.style.display = "none";
+  preview.removeAttribute("src");
+
+  if(!file) return;
+
+  if(!file.type.startsWith("image/")){
+    showMessage(formMessage, "অনুগ্রহ করে একটি ছবির ফাইল নির্বাচন করুন।", "error");
+    imageInput.value = "";
+    return;
+  }
+
+  if(file.size > 5 * 1024 * 1024){
+    showMessage(formMessage, "ছবির সাইজ ৫ MB-এর বেশি। ছোট ছবি নির্বাচন করুন।", "error");
+    imageInput.value = "";
+    return;
+  }
+
+  preview.src = URL.createObjectURL(file);
+  preview.style.display = "block";
+  formMessage.style.display = "none";
+});
+
+form.addEventListener("submit", async function(event){
+  event.preventDefault();
+
+  const title = document.getElementById("title").value.trim();
+  const workDate = document.getElementById("workDate").value;
+  const location = document.getElementById("location").value.trim();
+  const description = document.getElementById("description").value.trim();
+  const file = imageInput.files[0];
+
+  if(!title || !workDate || !location || !description || !file){
+    showMessage(formMessage, "সব ঘর পূরণ করে ছবিটি নির্বাচন করুন।", "error");
+    return;
+  }
+
+  if(!file.type.startsWith("image/") || file.size > 5 * 1024 * 1024){
+    showMessage(formMessage, "ছবিটি সঠিক হতে হবে এবং সাইজ ৫ MB-এর মধ্যে থাকতে হবে।", "error");
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "⏳ জমা হচ্ছে...";
+
+  let uploadedPath = null;
+
+  try{
+    const safeName = file.name
+      .replace(/[^a-zA-Z0-9._-]/g, "_")
+      .slice(-100);
+
+    const filePath =
+      Date.now() + "_" + Math.random().toString(36).slice(2) + "_" + safeName;
+
+    const {error: uploadError} = await sb.storage
+      .from("work-images")
+      .upload(filePath, file, {
+        cacheControl:"3600",
+        upsert:false,
+        contentType:file.type
+      });
+
+    if(uploadError) throw uploadError;
+
+    uploadedPath = filePath;
+
+    const {data:urlData} = sb.storage
+      .from("work-images")
+      .getPublicUrl(filePath);
+
+    const imageUrl = urlData.publicUrl;
+
+    const {error: insertError} = await sb
+      .from("work_posts")
+      .insert([{
+        title:title,
+        work_date:workDate,
+        location:location,
+        description:description,
+        image_url:imageUrl,
+        status:"pending"
+      }]);
+
+    if(insertError) throw insertError;
+
+    showMessage(
+      formMessage,
+      "✅ কাজের তথ্য জমা হয়েছে। Admin অনুমোদন করার পর এটি প্রকাশিত হবে।",
+      "success"
+    );
+
+    form.reset();
+    preview.style.display = "none";
+    preview.removeAttribute("src");
+
+  }catch(error){
+    console.error("Submission error:", error);
+
+    if(uploadedPath){
+      const {error: cleanupError} = await sb.storage
+        .from("work-images")
+        .remove([uploadedPath]);
+
+      if(cleanupError){
+        console.error("Image cleanup error:", cleanupError);
+      }
+    }
+
+    showMessage(
+      formMessage,
+      "❌ জমা দেওয়া যায়নি: " + (error.message || "অজানা সমস্যা") +
+      "। Supabase-এর Storage ও INSERT policy পরীক্ষা করুন।",
+      "error"
+    );
+  }finally{
+    submitBtn.disabled = false;
+    submitBtn.textContent = "📤 কাজ জমা দিন";
+  }
+});
+
+loadApprovedWorks();
 </script>
 
 </body>
-
 </html>
