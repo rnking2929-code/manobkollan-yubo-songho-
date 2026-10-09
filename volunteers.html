@@ -1,51 +1,27 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>স্বেচ্ছাসেবক - মানবকল্যাণ যুব সংঘ</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 body{
   margin:0;
   font-family:Arial,"Noto Sans Bengali",sans-serif;
   background:#0f172a;
   color:#fff;
 }
-
 .header{
   text-align:center;
   padding:28px 15px;
   background:#111827;
   border-bottom:1px solid #334155;
 }
-
-.header h1{
-  margin:0 0 8px;
-  font-size:27px;
-}
-
-.header p{
-  margin:0;
-  color:#94a3b8;
-}
-
-.container{
-  max-width:850px;
-  margin:auto;
-  padding:25px 15px;
-}
-
+.header h1{margin:0 0 8px;font-size:27px}
+.header p{margin:0;color:#94a3b8}
+.container{max-width:850px;margin:auto;padding:25px 15px}
 .box{
   background:#111827;
   border:1px solid #334155;
@@ -53,11 +29,7 @@ body{
   padding:22px;
   margin-bottom:22px;
 }
-
-.box h2{
-  margin-top:0;
-}
-
+.box h2{margin-top:0}
 label{
   display:block;
   margin-top:12px;
@@ -65,1029 +37,363 @@ label{
   font-size:14px;
   color:#cbd5e1;
 }
-
-input,
-textarea{
-
+input,textarea{
   width:100%;
-
   padding:13px;
-
   border-radius:9px;
-
   border:1px solid #475569;
-
   background:#1e293b;
-
   color:#fff;
-
   font-size:14px;
-
 }
-
-input:focus,
-textarea:focus{
-
-  outline:none;
-
-  border-color:#22c55e;
-
-}
-
-textarea{
-
-  min-height:100px;
-
-  resize:vertical;
-
-}
-
+input:focus,textarea:focus{outline:none;border-color:#22c55e}
+textarea{min-height:100px;resize:vertical}
 button{
-
   width:100%;
-
   padding:13px;
-
   margin-top:15px;
-
   border:0;
-
   border-radius:9px;
-
   background:#16a34a;
-
   color:#fff;
-
   font-weight:bold;
-
   font-size:15px;
-
   cursor:pointer;
-
 }
-
-button:hover{
-  opacity:.9;
-}
-
-button:disabled{
-
-  opacity:.6;
-
-  cursor:not-allowed;
-
-}
-
-.msg{
-
-  text-align:center;
-
-  margin-top:12px;
-
-  color:#fbbf24;
-
-  line-height:1.7;
-
-}
-
-.volunteer-list{
-
-  display:grid;
-
-  gap:12px;
-
-}
-
+button:hover{opacity:.9}
+button:disabled{opacity:.6;cursor:not-allowed}
+.msg{text-align:center;margin-top:12px;color:#fbbf24;line-height:1.7}
+.volunteer-list{display:grid;gap:12px}
 .volunteer{
-
   background:#1e293b;
-
   border:1px solid #334155;
-
   border-radius:12px;
-
   padding:15px;
-
 }
-
-.volunteer-name{
-
-  font-size:18px;
-
-  font-weight:bold;
-
-  margin-bottom:7px;
-
-}
-
-.volunteer-info{
-
-  color:#cbd5e1;
-
-  font-size:13px;
-
-  line-height:1.9;
-
-}
-
+.volunteer-name{font-size:18px;font-weight:bold;margin-bottom:7px}
+.volunteer-info{color:#cbd5e1;font-size:13px;line-height:1.9}
 .badge{
-
   display:inline-block;
-
   padding:4px 8px;
-
   border-radius:5px;
-
   background:#14532d;
-
   color:#bbf7d0;
-
   font-size:11px;
-
 }
-
 .delete-btn{
-
   width:auto;
-
   margin-top:12px;
-
   padding:8px 13px;
-
   background:#dc2626;
-
   color:#fff;
-
   border-radius:7px;
-
   font-size:12px;
-
 }
-
-.delete-btn:hover{
-
-  background:#b91c1c;
-
-  opacity:1;
-
-}
-
-.footer{
-
-  text-align:center;
-
-  color:#64748b;
-
-  font-size:12px;
-
-  padding:25px 10px;
-
-}
-
-.empty{
-
-  text-align:center;
-
-  color:#94a3b8;
-
-  padding:20px;
-
-}
-
+.delete-btn:hover{background:#b91c1c;opacity:1}
+.footer{text-align:center;color:#64748b;font-size:12px;padding:25px 10px}
+.empty{text-align:center;color:#94a3b8;padding:20px}
 @media(max-width:500px){
-
-  .container{
-
-    padding:15px 10px;
-
-  }
-
-  .box{
-
-    padding:17px;
-
-  }
-
+  .container{padding:15px 10px}
+  .box{padding:17px}
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
-
 <div class="header">
-
   <h1>🤝 স্বেচ্ছাসেবক</h1>
-
-  <p>
-    মানবকল্যাণ যুব সংঘ
-  </p>
-
+  <p>মানবকল্যাণ যুব সংঘ</p>
 </div>
-
-
 
 <div class="container">
 
+  <div class="box">
+    <h2>🤝 স্বেচ্ছাসেবক হিসেবে যোগ দিন</h2>
 
-<!-- =========================
-     APPLICATION FORM
-========================= -->
+    <p style="color:#94a3b8;font-size:13px;line-height:1.7">
+      মানবকল্যাণ যুব সংঘের মানবকল্যাণমূলক কার্যক্রমে
+      স্বেচ্ছাসেবক হিসেবে যুক্ত হতে নিচের ফর্মটি পূরণ করুন।
+    </p>
 
-<div class="box">
+    <label for="name">নাম *</label>
+    <input type="text" id="name" placeholder="আপনার পূর্ণ নাম" required>
 
-  <h2>
-    🤝 স্বেচ্ছাসেবক হিসেবে যোগ দিন
-  </h2>
+    <label for="phone">মোবাইল নম্বর *</label>
+    <input type="tel" id="phone" placeholder="01XXXXXXXXX" required>
 
-  <p style="
-    color:#94a3b8;
-    font-size:13px;
-    line-height:1.7;
-  ">
+    <label for="age">বয়স *</label>
+    <input type="number" id="age" placeholder="আপনার বয়স" min="10" max="100" required>
 
-    মানবকল্যাণ যুব সংঘের মানবকল্যাণমূলক কার্যক্রমে
-    স্বেচ্ছাসেবক হিসেবে যুক্ত হতে নিচের ফর্মটি পূরণ করুন।
+    <label for="area">এলাকা *</label>
+    <input type="text" id="area" placeholder="গ্রাম / ইউনিয়ন / উপজেলা" required>
 
-  </p>
+    <label for="profession">পেশা</label>
+    <input type="text" id="profession" placeholder="শিক্ষার্থী / চাকরি / ব্যবসা ইত্যাদি">
 
+    <label for="reason">কেন স্বেচ্ছাসেবক হতে চান? *</label>
+    <textarea id="reason" placeholder="মানবকল্যাণমূলক কাজে যুক্ত হওয়ার কারণ লিখুন..." required></textarea>
 
-  <label>
-    নাম *
-  </label>
+    <button id="submitBtn" type="button" onclick="submitVolunteer()">
+      🤝 স্বেচ্ছাসেবক হওয়ার আবেদন করুন
+    </button>
 
-  <input
-    type="text"
-    id="name"
-    placeholder="আপনার পূর্ণ নাম"
-  >
+    <div id="msg" class="msg" aria-live="polite"></div>
+  </div>
 
+  <div class="box">
+    <h2>🤝 আমাদের স্বেচ্ছাসেবক</h2>
+    <p style="color:#94a3b8;font-size:13px">
+      যারা স্বেচ্ছাসেবক হিসেবে যুক্ত হয়েছেন
+    </p>
 
-  <label>
-    মোবাইল নম্বর *
-  </label>
-
-  <input
-    type="tel"
-    id="phone"
-    placeholder="01XXXXXXXXX"
-  >
-
-
-  <label>
-    বয়স *
-  </label>
-
-  <input
-    type="number"
-    id="age"
-    placeholder="আপনার বয়স"
-    min="10"
-    max="100"
-  >
-
-
-  <label>
-    এলাকা *
-  </label>
-
-  <input
-    type="text"
-    id="area"
-    placeholder="গ্রাম / ইউনিয়ন / উপজেলা"
-  >
-
-
-  <label>
-    পেশা
-  </label>
-
-  <input
-    type="text"
-    id="profession"
-    placeholder="শিক্ষার্থী / চাকরি / ব্যবসা ইত্যাদি"
-  >
-
-
-  <label>
-    কেন স্বেচ্ছাসেবক হতে চান? *
-  </label>
-
-  <textarea
-    id="reason"
-    placeholder="মানবকল্যাণমূলক কাজে যুক্ত হওয়ার কারণ লিখুন..."
-  ></textarea>
-
-
-  <button
-    id="submitBtn"
-    onclick="submitVolunteer()"
-  >
-
-    🤝 স্বেচ্ছাসেবক হওয়ার আবেদন করুন
-
-  </button>
-
-
-  <div
-    id="msg"
-    class="msg"
-  ></div>
-
-</div>
-
-
-
-<!-- =========================
-     PUBLIC VOLUNTEER LIST
-========================= -->
-
-<div class="box">
-
-  <h2>
-    🤝 আমাদের স্বেচ্ছাসেবক
-  </h2>
-
-  <p style="
-    color:#94a3b8;
-    font-size:13px;
-  ">
-
-    যারা স্বেচ্ছাসেবক হিসেবে যুক্ত হয়েছেন
-
-  </p>
-
-
-  <div
-    id="volunteerList"
-    class="volunteer-list"
-  >
-
-    <div class="empty">
-
-      ⏳ তালিকা লোড হচ্ছে...
-
+    <div id="volunteerList" class="volunteer-list">
+      <div class="empty">⏳ তালিকা লোড হচ্ছে...</div>
     </div>
-
   </div>
 
 </div>
 
-
-</div>
-
-
-
-<!-- FOOTER -->
-
-<div class="footer">
-
-  © মানবকল্যাণ যুব সংঘ
-
-</div>
-
-
-
-<!-- =========================
-     SUPABASE
-========================= -->
+<div class="footer">© মানবকল্যাণ যুব সংঘ</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script src="config.js"></script>
 
-
 <script>
-
 /* =========================
-   SUPABASE CLIENT
+   SUPABASE CONFIGURATION
 ========================= */
 
 const sb = supabase.createClient(
-
   window.SUPABASE_URL,
-
   window.SUPABASE_ANON_KEY
-
 );
 
+/* Admin-এর ইমেইল */
+const ADMIN_EMAIL = "rnking2929@gmail.com";
 
-/* =========================
-   ESCAPE HTML
-========================= */
+/* Admin অ্যাকাউন্ট যাচাই */
+async function isAdmin(){
+  try{
+    const {data, error} = await sb.auth.getUser();
 
-function escapeHTML(value){
+    if(error || !data.user){
+      return false;
+    }
 
-  return String(value ?? "")
-
-    .replace(/&/g,"&amp;")
-
-    .replace(/</g,"&lt;")
-
-    .replace(/>/g,"&gt;")
-
-    .replace(/"/g,"&quot;")
-
-    .replace(/'/g,"&#039;");
-
+    return (
+      (data.user.email || "").toLowerCase() === ADMIN_EMAIL
+    );
+  }catch(error){
+    console.error("ADMIN CHECK ERROR:", error);
+    return false;
+  }
 }
 
+/* HTML নিরাপদভাবে দেখানো */
+function escapeHTML(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
 
 /* =========================
    SUBMIT VOLUNTEER
 ========================= */
 
 async function submitVolunteer(){
-
-  const name =
-    document
-      .getElementById("name")
-      .value
-      .trim();
-
-
-  const phone =
-    document
-      .getElementById("phone")
-      .value
-      .trim();
-
-
-  const age =
-    document
-      .getElementById("age")
-      .value
-      .trim();
-
-
-  const area =
-    document
-      .getElementById("area")
-      .value
-      .trim();
-
-
-  const profession =
-    document
-      .getElementById("profession")
-      .value
-      .trim();
-
-
-  const reason =
-    document
-      .getElementById("reason")
-      .value
-      .trim();
-
-
-  const msg =
-    document
-      .getElementById("msg");
-
-
-  const button =
-    document
-      .getElementById("submitBtn");
-
-
-  /* =========================
-     VALIDATION
-  ========================= */
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const age = document.getElementById("age").value.trim();
+  const area = document.getElementById("area").value.trim();
+  const profession = document.getElementById("profession").value.trim();
+  const reason = document.getElementById("reason").value.trim();
+  const msg = document.getElementById("msg");
+  const button = document.getElementById("submitBtn");
 
   if(!name){
-
-    msg.textContent =
-      "⚠️ আপনার নাম লিখুন।";
-
+    msg.textContent = "⚠️ আপনার নাম লিখুন।";
     return;
-
   }
-
 
   if(!phone){
-
-    msg.textContent =
-      "⚠️ মোবাইল নম্বর দিন।";
-
+    msg.textContent = "⚠️ মোবাইল নম্বর দিন।";
     return;
-
   }
 
-
-  if(!age){
-
-    msg.textContent =
-      "⚠️ বয়স দিন।";
-
+  if(!age || Number(age) < 10 || Number(age) > 100){
+    msg.textContent = "⚠️ সঠিক বয়স দিন।";
     return;
-
   }
-
 
   if(!area){
-
-    msg.textContent =
-      "⚠️ আপনার এলাকা দিন।";
-
+    msg.textContent = "⚠️ আপনার এলাকা দিন।";
     return;
-
   }
-
 
   if(!reason){
-
-    msg.textContent =
-      "⚠️ কেন স্বেচ্ছাসেবক হতে চান তা লিখুন।";
-
+    msg.textContent = "⚠️ কেন স্বেচ্ছাসেবক হতে চান তা লিখুন।";
     return;
-
   }
 
-
-  /* =========================
-     START
-  ========================= */
-
-  msg.textContent =
-    "⏳ আবেদন জমা হচ্ছে...";
-
-
+  msg.textContent = "⏳ আবেদন জমা হচ্ছে...";
   button.disabled = true;
 
-
   try{
-
-    /* =========================
-       INSERT
-    ========================= */
-
-    const {data,error} =
-
-      await sb
-        .from(
-          "volunteer_applications"
-        )
-        .insert({
-
-          name:name,
-
-          phone:phone,
-
-          age:Number(age),
-
-          area:area,
-
-          profession:
-            profession || null,
-
-          reason:reason,
-
-          status:"approved"
-
-        })
-        .select();
-
-
-    /* =========================
-       ERROR
-    ========================= */
+    const {error} = await sb
+      .from("volunteer_applications")
+      .insert({
+        name: name,
+        phone: phone,
+        age: Number(age),
+        area: area,
+        profession: profession || null,
+        reason: reason,
+        status: "approved"
+      });
 
     if(error){
-
-      console.error(
-        "SUPABASE ERROR:",
-        error
-      );
-
-
-      msg.innerHTML =
-        "❌ আবেদন জমা হয়নি।<br>" +
-        "<small>" +
-        escapeHTML(
-          error.message
-        ) +
-        "</small>";
-
-      button.disabled = false;
-
+      console.error("SUPABASE ERROR:", error);
+      msg.textContent = "❌ আবেদন জমা হয়নি: " + error.message;
       return;
-
     }
 
+    msg.textContent = "✅ আপনার আবেদন সফলভাবে জমা হয়েছে।";
 
-    /* =========================
-       SUCCESS
-    ========================= */
-
-    msg.textContent =
-      "✅ আপনার আবেদন সফলভাবে জমা হয়েছে।";
-
-
-    /* =========================
-       CLEAR FORM
-    ========================= */
-
-    document
-      .getElementById("name")
-      .value = "";
-
-
-    document
-      .getElementById("phone")
-      .value = "";
-
-
-    document
-      .getElementById("age")
-      .value = "";
-
-
-    document
-      .getElementById("area")
-      .value = "";
-
-
-    document
-      .getElementById("profession")
-      .value = "";
-
-
-    document
-      .getElementById("reason")
-      .value = "";
-
-
-    /* =========================
-       RELOAD LIST
-    ========================= */
+    document.getElementById("name").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("area").value = "";
+    document.getElementById("profession").value = "";
+    document.getElementById("reason").value = "";
 
     await loadVolunteers();
 
-
   }catch(error){
-
-    console.error(
-      "SYSTEM ERROR:",
-      error
-    );
-
-
-    msg.innerHTML =
-      "❌ সমস্যা হয়েছে।<br>" +
-      "<small>" +
-      escapeHTML(
-        error.message ||
-        String(error)
-      ) +
-      "</small>";
-
+    console.error("SYSTEM ERROR:", error);
+    msg.textContent = "❌ সমস্যা হয়েছে। আবার চেষ্টা করুন।";
+  }finally{
+    button.disabled = false;
   }
-
-
-  button.disabled = false;
-
 }
-
 
 /* =========================
    LOAD VOLUNTEERS
 ========================= */
 
 async function loadVolunteers(){
+  const list = document.getElementById("volunteerList");
 
-  const list =
-    document
-      .getElementById(
-        "volunteerList"
-      );
-
-
-  list.innerHTML =
-    '<div class="empty">' +
-    '⏳ তালিকা লোড হচ্ছে...' +
-    '</div>';
-
+  list.innerHTML = '<div class="empty">⏳ তালিকা লোড হচ্ছে...</div>';
 
   try{
-
-    /* =========================
-       GET VOLUNTEERS
-    ========================= */
-
-    const {data,error} =
-
-      await sb
-        .from(
-          "volunteer_applications"
-        )
-        .select(
-          "id,name,age,area,profession,status,created_at"
-        )
-        .order(
-          "created_at",
-          {
-            ascending:false
-          }
-        );
-
-
-    /* =========================
-       ERROR
-    ========================= */
+    const {data, error} = await sb
+      .from("volunteer_applications")
+      .select("id,name,age,area,profession,status,created_at")
+      .order("created_at", {ascending:false});
 
     if(error){
-
-      console.error(
-        "LOAD ERROR:",
-        error
-      );
-
-
+      console.error("LOAD ERROR:", error);
       list.innerHTML =
-        '<div class="empty" ' +
-        'style="color:#fca5a5">' +
-        '❌ তালিকা লোড করা যায়নি।<br>' +
-        '<small>' +
-        escapeHTML(
-          error.message
-        ) +
-        '</small>' +
-        '</div>';
-
+        '<div class="empty" style="color:#fca5a5">' +
+        '❌ তালিকা লোড করা যায়নি।<br><small>' +
+        escapeHTML(error.message) +
+        '</small></div>';
       return;
-
     }
 
-
-    /* =========================
-       EMPTY
-    ========================= */
-
-    if(
-      !data ||
-      data.length === 0
-    ){
-
+    if(!data || data.length === 0){
       list.innerHTML =
-        '<div class="empty">' +
-        'এখনও কোনো স্বেচ্ছাসেবক নেই।' +
-        '</div>';
-
+        '<div class="empty">এখনও কোনো স্বেচ্ছাসেবক নেই।</div>';
       return;
-
     }
 
+    /* শুধু নির্দিষ্ট Admin-এর জন্য ডিলেট বাটন */
+    const admin = await isAdmin();
 
-    /* =========================
-       CHECK LOGIN
-    ========================= */
+    list.innerHTML = data.map(function(v){
+      const deleteButton = admin
+        ? `<button class="delete-btn"
+             type="button"
+             onclick="deleteVolunteer('${escapeHTML(v.id)}')">
+             🗑️ ডিলেট
+           </button>`
+        : "";
 
-    const {
-      data:{
-        user
-      }
-    } = await sb.auth.getUser();
+      return `
+        <div class="volunteer">
+          <div class="volunteer-name">
+            🤝 ${escapeHTML(v.name)}
+          </div>
 
+          <div class="volunteer-info">
+            <span class="badge">স্বেচ্ছাসেবক</span>
+            <br>
+            📍 এলাকা: ${escapeHTML(v.area || "উল্লেখ নেই")}
+            <br>
+            🎂 বয়স: ${escapeHTML(v.age || "উল্লেখ নেই")}
+            <br>
+            💼 পেশা: ${escapeHTML(v.profession || "উল্লেখ নেই")}
+          </div>
 
-    /* =========================
-       DISPLAY
-    ========================= */
-
-    list.innerHTML =
-
-      data.map(
-        function(v){
-
-          return `
-
-            <div class="volunteer">
-
-              <div class="volunteer-name">
-
-                🤝
-                ${escapeHTML(
-                  v.name
-                )}
-
-              </div>
-
-
-              <div class="volunteer-info">
-
-                <span class="badge">
-                  স্বেচ্ছাসেবক
-                </span>
-
-                <br>
-
-                📍 এলাকা:
-                ${escapeHTML(
-                  v.area ||
-                  "উল্লেখ নেই"
-                )}
-
-                <br>
-
-                🎂 বয়স:
-                ${escapeHTML(
-                  v.age ||
-                  "উল্লেখ নেই"
-                )}
-
-                <br>
-
-                💼 পেশা:
-                ${escapeHTML(
-                  v.profession ||
-                  "উল্লেখ নেই"
-                )}
-
-              </div>
-
-
-              ${
-                user
-                ?
-                `
-                  <button
-                    class="delete-btn"
-                    onclick="deleteVolunteer('${v.id}')"
-                  >
-                    🗑️ ডিলেট
-                  </button>
-                `
-                :
-                ""
-              }
-
-            </div>
-
-          `;
-
-        }
-      ).join("");
-
+          ${deleteButton}
+        </div>
+      `;
+    }).join("");
 
   }catch(error){
-
-    console.error(
-      "LIST ERROR:",
-      error
-    );
-
-
+    console.error("LIST ERROR:", error);
     list.innerHTML =
-      '<div class="empty" ' +
-      'style="color:#fca5a5">' +
-      '❌ তালিকা লোড করা যায়নি।' +
-      '</div>';
-
+      '<div class="empty" style="color:#fca5a5">' +
+      '❌ তালিকা লোড করা যায়নি।</div>';
   }
-
 }
-
 
 /* =========================
    DELETE VOLUNTEER
 ========================= */
 
 async function deleteVolunteer(id){
-
-  /* =========================
-     CHECK LOGIN
-  ========================= */
-
-  const {
-    data:{
-      user
-    }
-  } = await sb.auth.getUser();
-
-
-  if(!user){
-
-    alert(
-      "⚠️ ডিলেট করার জন্য Admin Login করতে হবে।"
-    );
-
+  /* বাটন লুকানো থাকলেও Admin যাচাই করা হবে */
+  if(!(await isAdmin())){
+    alert("⛔ শুধু Admin এই তথ্য ডিলেট করতে পারবেন।");
     return;
-
   }
 
+  const confirmed = confirm(
+    "আপনি কি এই স্বেচ্ছাসেবকের তথ্য ডিলেট করতে চান?\n\n" +
+    "ডিলেট করলে তথ্যটি স্থায়ীভাবে মুছে যাবে।"
+  );
 
-  /* =========================
-     CONFIRM
-  ========================= */
-
-  const confirmDelete =
-
-    confirm(
-      "⚠️ আপনি কি এই স্বেচ্ছাসেবককে ডিলেট করতে চান?\n\n" +
-      "ডিলেট করলে তথ্যটি স্থায়ীভাবে মুছে যাবে।"
-    );
-
-
-  if(!confirmDelete){
-
-    return;
-
-  }
-
+  if(!confirmed) return;
 
   try{
-
-    /* =========================
-       DELETE
-    ========================= */
-
-    const {error} =
-
-      await sb
-        .from(
-          "volunteer_applications"
-        )
-        .delete()
-        .eq(
-          "id",
-          id
-        );
-
-
-    /* =========================
-       ERROR
-    ========================= */
+    const {error} = await sb
+      .from("volunteer_applications")
+      .delete()
+      .eq("id", id);
 
     if(error){
-
-      console.error(
-        "DELETE ERROR:",
-        error
-      );
-
-
-      alert(
-        "❌ ডিলেট করা যায়নি!\n\n" +
-        error.message
-      );
-
+      console.error("DELETE ERROR:", error);
+      alert("❌ ডিলেট করা যায়নি।\n" + error.message);
       return;
-
     }
 
-
-    /* =========================
-       SUCCESS
-    ========================= */
-
-    alert(
-      "✅ স্বেচ্ছাসেবকের তথ্য ডিলেট করা হয়েছে।"
-    );
-
-
-    /* =========================
-       RELOAD
-    ========================= */
-
+    alert("✅ স্বেচ্ছাসেবকের তথ্য ডিলেট করা হয়েছে।");
     await loadVolunteers();
 
-
   }catch(error){
-
-    console.error(
-      "DELETE SYSTEM ERROR:",
-      error
-    );
-
-
-    alert(
-      "❌ সমস্যা হয়েছে!\n\n" +
-      (
-        error.message ||
-        String(error)
-      )
-    );
-
+    console.error("DELETE SYSTEM ERROR:", error);
+    alert("❌ সমস্যা হয়েছে। আবার চেষ্টা করুন।");
   }
-
 }
 
-
-/* =========================
-   START
-========================= */
-
+/* পৃষ্ঠা চালু হলে তালিকা দেখানো */
 loadVolunteers();
-
 </script>
 
 </body>
-
 </html>
