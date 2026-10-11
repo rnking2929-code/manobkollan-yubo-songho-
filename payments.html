@@ -1,1047 +1,500 @@
-<!DOCTYPE html><html lang="bn">
+
+<!DOCTYPE html>
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payment Management - মানবকল্যাণ যুব সংঘ</title><style>
+<title>Payment Management - মানবকল্যাণ যুব সংঘ</title>
+<style>
 *{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#0f172a;color:#fff}
+.header{padding:20px 15px;text-align:center;background:#111827;border-bottom:1px solid #334155}
+.header h1{margin:0 0 6px;font-size:23px}
+.header p{margin:0;color:#94a3b8}
+.container{max-width:950px;margin:auto;padding:20px 15px}
+.topbar{display:flex;gap:10px;margin-bottom:18px}
+.topbar a,.topbar button{flex:1;padding:12px;border-radius:9px;border:0;text-align:center;text-decoration:none;font-weight:bold;cursor:pointer}
+.back{background:#334155;color:#fff}
+.logout{background:#dc2626;color:#fff}
+.card{background:#111827;border:1px solid #334155;border-radius:14px;padding:18px;margin-bottom:15px}
+input,select,textarea{width:100%;padding:12px;margin-top:7px;margin-bottom:12px;border-radius:9px;border:1px solid #475569;background:#1e293b;color:#fff;font-size:15px}
+textarea{min-height:85px;resize:vertical}
+label{color:#cbd5e1;font-weight:bold;font-size:14px}
+.primary-btn{width:100%;padding:13px;border:0;border-radius:9px;background:#2563eb;color:#fff;font-weight:bold;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:15px}
+.stat{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:16px;text-align:center}
+.stat-title{color:#94a3b8;font-size:13px}
+.stat-value{font-size:23px;font-weight:bold;margin-top:7px}
+.income{color:#4ade80}
+.expense{color:#f87171}
+.balance{color:#60a5fa}
+.payment,.finance-item{border:1px solid #334155;border-radius:12px;padding:15px;margin-top:12px;background:#1e293b}
+.row{margin:7px 0;line-height:1.5}
+.label{color:#94a3b8}
+.amount{font-size:22px;font-weight:bold;margin:8px 0}
+.status{display:inline-block;padding:5px 9px;border-radius:7px;background:#92400e;color:#fde68a;font-size:13px}
+.approved{background:#166534;color:#bbf7d0}
+.rejected{background:#991b1b;color:#fecaca}
+.actions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
+.actions button{flex:1;min-width:130px;padding:11px;border:0;border-radius:8px;color:#fff;font-weight:bold;cursor:pointer}
+.approve{background:#16a34a}
+.reject{background:#dc2626}
+.sync{background:#2563eb}
+.finance-head{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.finance-type{font-weight:bold}
+.finance-amount{font-size:19px;font-weight:bold}
+.finance-date{color:#94a3b8;font-size:13px;margin-top:7px}
+.empty,.loading{text-align:center;padding:25px;color:#94a3b8}
+.message{margin:10px 0;color:#fbbf24;min-height:20px;overflow-wrap:anywhere}
+@media(max-width:650px){.stats{grid-template-columns:1fr}.finance-head{flex-direction:column;align-items:flex-start}}
+@media(max-width:500px){.topbar{flex-direction:column}.actions{flex-direction:column}}
+</style>
+</head>
+<body>
 
-body{
-  margin:0;
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
-  background:#0f172a;
-  color:#fff;
-}
-
-.header{
-  padding:20px 15px;
-  text-align:center;
-  background:#111827;
-  border-bottom:1px solid #334155;
-}
-
-.header h1{
-  margin:0 0 6px;
-  font-size:23px;
-}
-
-.header p{
-  margin:0;
-  color:#94a3b8;
-}
-
-.container{
-  max-width:950px;
-  margin:auto;
-  padding:20px 15px;
-}
-
-.topbar{
-  display:flex;
-  gap:10px;
-  margin-bottom:18px;
-}
-
-.topbar a,
-.topbar button{
-  flex:1;
-  padding:12px;
-  border-radius:9px;
-  border:0;
-  text-align:center;
-  text-decoration:none;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.back{
-  background:#334155;
-  color:#fff;
-}
-
-.logout{
-  background:#dc2626;
-  color:#fff;
-}
-
-.card{
-  background:#111827;
-  border:1px solid #334155;
-  border-radius:14px;
-  padding:18px;
-  margin-bottom:15px;
-}
-
-.card h2,
-.card h3{
-  margin-top:0;
-}
-
-input,
-select,
-textarea{
-  width:100%;
-  padding:12px;
-  margin-top:7px;
-  margin-bottom:12px;
-  border-radius:9px;
-  border:1px solid #475569;
-  background:#1e293b;
-  color:#fff;
-  font-size:15px;
-}
-
-textarea{
-  min-height:85px;
-  resize:vertical;
-}
-
-label{
-  color:#cbd5e1;
-  font-weight:bold;
-  font-size:14px;
-}
-
-.primary-btn{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:9px;
-  background:#2563eb;
-  color:#fff;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.income-btn{
-  background:#16a34a;
-}
-
-.expense-btn{
-  background:#dc2626;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-bottom:15px;
-}
-
-.stat{
-  background:#1e293b;
-  border:1px solid #334155;
-  border-radius:12px;
-  padding:16px;
-  text-align:center;
-}
-
-.stat-title{
-  color:#94a3b8;
-  font-size:13px;
-}
-
-.stat-value{
-  font-size:23px;
-  font-weight:bold;
-  margin-top:7px;
-}
-
-.income{
-  color:#4ade80;
-}
-
-.expense{
-  color:#f87171;
-}
-
-.balance{
-  color:#60a5fa;
-}
-
-.payment{
-  border:1px solid #334155;
-  border-radius:12px;
-  padding:15px;
-  margin-top:12px;
-  background:#1e293b;
-}
-
-.row{
-  margin:7px 0;
-  line-height:1.5;
-}
-
-.label{
-  color:#94a3b8;
-}
-
-.amount{
-  font-size:22px;
-  font-weight:bold;
-  margin:8px 0;
-}
-
-.status{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:7px;
-  background:#92400e;
-  color:#fde68a;
-  font-size:13px;
-}
-
-.approved{
-  background:#166534;
-  color:#bbf7d0;
-}
-
-.rejected{
-  background:#991b1b;
-  color:#fecaca;
-}
-
-.actions{
-  display:flex;
-  gap:8px;
-  margin-top:13px;
-}
-
-.actions button{
-  flex:1;
-  padding:11px;
-  border:0;
-  border-radius:8px;
-  color:#fff;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.approve{
-  background:#16a34a;
-}
-
-.reject{
-  background:#dc2626;
-}
-
-.finance-item{
-  border:1px solid #334155;
-  background:#1e293b;
-  border-radius:11px;
-  padding:14px;
-  margin-top:10px;
-}
-
-.finance-head{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:center;
-}
-
-.finance-type{
-  font-weight:bold;
-}
-
-.finance-amount{
-  font-size:19px;
-  font-weight:bold;
-}
-
-.finance-date{
-  color:#94a3b8;
-  font-size:13px;
-  margin-top:7px;
-}
-
-.empty,
-.loading{
-  text-align:center;
-  padding:25px;
-  color:#94a3b8;
-}
-
-.message{
-  text-align:center;
-  margin:10px 0;
-  color:#fbbf24;
-  min-height:20px;
-}
-
-hr{
-  border:0;
-  border-top:1px solid #334155;
-  margin:20px 0;
-}
-
-@media(max-width:650px){
-  .stats{
-    grid-template-columns:1fr;
-  }
-
-  .finance-head{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-}
-
-@media(max-width:500px){
-  .actions{
-    flex-direction:column;
-  }
-}
-</style></head><body><div class="header">
+<div class="header">
   <h1>💰 Payment Management</h1>
   <p>মানবকল্যাণ যুব সংঘ</p>
-</div><div class="container">  <div class="topbar">
+</div>
+
+<div class="container">
+  <div class="topbar">
     <a class="back" href="admin.html">⬅️ Admin</a>
     <button class="logout" onclick="logout()">🚪 Logout</button>
-  </div>  <!-- FINANCIAL SUMMARY -->  <div class="stats"><div class="stat">
-  <div class="stat-title">মোট আয়</div>
-  <div id="totalIncome" class="stat-value income">৳ 0</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-title">মোট আয়</div>
+      <div id="totalIncome" class="stat-value income">৳ 0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">মোট খরচ</div>
+      <div id="totalExpense" class="stat-value expense">৳ 0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">বর্তমান ব্যালেন্স</div>
+      <div id="balance" class="stat-value balance">৳ 0</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>➕ নতুন আর্থিক হিসাব</h2>
+    <p style="color:#94a3b8">bKash পেমেন্ট ছাড়া অন্য আয় বা খরচ এখানে যোগ করুন।</p>
+
+    <label for="financeType">হিসাবের ধরন</label>
+    <select id="financeType">
+      <option value="income">💰 আয়</option>
+      <option value="expense">💸 খরচ</option>
+    </select>
+
+    <label for="financeCategory">ক্যাটাগরি</label>
+    <input id="financeCategory" type="text" placeholder="যেমন: অনুদান / খাদ্য সহায়তা">
+
+    <label for="financeAmount">টাকার পরিমাণ</label>
+    <input id="financeAmount" type="number" min="1" step="0.01" placeholder="যেমন: 1000">
+
+    <label for="financeDate">তারিখ</label>
+    <input id="financeDate" type="date">
+
+    <label for="financeDescription">বিবরণ</label>
+    <textarea id="financeDescription" placeholder="এই আয় বা খরচের বিস্তারিত লিখুন"></textarea>
+
+    <button class="primary-btn" onclick="addFinance()">💾 হিসাব সংরক্ষণ করুন</button>
+    <div id="financeMessage" class="message" role="status"></div>
+  </div>
+
+  <div class="card">
+    <h2>💰 bKash Payment Requests</h2>
+    <p style="color:#94a3b8">
+      সদস্যদের পেমেন্ট যাচাই করে Approve অথবা Reject করুন।
+      Approved পেমেন্টের আয় যোগ না হলে “আয় হিসাব মিলান” ব্যবহার করুন।
+    </p>
+    <button onclick="loadPayments()" class="primary-btn">🔄 Payment তালিকা Refresh</button>
+    <div id="message" class="message" role="status"></div>
+    <div id="paymentList"><div class="loading">⏳ Payment তালিকা লোড হচ্ছে...</div></div>
+  </div>
+
+  <div class="card">
+    <h2>📋 আয়-ব্যয়ের হিসাব</h2>
+    <button onclick="loadTransactions()" class="primary-btn">🔄 হিসাব Refresh</button>
+    <div id="transactionList"><div class="loading">⏳ হিসাব লোড হচ্ছে...</div></div>
+  </div>
 </div>
 
-<div class="stat">
-  <div class="stat-title">মোট খরচ</div>
-  <div id="totalExpense" class="stat-value expense">৳ 0</div>
-</div>
-
-<div class="stat">
-  <div class="stat-title">বর্তমান ব্যালেন্স</div>
-  <div id="balance" class="stat-value balance">৳ 0</div>
-</div>
-
-  </div>  <!-- MANUAL FINANCE ENTRY -->  <div class="card"><h2>➕ নতুন আর্থিক হিসাব</h2>
-
-<p style="color:#94a3b8">
-  সংগঠনের অন্য কোনো আয় বা খরচ এখানে যোগ করুন।
-</p>
-
-<label>হিসাবের ধরন</label>
-
-<select id="financeType">
-  <option value="income">💰 আয়</option>
-  <option value="expense">💸 খরচ</option>
-</select>
-
-
-<label>ক্যাটাগরি</label>
-
-<input
-  id="financeCategory"
-  type="text"
-  placeholder="যেমন: অনুদান / খাদ্য সহায়তা / শীতবস্ত্র"
->
-
-
-<label>টাকার পরিমাণ</label>
-
-<input
-  id="financeAmount"
-  type="number"
-  min="1"
-  step="0.01"
-  placeholder="যেমন: 1000"
->
-
-
-<label>তারিখ</label>
-
-<input
-  id="financeDate"
-  type="date"
->
-
-
-<label>বিবরণ</label>
-
-<textarea
-  id="financeDescription"
-  placeholder="এই আয় বা খরচের বিস্তারিত লিখুন"
-></textarea>
-
-
-<button
-  class="primary-btn"
-  onclick="addFinance()">
-  💾 হিসাব সংরক্ষণ করুন
-</button>
-
-<div id="financeMessage" class="message"></div>
-
-  </div>  <!-- BKASH PAYMENT -->  <div class="card"><h2>💰 bKash Payment Requests</h2>
-
-<p style="color:#94a3b8">
-  সদস্যদের পাঠানো bKash payment যাচাই করে Approve অথবা Reject করুন।
-</p>
-
-<button
-  onclick="loadPayments()"
-  class="primary-btn">
-  🔄 তালিকা Refresh
-</button>
-
-<div id="message" class="message"></div>
-
-<div id="paymentList">
-  <div class="loading">⏳ Payment তালিকা লোড হচ্ছে...</div>
-</div>
-
-  </div>  <!-- TRANSACTION LIST -->  <div class="card"><h2>📋 আয়-ব্যয়ের হিসাব</h2>
-
-<button
-  onclick="loadTransactions()"
-  class="primary-btn">
-  🔄 হিসাব Refresh
-</button>
-
-<div id="transactionList">
-  <div class="loading">⏳ হিসাব লোড হচ্ছে...</div>
-</div>
-
-  </div></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
 const sb = supabase.createClient(
   window.SUPABASE_URL,
   window.SUPABASE_ANON_KEY
 );
 
-
 function esc(value){
-
   return String(value ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
-
 }
 
-
 function money(value){
-
   return Number(value || 0).toLocaleString("bn-BD",{
     minimumFractionDigits:0,
     maximumFractionDigits:2
   });
-
 }
-
 
 function today(){
-
   const d = new Date();
-
-  const year = d.getFullYear();
-
-  const month =
-    String(d.getMonth()+1).padStart(2,"0");
-
-  const day =
-    String(d.getDate()).padStart(2,"0");
-
-  return `${year}-${month}-${day}`;
-
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 }
 
-
 async function checkLogin(){
+  const {data,error} = await sb.auth.getSession();
 
-  const {data} = await sb.auth.getSession();
-
-  if(!data.session){
-
-    window.location.href="admin.html";
-
+  if(error || !data.session){
+    window.location.href = "admin.html";
     return false;
   }
-
   return true;
 }
 
-
-/* =========================
-   FINANCIAL SUMMARY
-========================= */
+function showMessage(text){
+  document.getElementById("message").textContent = text;
+}
 
 async function loadTransactions(){
+  if(!await checkLogin()) return;
 
-  const ok = await checkLogin();
+  const list = document.getElementById("transactionList");
+  list.innerHTML = '<div class="loading">⏳ হিসাব লোড হচ্ছে...</div>';
 
-  if(!ok) return;
-
-  const list =
-    document.getElementById("transactionList");
-
-  list.innerHTML =
-    '<div class="loading">⏳ হিসাব লোড হচ্ছে...</div>';
-
-
-  const {data,error} =
-    await sb
-      .from("transactions")
-      .select("*")
-      .order("created_at",{ascending:false});
-
+  const {data,error} = await sb
+    .from("transactions")
+    .select("*")
+    .order("created_at",{ascending:false});
 
   if(error){
-
-    console.error(error);
-
-    list.innerHTML =
-      '<div class="empty">❌ হিসাব লোড করা যায়নি।</div>';
-
+    console.error("loadTransactions error:",error);
+    list.innerHTML = '<div class="empty">❌ হিসাব লোড হয়নি: '+esc(error.message)+'</div>';
     return;
   }
 
+  let income = 0;
+  let expense = 0;
 
-  let totalIncome = 0;
-
-  let totalExpense = 0;
-
-
-  (data || []).forEach(function(x){
-
-    const amount =
-      Number(x.amount || 0);
-
-    if(x.type==="income"){
-
-      totalIncome += amount;
-
-    }else if(x.type==="expense"){
-
-      totalExpense += amount;
-
-    }
-
+  (data || []).forEach(x=>{
+    const amount = Number(x.amount || 0);
+    if(x.type === "income") income += amount;
+    if(x.type === "expense") expense += amount;
   });
 
+  document.getElementById("totalIncome").textContent = "৳ "+money(income);
+  document.getElementById("totalExpense").textContent = "৳ "+money(expense);
+  document.getElementById("balance").textContent = "৳ "+money(income-expense);
 
-  const balance =
-    totalIncome - totalExpense;
-
-
-  document.getElementById("totalIncome").textContent =
-    "৳ " + money(totalIncome);
-
-  document.getElementById("totalExpense").textContent =
-    "৳ " + money(totalExpense);
-
-  document.getElementById("balance").textContent =
-    "৳ " + money(balance);
-
-
-  if(!data || data.length===0){
-
-    list.innerHTML =
-      '<div class="empty">📭 এখনো কোনো আয়-ব্যয়ের হিসাব নেই।</div>';
-
+  if(!data || !data.length){
+    list.innerHTML = '<div class="empty">📭 এখনো কোনো আয়-ব্যয়ের হিসাব নেই।</div>';
     return;
   }
 
-
-  list.innerHTML = data.map(function(x){
-
-    const isIncome =
-      x.type==="income";
-
-    const amount =
-      Number(x.amount || 0);
-
-    const date =
-      x.created_at
+  list.innerHTML = data.map(x=>{
+    const isIncome = x.type === "income";
+    const date = x.created_at
       ? new Date(x.created_at).toLocaleString("bn-BD")
       : "";
 
-
-    return `
-      <div class="finance-item">
-
-        <div class="finance-head">
-
-          <div>
-
-            <div class="finance-type ${isIncome ? "income":"expense"}">
-              ${isIncome ? "💰 আয়":"💸 খরচ"}
-            </div>
-
-            <strong>
-              ${esc(x.category || "ক্যাটাগরি নেই")}
-            </strong>
-
-          </div>
-
-          <div class="finance-amount ${isIncome ? "income":"expense"}">
-            ${isIncome ? "+":"-"} ৳ ${money(amount)}
-          </div>
-
+    return `<div class="finance-item">
+      <div class="finance-head">
+        <div>
+          <div class="finance-type ${isIncome?"income":"expense"}">${isIncome?"💰 আয়":"💸 খরচ"}</div>
+          <strong>${esc(x.category || "ক্যাটাগরি নেই")}</strong>
         </div>
-
-        <div class="row">
-          ${esc(x.description || "কোনো বিবরণ নেই")}
+        <div class="finance-amount ${isIncome?"income":"expense"}">
+          ${isIncome?"+":"-"} ৳ ${money(x.amount)}
         </div>
-
-        <div class="finance-date">
-          📅 ${esc(date)}
-        </div>
-
       </div>
-    `;
-
+      <div class="row">${esc(x.description || "কোনো বিবরণ নেই")}</div>
+      <div class="finance-date">📅 ${esc(date)}</div>
+    </div>`;
   }).join("");
-
 }
-
-
-/* =========================
-   ADD INCOME / EXPENSE
-========================= */
 
 async function addFinance(){
+  if(!await checkLogin()) return;
 
-  const ok = await checkLogin();
-
-  if(!ok) return;
-
-
-  const type =
-    document.getElementById("financeType").value;
-
-  const category =
-    document.getElementById("financeCategory").value.trim();
-
-  const amount =
-    Number(document.getElementById("financeAmount").value);
-
-  const date =
-    document.getElementById("financeDate").value;
-
-  const description =
-    document.getElementById("financeDescription").value.trim();
-
-  const msg =
-    document.getElementById("financeMessage");
-
+  const type = document.getElementById("financeType").value;
+  const category = document.getElementById("financeCategory").value.trim();
+  const amount = Number(document.getElementById("financeAmount").value);
+  const date = document.getElementById("financeDate").value;
+  const description = document.getElementById("financeDescription").value.trim();
+  const msg = document.getElementById("financeMessage");
 
   if(!category){
-
-    msg.textContent =
-      "⚠️ ক্যাটাগরি লিখুন।";
-
+    msg.textContent = "⚠️ ক্যাটাগরি লিখুন।";
     return;
   }
 
-
-  if(!amount || amount<=0){
-
-    msg.textContent =
-      "⚠️ সঠিক টাকার পরিমাণ দিন।";
-
+  if(!Number.isFinite(amount) || amount <= 0){
+    msg.textContent = "⚠️ সঠিক টাকার পরিমাণ দিন।";
     return;
   }
-
 
   if(!date){
-
-    msg.textContent =
-      "⚠️ তারিখ নির্বাচন করুন।";
-
+    msg.textContent = "⚠️ তারিখ নির্বাচন করুন।";
     return;
   }
 
+  msg.textContent = "⏳ হিসাব সংরক্ষণ হচ্ছে...";
 
-  msg.textContent =
-    "⏳ হিসাব সংরক্ষণ হচ্ছে...";
-
-
-  /*
-    তারিখ অনুযায়ী created_at সেট করা হচ্ছে।
-  */
-
-  const createdAt =
-    date + "T12:00:00";
-
-
-  const {error} =
-    await sb
-      .from("transactions")
-      .insert([{
-
-        type:type,
-
-        category:category,
-
-        amount:amount,
-
-        description:description,
-
-        created_at:createdAt
-
-      }]);
-
+  const {error} = await sb.from("transactions").insert([{
+    type,
+    category,
+    amount,
+    description,
+    created_at:new Date(date+"T12:00:00").toISOString()
+  }]);
 
   if(error){
-
-    console.error(error);
-
-    msg.textContent =
-      "❌ হিসাব সংরক্ষণ করা যায়নি।";
-
+    console.error("addFinance error:",error);
+    msg.textContent = "❌ সংরক্ষণ হয়নি: "+error.message;
     return;
   }
 
-
-  msg.textContent =
-    "✅ হিসাব সফলভাবে সংরক্ষণ হয়েছে।";
-
-
-  document.getElementById("financeCategory").value="";
-  document.getElementById("financeAmount").value="";
-  document.getElementById("financeDescription").value="";
-
-  document.getElementById("financeDate").value =
-    today();
-
+  msg.textContent = "✅ হিসাব সংরক্ষণ হয়েছে।";
+  document.getElementById("financeCategory").value = "";
+  document.getElementById("financeAmount").value = "";
+  document.getElementById("financeDescription").value = "";
+  document.getElementById("financeDate").value = today();
 
   await loadTransactions();
-
 }
 
+/* Approved payment-এর হিসাব transactions-এ যোগ করে।
+   একই marker থাকলে একই payment দ্বিতীয়বার যোগ হবে না। */
+async function syncApprovedPayment(payment){
+  if(!payment || !payment.id){
+    showMessage("❌ Payment ID পাওয়া যায়নি।");
+    return;
+  }
 
-/* =========================
-   BKASH PAYMENTS
-========================= */
+  if(payment.status !== "approved"){
+    showMessage("⚠️ আগে পেমেন্ট Approved করুন।");
+    return;
+  }
 
-function showMessage(text){
+  const marker = "[PaymentRequestID:"+payment.id+"]";
 
-  document.getElementById("message").textContent=text;
+  const {data:existing,error:checkError} = await sb
+    .from("transactions")
+    .select("id,description")
+    .ilike("description","%"+marker+"%")
+    .limit(1);
 
+  if(checkError){
+    console.error("duplicate check error:",checkError);
+    showMessage("❌ আগে হিসাব যাচাই করা যায়নি: "+checkError.message);
+    return;
+  }
+
+  if(existing && existing.length){
+    showMessage("✅ এই পেমেন্টের আয় আগেই হিসাবের মধ্যে আছে; নতুন করে যোগ করা হয়নি।");
+    await loadTransactions();
+    return;
+  }
+
+  const amount = Number(payment.amount);
+
+  if(!Number.isFinite(amount) || amount <= 0){
+    showMessage("❌ পেমেন্টের টাকার পরিমাণ সঠিক নয়।");
+    return;
+  }
+
+  const trx = String(payment.transaction_id || "").trim();
+
+  const description =
+    `bKash payment - ${String(payment.name || "")} - TrxID: ${trx || "উল্লেখ নেই"} ${marker}`;
+
+  const {error:insertError} = await sb.from("transactions").insert([{
+    type:"income",
+    category:"Member Contribution",
+    amount,
+    description
+  }]);
+
+  if(insertError){
+    console.error("transaction insert error:",insertError);
+    showMessage("⚠️ পেমেন্ট Approved আছে, কিন্তু আয় যোগ হয়নি: "+insertError.message);
+    return;
+  }
+
+  showMessage("✅ পেমেন্টের আয় হিসাবের মধ্যে যোগ হয়েছে।");
+  await loadTransactions();
 }
-
 
 async function loadPayments(){
+  if(!await checkLogin()) return;
 
-  const ok = await checkLogin();
+  const list = document.getElementById("paymentList");
+  list.innerHTML = '<div class="loading">⏳ Payment তালিকা লোড হচ্ছে...</div>';
 
-  if(!ok) return;
-
-
-  const list =
-    document.getElementById("paymentList");
-
-
-  list.innerHTML =
-    '<div class="loading">⏳ Payment তালিকা লোড হচ্ছে...</div>';
-
-
-  const {data,error} =
-    await sb
-      .from("payment_requests")
-      .select("*")
-      .order("created_at",{ascending:false});
-
+  const {data,error} = await sb
+    .from("payment_requests")
+    .select("*")
+    .order("created_at",{ascending:false});
 
   if(error){
-
-    console.error(error);
-
-    list.innerHTML =
-      '<div class="empty">❌ Payment তালিকা লোড করা যায়নি।</div>';
-
+    console.error("loadPayments error:",error);
+    list.innerHTML = '<div class="empty">❌ Payment তালিকা লোড হয়নি: '+esc(error.message)+'</div>';
     return;
   }
 
-
-  if(!data || data.length===0){
-
-    list.innerHTML =
-      '<div class="empty">📭 কোনো Payment Request নেই।</div>';
-
+  if(!data || !data.length){
+    list.innerHTML = '<div class="empty">📭 কোনো Payment Request নেই।</div>';
     return;
   }
 
+  list.innerHTML = data.map(x=>{
+    const status = String(x.status || "pending");
+    const statusText =
+      status === "approved" ? "✅ Approved" :
+      status === "rejected" ? "❌ Rejected" : "⏳ Pending";
 
-  list.innerHTML = data.map(function(x){
+    const statusClass =
+      status === "approved" ? "approved" :
+      status === "rejected" ? "rejected" : "";
 
-    const status =
-      String(x.status || "pending");
-
-
-    let statusText = "⏳ Pending";
-
-    let statusClass = "";
-
-
-    if(status==="approved"){
-
-      statusText="✅ Approved";
-
-      statusClass="approved";
-
-    }
-
-
-    if(status==="rejected"){
-
-      statusText="❌ Rejected";
-
-      statusClass="rejected";
-
-    }
-
-
-    let buttons="";
-
-
-    if(status==="pending"){
-
-      buttons = `
-        <div class="actions">
-
-          <button
-            class="approve"
-            onclick="approvePayment('${x.id}')">
-            ✅ Approve
-          </button>
-
-          <button
-            class="reject"
-            onclick="rejectPayment('${x.id}')">
-            ❌ Reject
-          </button>
-
-        </div>
-      `;
-
-    }
-
-
-    const date =
-      x.created_at
+    const date = x.created_at
       ? new Date(x.created_at).toLocaleString("bn-BD")
       : "";
 
+    let buttons = "";
 
-    return `
-      <div class="payment">
+    if(status === "pending"){
+      buttons = `<div class="actions">
+        <button class="approve" onclick="approvePayment('${esc(x.id)}')">✅ Approve</button>
+        <button class="reject" onclick="rejectPayment('${esc(x.id)}')">❌ Reject</button>
+      </div>`;
+    }else if(status === "approved"){
+      buttons = `<div class="actions">
+        <button class="sync" onclick="syncPaymentById('${esc(x.id)}')">🔄 আয় হিসাব মিলান</button>
+      </div>`;
+    }
 
-        <div class="row">
-          <span class="label">নাম:</span>
-          <strong>${esc(x.name || "নাম দেওয়া হয়নি")}</strong>
-        </div>
-
-        <div class="row">
-          <span class="label">bKash নম্বর:</span>
-          ${esc(x.bkash_number || "")}
-        </div>
-
-        <div class="amount">
-          ৳ ${money(x.amount)}
-        </div>
-
-        <div class="row">
-          <span class="label">Transaction ID:</span>
-          <strong>${esc(x.transaction_id || "")}</strong>
-        </div>
-
-        <div class="row">
-          <span class="label">সময়:</span>
-          ${esc(date)}
-        </div>
-
-        <div class="row">
-          <span class="status ${statusClass}">
-            ${statusText}
-          </span>
-        </div>
-
-        ${buttons}
-
-      </div>
-    `;
-
+    return `<div class="payment">
+      <div class="row"><span class="label">নাম:</span> <strong>${esc(x.name || "নাম দেওয়া হয়নি")}</strong></div>
+      <div class="row"><span class="label">bKash নম্বর:</span> ${esc(x.bkash_number || "উল্লেখ নেই")}</div>
+      <div class="amount">৳ ${money(x.amount)}</div>
+      <div class="row"><span class="label">Transaction ID:</span> <strong>${esc(x.transaction_id || "উল্লেখ নেই")}</strong></div>
+      <div class="row"><span class="label">সময়:</span> ${esc(date)}</div>
+      <div class="row"><span class="status ${statusClass}">${statusText}</span></div>
+      ${buttons}
+    </div>`;
   }).join("");
-
 }
 
+async function syncPaymentById(id){
+  if(!await checkLogin()) return;
 
-async function approvePayment(id){
+  showMessage("⏳ আগের Approved পেমেন্টের হিসাব যাচাই হচ্ছে...");
 
-  if(!confirm("এই Payment Approve করবেন?")){
-
-    return;
-  }
-
-
-  showMessage("⏳ Approve করা হচ্ছে...");
-
-
-  const {data:payment,error} =
-    await sb
-      .from("payment_requests")
-      .select("*")
-      .eq("id",id)
-      .single();
-
+  const {data:payment,error} = await sb
+    .from("payment_requests")
+    .select("*")
+    .eq("id",id)
+    .single();
 
   if(error || !payment){
-
-    console.error(error);
-
-    showMessage("❌ Payment পাওয়া যায়নি।");
-
+    console.error("syncPaymentById error:",error);
+    showMessage("❌ Payment পাওয়া যায়নি: "+(error?.message || "অজানা ত্রুটি"));
     return;
   }
 
-
-  /*
-    প্রথমে Payment approved করা হচ্ছে।
-  */
-
-  const {error:updateError} =
-    await sb
-      .from("payment_requests")
-      .update({
-        status:"approved"
-      })
-      .eq("id",id);
-
-
-  if(updateError){
-
-    console.error(updateError);
-
-    showMessage("❌ Approve করা যায়নি।");
-
-    return;
-  }
-
-
-  /*
-    Approved payment আয় হিসেবে Transactions-এ যাবে।
-  */
-
-  const {error:transactionError} =
-    await sb
-      .from("transactions")
-      .insert([{
-
-        type:"income",
-
-        category:"Member Contribution",
-
-        amount:Number(payment.amount),
-
-        description:
-          "bKash payment - " +
-          String(payment.name || "") +
-          " - TrxID: " +
-          String(payment.transaction_id || "")
-
-      }]);
-
-
-  if(transactionError){
-
-    console.error(transactionError);
-
-    showMessage(
-      "⚠️ Payment Approved হয়েছে, কিন্তু Transactions-এ যোগ করা যায়নি।"
-    );
-
-    await loadPayments();
-
-    return;
-  }
-
-
-  showMessage(
-    "✅ Payment Approved এবং আয় হিসেবে হিসাবের মধ্যে যোগ হয়েছে।"
-  );
-
-
-  await loadPayments();
-
-  await loadTransactions();
-
+  await syncApprovedPayment(payment);
 }
 
+async function approvePayment(id){
+  if(!await checkLogin()) return;
+  if(!confirm("এই Payment Approve করবেন?")) return;
 
-async function rejectPayment(id){
+  showMessage("⏳ পেমেন্ট যাচাই হচ্ছে...");
 
-  if(!confirm("এই Payment Reject করবেন?")){
+  const {data:payment,error:fetchError} = await sb
+    .from("payment_requests")
+    .select("*")
+    .eq("id",id)
+    .single();
 
+  if(fetchError || !payment){
+    console.error("payment fetch error:",fetchError);
+    showMessage("❌ Payment পাওয়া যায়নি: "+(fetchError?.message || "অজানা ত্রুটি"));
     return;
   }
 
+  if(payment.status === "rejected"){
+    showMessage("⚠️ এই পেমেন্ট আগে Reject করা হয়েছে। আগে তথ্য যাচাই করুন।");
+    return;
+  }
+
+  if(payment.status !== "approved"){
+    const {data:updated,error:updateError} = await sb
+      .from("payment_requests")
+      .update({status:"approved"})
+      .eq("id",id)
+      .select("*")
+      .single();
+
+    if(updateError || !updated){
+      console.error("payment approval error:",updateError);
+      showMessage("❌ Approve করা যায়নি: "+(updateError?.message || "ডাটাবেস অনুমতি/নীতি পরীক্ষা করুন"));
+      return;
+    }
+
+    await syncApprovedPayment(updated);
+  }else{
+    await syncApprovedPayment(payment);
+  }
+
+  await loadPayments();
+}
+
+async function rejectPayment(id){
+  if(!await checkLogin()) return;
+  if(!confirm("এই Payment Reject করবেন?")) return;
 
   showMessage("⏳ Reject করা হচ্ছে...");
 
-
-  const {error} =
-    await sb
-      .from("payment_requests")
-      .update({
-        status:"rejected"
-      })
-      .eq("id",id);
-
+  const {error} = await sb
+    .from("payment_requests")
+    .update({status:"rejected"})
+    .eq("id",id);
 
   if(error){
-
-    console.error(error);
-
-    showMessage("❌ Reject করা যায়নি।");
-
+    console.error("reject error:",error);
+    showMessage("❌ Reject করা যায়নি: "+error.message);
     return;
   }
 
-
   showMessage("✅ Payment Reject করা হয়েছে।");
-
-
   await loadPayments();
-
 }
-
-
-/* =========================
-   LOGOUT
-========================= */
 
 async function logout(){
-
   await sb.auth.signOut();
-
-  window.location.href="admin.html";
-
+  window.location.href = "admin.html";
 }
 
-
-/* =========================
-   START
-========================= */
-
-document.getElementById("financeDate").value =
-  today();
-
+document.getElementById("financeDate").value = today();
 
 async function start(){
-
-  const ok = await checkLogin();
-
-  if(!ok) return;
-
+  if(!await checkLogin()) return;
   await loadPayments();
-
   await loadTransactions();
-
 }
 
-
 start();
-
-</script></body>
+</script>
+</body>
 </html>
